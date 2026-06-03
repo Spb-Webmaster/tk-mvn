@@ -1,0 +1,107 @@
+.home-programs .section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+}
+.home-programs .programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.home-programs .program-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+  cursor: pointer;
+}
+.home-programs .program-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.home-programs .program-card:hover {
+  background: var(--bg2);
+}
+.home-programs .program-card:hover::after {
+  transform: scaleX(1);
+}
+.home-programs .program-num {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+.home-programs .program-icon {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.home-programs .program-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.home-programs .program-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.home-programs .program-link {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.home-programs.home-programs-no-padding-top-43 {
+  padding-top: 43px;
+  background: var(--bg2);
+}
+
+@media (max-width: 1023px) {
+  .home-programs .section-head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .home-programs .programs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .home-programs .programs-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-programs .program-card {
+    padding: 32px 24px;
+  }
+  .home-programs .program-num {
+    font-size: 48px;
+  }
+}
+
+/*# sourceMappingURL=programs.css.map */

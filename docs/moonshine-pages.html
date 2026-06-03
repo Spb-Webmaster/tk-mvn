@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoonShine v4 — Отдельные страницы с сохранением данных</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .lead {
+            font-size: 1.05rem;
+            color: #475569;
+            margin-bottom: 48px;
+            border-left: 4px solid #6366f1;
+            padding-left: 16px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 48px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #334155;
+            margin: 28px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        p { margin-bottom: 14px; }
+
+        ul, ol {
+            margin: 0 0 16px 24px;
+        }
+
+        li { margin-bottom: 6px; }
+
+        code {
+            font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.875em;
+            background: #e2e8f0;
+            color: #be185d;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 24px;
+            overflow-x: auto;
+            margin: 16px 0 24px;
+            font-size: 0.875rem;
+            line-height: 1.65;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        .comment { color: #64748b; }
+        .keyword { color: #93c5fd; }
+        .string { color: #86efac; }
+        .class-name { color: #fde68a; }
+        .function { color: #c4b5fd; }
+        .attr { color: #f9a8d4; }
+
+        .tip {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin: 20px 0;
+            color: #1e40af;
+            font-size: 0.95rem;
+        }
+
+        .tip strong { color: #1d4ed8; }
+
+        .warn {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin: 20px 0;
+            color: #92400e;
+            font-size: 0.95rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: #6366f1;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 3px;
+        }
+
+        .step-body { flex: 1; }
+        .step-body p:last-child { margin-bottom: 0; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 10px 14px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td { background: #f1f5f9; }
+
+        .file-path {
+            display: inline-block;
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 48px 0;
+        }
+
+        footer {
+            margin-top: 64px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <h1>MoonShine v4 — Отдельные страницы с сохранением данных</h1>
+    <p class="lead">
+        Как создать независимую страницу в панели администратора (не ресурс),
+        добавить на неё поля и сохранять данные в базу данных
+        через универсальную таблицу настроек.
+    </p>
+
+    <!-- ─── Концепция ─── -->
+    <h2>Концепция</h2>
+
+    <p>
+        В MoonShine v4 существует два типа объектов меню:
+    </p>
+
+    <ul>
+        <li><strong>ModelResource</strong> — CRUD для набора записей (таблица со списком, форма редактирования).</li>
+        <li><strong>Page</strong> — произвольная страница с любыми компонентами. Никакой таблицы «по умолчанию» у неё нет.</li>
+    </ul>
+
+    <p>
+        Для хранения данных настроечных страниц (Главная, Контакты, О нас и т.д.)
+        не нужно создавать отдельную таблицу под каждую страницу.
+        Достаточно одной универсальной таблицы <code>settings</code>, где каждая страница
+        хранит свои данные в одной строке в формате JSON, идентифицируя строку по полю <code>group</code>.
+    </p>
+
+    <table>
+        <thead>
+            <tr><th>id</th><th>group</th><th>data (JSON)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>home</td><td><code>{"hero_title": "Добро пожаловать", "hero_subtitle": "..."}</code></td></tr>
+            <tr><td>2</td><td>contacts</td><td><code>{"phone": "+7 (727) 224 21 21", "email": "..."}</code></td></tr>
+            <tr><td>3</td><td>about</td><td><code>{"text": "О компании...", "img": "..."}</code></td></tr>
+        </tbody>
+    </table>
+
+    <p>
+        Строка создаётся автоматически при первом открытии страницы — никакие дополнительные
+        миграции или модели для новых страниц не нужны.
+    </p>
+
+    <!-- ─── Структура файлов ─── -->
+    <h2>Структура файлов</h2>
+
+    <table>
+        <thead>
+            <tr><th>Файл</th><th>Назначение</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="file-path">app/Models/Setting.php</span></td>
+                <td>Универсальная модель настроек</td>
+            </tr>
+            <tr>
+                <td><span class="file-path">database/migrations/…_create_settings_table.php</span></td>
+                <td>Миграция таблицы settings (один раз на весь проект)</td>
+            </tr>
+            <tr>
+                <td><span class="file-path">app/MoonShine/Pages/Pages/HomePage.php</span></td>
+                <td>Кастомная страница «Главная»</td>
+            </tr>
+            <tr>
+                <td><span class="file-path">app/Providers/MoonShineServiceProvider.php</span></td>
+                <td>Регистрация страницы</td>
+            </tr>
+            <tr>
+                <td><span class="file-path">app/MoonShine/Layouts/AxeldLayout.php</span></td>
+                <td>Добавление страницы в меню</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ─── Пошаговое создание ─── -->
+    <h2>Пошаговое создание</h2>
+
+    <!-- Шаг 1 -->
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <h3>Миграция универсальной таблицы settings</h3>
+            <p>Создаётся один раз для всего проекта. Новые страницы не требуют новых миграций.</p>
+            <pre><code><span class="comment">// database/migrations/…_create_settings_table.php</span>
+
+Schema::create(<span class="string">'settings'</span>, function (Blueprint $table): void {
+    $table->id();
+    $table->string(<span class="string">'group'</span>)->unique();  <span class="comment">// идентификатор страницы</span>
+    $table->json(<span class="string">'data'</span>)->nullable();    <span class="comment">// все поля страницы в JSON</span>
+    $table->timestamps();
+});</code></pre>
+        </div>
+    </div>
+
+    <!-- Шаг 2 -->
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+            <h3>Модель Setting</h3>
+            <p>
+                Поле <code>data</code> кастуется как массив.
+                Метод <code>getGroup()</code> возвращает строку для нужной страницы,
+                создавая её автоматически если она ещё не существует.
+            </p>
+            <pre><code><span class="comment">// app/Models/Setting.php</span>
+
+<span class="keyword">class</span> <span class="class-name">Setting</span> <span class="keyword">extends</span> <span class="class-name">Model</span>
+{
+    <span class="keyword">protected</span> $fillable = [<span class="string">'group'</span>, <span class="string">'data'</span>];
+
+    <span class="keyword">protected</span> $casts = [
+        <span class="string">'data'</span> => <span class="string">'array'</span>,
+    ];
+
+    <span class="keyword">public static function</span> <span class="function">getGroup</span>(string $group): self
+    {
+        <span class="comment">// Найти строку по group или создать новую с пустым data</span>
+        <span class="keyword">return</span> static::<span class="function">firstOrCreate</span>(
+            [<span class="string">'group'</span> => $group],
+            [<span class="string">'data'</span>  => []]
+        );
+    }
+}</code></pre>
+        </div>
+    </div>
+
+    <!-- Шаг 3 -->
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+            <h3>Класс страницы</h3>
+            <p>
+                Страница расширяет <code>MoonShine\Laravel\Pages\Page</code>.
+                Форма строится через <code>FormBuilder</code>, заполняется методом <code>fill()</code>
+                из массива <code>data</code> нужной группы настроек.
+                Сохранение происходит через <code>#[AsyncMethod]</code> — без отдельного контроллера.
+            </p>
+            <pre><code><span class="comment">// app/MoonShine/Pages/Pages/HomePage.php</span>
+
+<span class="keyword">class</span> <span class="class-name">HomePage</span> <span class="keyword">extends</span> <span class="class-name">Page</span>
+{
+    <span class="keyword">public function</span> <span class="function">getTitle</span>(): string
+    {
+        <span class="keyword">return</span> <span class="string">'Главная'</span>;
+    }
+
+    <span class="comment">// Получить (или создать) строку настроек для этой страницы</span>
+    <span class="keyword">private function</span> <span class="function">getSetting</span>(): <span class="class-name">Setting</span>
+    {
+        <span class="keyword">return</span> <span class="class-name">Setting</span>::<span class="function">getGroup</span>(<span class="string">'home'</span>);
+    }
+
+    <span class="comment">// Асинхронный обработчик сохранения формы</span>
+    <span class="attr">#[AsyncMethod]</span>
+    <span class="keyword">public function</span> <span class="function">store</span>(<span class="class-name">Request</span> $request): <span class="class-name">JsonResponse</span>
+    {
+        $setting = $this-><span class="function">getSetting</span>();
+        $setting->data = $request-><span class="function">except</span>([<span class="string">'_token'</span>, <span class="string">'_method'</span>]);
+        $setting-><span class="function">save</span>();
+
+        <span class="keyword">return</span> <span class="class-name">JsonResponse</span>::<span class="function">make</span>()-><span class="function">toast</span>(<span class="string">'Сохранено'</span>, ToastType::SUCCESS);
+    }
+
+    <span class="comment">// Построить форму</span>
+    <span class="keyword">private function</span> <span class="function">form</span>(): <span class="class-name">FormBuilder</span>
+    {
+        <span class="keyword">return</span> <span class="class-name">FormBuilder</span>::<span class="function">make</span>()
+            -><span class="function">asyncMethod</span>(<span class="string">'store'</span>)           <span class="comment">// POST на #[AsyncMethod] store()</span>
+            -><span class="function">fill</span>($this-><span class="function">getSetting</span>()->data ?? []) <span class="comment">// заполнить из JSON</span>
+            -><span class="function">fields</span>([
+                <span class="class-name">Box</span>::<span class="function">make</span>(<span class="string">'Главный баннер'</span>, [
+                    <span class="class-name">Text</span>::<span class="function">make</span>(<span class="string">'Заголовок'</span>,    <span class="string">'hero_title'</span>),
+                    <span class="class-name">Text</span>::<span class="function">make</span>(<span class="string">'Подзаголовок'</span>, <span class="string">'hero_subtitle'</span>),
+                    <span class="class-name">TinyMce</span>::<span class="function">make</span>(<span class="string">'Описание'</span>,    <span class="string">'hero_description'</span>),
+                    <span class="class-name">Image</span>::<span class="function">make</span>(<span class="string">'Изображение'</span>, <span class="string">'hero_image'</span>)
+                        -><span class="function">disk</span>(<span class="string">'public'</span>)
+                        -><span class="function">dir</span>(<span class="string">'pages/home'</span>)
+                        -><span class="function">removable</span>(),
+                ]),
+                <span class="class-name">Box</span>::<span class="function">make</span>(<span class="string">'Приветственный блок'</span>, [
+                    <span class="class-name">TinyMce</span>::<span class="function">make</span>(<span class="string">'Текст'</span>, <span class="string">'welcome_text'</span>),
+                ]),
+            ])
+            -><span class="function">submit</span>(<span class="string">'Сохранить'</span>, [<span class="string">'class'</span> => <span class="string">'btn-primary'</span>]);
+    }
+
+    <span class="comment">// Отрендерить страницу</span>
+    <span class="keyword">protected function</span> <span class="function">components</span>(): iterable
+    {
+        <span class="keyword">yield</span> $this-><span class="function">form</span>();
+    }
+}</code></pre>
+
+            <div class="tip">
+                <strong>Ключевой момент:</strong> <code>fill(array)</code> заполняет форму из простого массива.
+                Имена полей (<code>hero_title</code>, <code>hero_subtitle</code> и т.д.) напрямую соответствуют
+                ключам в JSON-колонке <code>data</code>. Никакой дополнительной типизации не нужно.
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 4 -->
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+            <h3>Регистрация страницы в ServiceProvider</h3>
+            <pre><code><span class="comment">// app/Providers/MoonShineServiceProvider.php</span>
+
+$core
+    ->resources([...])
+    ->pages([
+        ...$core->getConfig()-><span class="function">getPages</span>(), <span class="comment">// системные страницы MoonShine</span>
+        <span class="class-name">HomePage</span>::class,               <span class="comment">// наша страница</span>
+    ]);</code></pre>
+        </div>
+    </div>
+
+    <!-- Шаг 5 -->
+    <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+            <h3>Добавление в меню (Layout)</h3>
+            <pre><code><span class="comment">// app/MoonShine/Layouts/AxeldLayout.php</span>
+
+<span class="keyword">protected function</span> <span class="function">menu</span>(): array
+{
+    <span class="keyword">return</span> [
+        <span class="class-name">MenuGroup</span>::<span class="function">make</span>(<span class="keyword">static fn</span>() => __(<span class="string">'Страницы'</span>), [
+            <span class="class-name">MenuItem</span>::<span class="function">make</span>(<span class="class-name">HomePage</span>::class, <span class="string">'Главная'</span>, <span class="string">'home'</span>),
+            <span class="comment">// MenuItem::make(ContactsPage::class, 'Контакты', 'phone'),</span>
+        ]),
+        <span class="comment">// другие группы...</span>
+    ];
+}</code></pre>
+        </div>
+    </div>
+
+    <!-- ─── Добавление новой страницы ─── -->
+    <h2>Как добавить новую страницу (например, «Контакты»)</h2>
+
+    <p>Новая страница не требует новой таблицы или миграции. Достаточно трёх действий:</p>
+
+    <ol>
+        <li>
+            Создать файл <span class="file-path">app/MoonShine/Pages/Pages/ContactsPage.php</span>
+            по образцу <code>HomePage</code>, заменив:
+            <ul>
+                <li><code>getTitle()</code> → <code>'Контакты'</code></li>
+                <li><code>Setting::getGroup('home')</code> → <code>Setting::getGroup('contacts')</code></li>
+                <li>поля формы на нужные (телефон, email, адрес и т.д.)</li>
+            </ul>
+        </li>
+        <li>Зарегистрировать <code>ContactsPage::class</code> в <code>MoonShineServiceProvider</code>.</li>
+        <li>Добавить <code>MenuItem::make(ContactsPage::class, 'Контакты', 'phone')</code> в меню.</li>
+    </ol>
+
+    <div class="tip">
+        <strong>Строка в таблице</strong> <code>settings</code> с <code>group = 'contacts'</code>
+        будет создана автоматически при первом сохранении формы через <code>firstOrCreate()</code>.
+    </div>
+
+    <!-- ─── Чтение данных на сайте ─── -->
+    <h2>Чтение данных на сайте (во views)</h2>
+
+    <p>Данные страницы доступны из любого шаблона или контроллера:</p>
+
+    <pre><code><span class="comment">// В контроллере</span>
+$home = <span class="class-name">Setting</span>::<span class="function">getGroup</span>(<span class="string">'home'</span>);
+$heroTitle = $home-><span class="function">getValue</span>(<span class="string">'hero_title'</span>, <span class="string">'Заголовок по умолчанию'</span>);
+
+<span class="comment">// Или напрямую</span>
+$data = <span class="class-name">Setting</span>::<span class="function">getGroup</span>(<span class="string">'home'</span>)->data;
+$heroTitle = $data[<span class="string">'hero_title'</span>] ?? <span class="string">''</span>;</code></pre>
+
+    <pre><code><span class="comment">{{-- В Blade-шаблоне --}}</span>
+@php($home = \App\Models\Setting::getGroup('home'))
+
+&lt;h1&gt;{{ $home->getValue('hero_title') }}&lt;/h1&gt;
+&lt;p&gt;{!! $home->getValue('hero_description') !!}&lt;/p&gt;</code></pre>
+
+    <div class="warn">
+        <strong>Важно:</strong> используй <code>{!! !!}</code> (без экранирования) для полей TinyMce,
+        так как они содержат HTML. Для обычных текстовых полей используй <code>{{ }}</code>.
+    </div>
+
+    <!-- ─── Итог ─── -->
+    <h2>Итог</h2>
+
+    <table>
+        <thead>
+            <tr><th>Что нужно для новой страницы</th><th>Количество</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Новых таблиц / миграций</td><td>0</td></tr>
+            <tr><td>Новых моделей</td><td>0</td></tr>
+            <tr><td>Новых PHP-файлов (Page-класс)</td><td>1</td></tr>
+            <tr><td>Строк правок в ServiceProvider</td><td>1</td></tr>
+            <tr><td>Строк правок в Layout (меню)</td><td>1</td></tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    <footer>
+        Проект hseipaa.kz &nbsp;·&nbsp; MoonShine v4 &nbsp;·&nbsp; 2026
+    </footer>
+
+</div>
+</body>
+</html>

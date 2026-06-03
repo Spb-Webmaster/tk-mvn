@@ -1,0 +1,13 @@
+.home-desc-section {
+  padding: 56px 40px;
+  background: var(--bg);
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-desc-section { padding: 48px 20px; }
+}

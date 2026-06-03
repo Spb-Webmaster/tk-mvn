@@ -1,0 +1,103 @@
+.home-about {
+  background: var(--navy);
+  overflow: hidden;
+  padding: 0;
+}
+.home-about .about-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 620px;
+}
+.home-about .about-photo {
+  position: relative;
+  overflow: hidden;
+}
+.home-about .about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.home-about .about-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--navy) 100%);
+}
+.home-about .about-content {
+  padding: 80px 80px 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home-about .about-content .section-eyebrow {
+  margin-bottom: 20px;
+}
+.home-about .about-content .section-title {
+  color: #fff;
+  margin-bottom: 24px;
+}
+.home-about .about-body {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+.home-about .about-body p {
+  font-size: 16px;
+}
+.home-about .about-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.home-about .about-fact {
+  border-left: 2px solid var(--gold);
+  padding-left: 16px;
+}
+.home-about .about-fact-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold-lt);
+}
+.home-about .about-fact-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+@media (max-width: 1023px) {
+  .home-about .about-inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .home-about .about-photo {
+    height: 400px;
+  }
+  .home-about .about-photo::after {
+    background: linear-gradient(to bottom, transparent 50%, var(--navy) 100%);
+  }
+  .home-about .about-content {
+    padding: 60px 40px;
+  }
+}
+@media (max-width: 767px) {
+  .home-about .about-photo {
+    height: 260px;
+  }
+  .home-about .about-content {
+    padding: 48px 20px;
+  }
+  .home-about .about-facts {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/*# sourceMappingURL=about.css.map */

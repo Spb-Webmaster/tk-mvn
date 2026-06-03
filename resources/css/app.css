@@ -1,0 +1,60 @@
+@import '_variables.scss';
+@import 'pagination.scss';
+@import 'general-style/paddind.scss';
+@import 'general-style/width.scss';
+@import '@fontsource-variable/source-sans-3';
+@import '@fontsource/playfair-display/cyrillic-400.css';
+@import '@fontsource/playfair-display/cyrillic-600.css';
+@import '@fontsource/playfair-display/cyrillic-700.css';
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/roboto/wdth.css';
+
+@import 'fancybox/fancubox6.scss';
+@import 'mz-modal/mz-modal.css';
+@import 'message/flach_message.scss';
+@import 'loader_map.css';
+/*@import 'trix/trix.scss';*/
+
+@import 'materialize-select/select.scss';
+@import 'components/modules/faq.scss';
+@import 'components/form/form-loader.scss';
+@import 'components/form/form-input.scss';
+@import 'components/form/form-blue-component.scss';
+@import 'components/form/modal-zapros.scss';
+@import 'buttons/buttons.scss';
+@import 'templates/axeld/breadcrumbs.scss';
+@import 'templates/axeld/common/pages/default.scss';
+@import 'templates/axeld/common/resources/full/default.scss';
+@import 'templates/axeld/common/resources/full/full.scss';
+@import 'templates/axeld/common/resources/full/training.scss';
+@import 'templates/axeld/common/resources/teaser/default.scss';
+@import 'templates/axeld/common/resources/teaser/news.scss';
+@import 'templates/axeld/common/resources/teaser/photo.scss';
+@import 'templates/axeld/common/resources/teaser/master.scss';
+@import 'templates/axeld/breadcrumbs.scss';
+@import 'templates/axeld/content.scss';
+@import 'templates/axeld/header.scss';
+@import 'templates/axeld/footer.scss';
+@import 'templates/axeld/home.scss';
+
+/* ── MODULES ── */
+@import 'components/modules/hero.scss';
+@import 'components/modules/stats.scss';
+@import 'components/modules/events.scss';
+@import 'components/modules/programs.scss';
+@import 'components/modules/about.scss';
+@import 'components/modules/gallery.scss';
+@import 'components/modules/clients.scss';
+@import 'components/modules/desc.scss';
+@import 'components/modules/cta.scss';
+@import 'components/modules/master-nav.scss';
+@import 'components/admin/inline-edit.scss';
+@import 'style.scss';
+
+/* ── PAGES ── */
+@import 'pages/trainer.scss';
+@import 'pages/contact.scss';
+@import 'pages/video.scss';
+@import 'pages/response.scss';
+@import 'pages/schedule.scss';
+

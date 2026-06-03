@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Boost — Инструкция</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 { color: #e3342f; }
+        h2 { margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 14px 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        code { font-family: monospace; font-size: 14px; }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #f0ad4e;
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+        a { color: #e3342f; }
+    </style>
+</head>
+<body>
+
+<h1>Laravel Boost — Установка и Skills</h1>
+
+<h2>Шаг 1. Установка пакета</h2>
+<pre><code>composer require laravel/boost --dev</code></pre>
+
+<h2>Шаг 2. Инициализация</h2>
+<pre><code>php artisan boost:install</code></pre>
+<p>Появится интерактивное меню с выбором фич. Нужно <strong>вручную ввести</strong> нужные значения через запятую:</p>
+<pre><code>guidelines,skills,mcp</code></pre>
+<p>Или только нужное, например:</p>
+<pre><code>skills</code></pre>
+
+<h2>Шаг 3. Установка skill</h2>
+<pre><code>php artisan boost:add-skill &lt;owner/repo&gt; --skill &lt;skill-name&gt;</code></pre>
+<p>Пример:</p>
+<pre><code>php artisan boost:add-skill jeffallan/claude-skills --skill laravel-specialist</code></pre>
+
+<h2>Шаг 4. Директория skills</h2>
+<p>Все доступные skills: <a href="https://skills.laravel.cloud" target="_blank">skills.laravel.cloud</a></p>
+
+<div class="note">
+    <strong>Важно:</strong> <code>boost:add-skill</code> — это отдельная команда в терминале.
+    Не вводить её в меню <code>boost:install</code>.
+</div>
+
+</body>
+</html>

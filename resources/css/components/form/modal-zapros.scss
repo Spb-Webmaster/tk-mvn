@@ -1,0 +1,329 @@
+// =============================================
+// modal-zapros — модальное окно «Отправить запрос»
+// =============================================
+
+.mzr-modal {
+    background: var(--bg);
+    width: 540px;
+    max-width: 100%;
+    position: relative;
+    border-top: 3px solid var(--gold);
+    overflow: hidden;
+    font-family: var(--sans);
+}
+
+// ── Заголовок (тёмный) ──────────────────────
+
+.mzr-modal__head {
+    background: var(--navy);
+    padding: 28px 36px 24px;
+    position: relative;
+}
+
+.mzr-modal__eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 16px;
+        height: 1px;
+        background: var(--gold);
+    }
+}
+
+.mzr-modal__title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+}
+
+// ── Кнопка закрытия ─────────────────────────
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+}
+
+// ── Тело формы ──────────────────────────────
+
+.mzr-modal__body {
+    padding: 32px 36px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+// ── Переключатель типа клиента ───────────────
+
+.mzr-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mzr-radio-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.mzr-radio-row {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    input[type="radio"] { display: none; }
+
+    label {
+        flex: 1;
+        text-align: center;
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: var(--muted);
+        cursor: pointer;
+        transition: background 0.18s, color 0.18s;
+        user-select: none;
+        border-right: 1px solid var(--border);
+        letter-spacing: 0.02em;
+
+        &:last-of-type { border-right: none; }
+
+        &:hover {
+            background: var(--bg2);
+            color: var(--navy);
+        }
+    }
+
+    input[type="radio"]:checked + label {
+        background: var(--navy);
+        color: #fff;
+
+        &:hover { background: var(--navy2); }
+    }
+}
+
+// ── Разделитель ─────────────────────────────
+
+.mzr-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 -36px;
+    width: calc(100% + 72px);
+}
+
+// ── Поля ввода ──────────────────────────────
+
+.mzr-label--required::after {
+    content: ' *';
+    color: var(--gold);
+}
+
+.mzr-field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        font-family: var(--sans);
+        font-size: 14px;
+        color: var(--text);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 11px 14px;
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        line-height: 1.5;
+
+        &::placeholder {
+            color: #b0aaa0;
+            font-weight: 400;
+        }
+
+        &:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(196, 150, 58, 0.12);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 108px;
+    }
+
+    &--error {
+        input, textarea {
+            border-color: #c0392b;
+            &:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12); }
+        }
+    }
+
+    .mzr-error-msg {
+        position: absolute;
+        bottom: -4px;
+        left: 16px;
+        background: #fff;
+        font-size: 11px;
+        color: #c0392b;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+}
+
+.mzr-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+// ── Подвал формы ────────────────────────────
+
+.mzr-modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.mzr-modal__hint {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    max-width: 200px;
+}
+
+.mzr-btn-submit {
+    flex-shrink: 0;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 13px 28px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px rgba(196, 150, 58, 0.22);
+
+    &:hover {
+        background: var(--gold-lt);
+        transform: translateY(-1px);
+        box-shadow: 0 5px 18px rgba(196, 150, 58, 0.32);
+    }
+
+    &:active { transform: translateY(0); }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: default;
+        transform: none;
+    }
+}
+
+// ── Успешная отправка ────────────────────────
+
+.mzr-modal__success {
+    display: none;
+    padding: 48px 36px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+
+    &.show { display: flex; }
+}
+
+.mzr-success-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--bg2);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.mzr-success-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+}
+
+.mzr-success-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 320px;
+}
+
+// ── Адаптив ──────────────────────────────────
+
+@media (max-width: 600px) {
+    .mzr-modal__head      { padding: 24px 24px 20px; }
+    .mzr-modal__body      { padding: 24px 24px 28px; }
+    .mzr-modal__success   { padding: 40px 24px; }
+    .mzr-field-row        { grid-template-columns: 1fr; }
+    .mzr-divider          { margin: 0 -24px; width: calc(100% + 48px); }
+
+    .mzr-modal__footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mzr-modal__hint { max-width: 100%; }
+    .mzr-btn-submit  { width: 100%; justify-content: center; }
+}

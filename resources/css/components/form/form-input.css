@@ -1,0 +1,127 @@
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+.input-group .input-group__label {
+  display: block;
+  position: absolute;
+  top: 0;
+  line-height: 50px;
+  color: #667085;
+  left: 5px;
+  padding: 0 5px;
+  transition: line-height 200ms ease-in-out, font-size 200ms ease-in-out, top 200ms ease-in-out;
+  pointer-events: none;
+}
+.input-group .input-group__label span {
+  color: #EF533F;
+}
+.input-group .input-group__input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #E0E0E0;
+  border-radius: 3px;
+  padding: 0 10px;
+  appearance: none;
+  cursor: auto !important;
+}
+.input-group .input-group__input:not(:placeholder-shown) + label, .input-group .input-group__input:focus + label {
+  background-color: #fff;
+  line-height: 10px;
+  font-size: 14px;
+  top: -5px;
+}
+.input-group .input-group__input:focus {
+  outline: none;
+  border: 1px solid #E0E0E0;
+}
+
+.app_input_group {
+  position: relative;
+}
+.app_input_group .app_input_name._error {
+  border-color: #EF533F !important;
+}
+.app_input_group .app_input_error {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  font-size: 12px;
+  color: #EF533F;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.app_input_group .req {
+  color: #EF533F;
+}
+
+.input-button {
+  padding: 7px 0 10px;
+  position: relative;
+}
+
+.fgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.fg-full {
+  grid-column: 1/-1;
+}
+
+.ff {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 0;
+}
+.ff label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 2px 0;
+}
+.ff input, .ff textarea {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 10px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  resize: none;
+  appearance: none;
+}
+.ff input::placeholder, .ff textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.ff input:focus, .ff textarea:focus {
+  border-color: var(--gold);
+}
+.ff textarea {
+  min-height: 72px;
+}
+.ff input._error, .ff textarea._error {
+  border-color: #e05050;
+}
+.ff .reg-error-msg {
+  position: absolute;
+  bottom: -4px;
+  left: 16px;
+  background: var(--navy);
+  font-size: 11px;
+  color: #e05050;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/*# sourceMappingURL=form-input.css.map */

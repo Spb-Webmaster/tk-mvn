@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+.site-footer {
+  background: #0d1628; padding: 48px 46px;
+  color: rgba(255,255,255,0.45);
+
+  .footer-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-copy {
+    font-size: 15px; line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex; gap: 24px;
+
+    a {
+      color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 15px; transition: color 0.2s;
+
+      &:hover { color: var(--gold); }
+    }
+  }
+
+  .footer-phone {
+    font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.75);
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,127 @@
+@charset "UTF-8";
+/* ── SLIM SELECT — тема CTA-формы ── */
+.home-cta .cta-form {
+  --ss-primary-color: var(--gold);
+}
+
+.home-cta .cta-form .ss-main {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 14px 18px;
+  font-family: var(--sans);
+  font-size: 14px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, color 0.2s;
+  width: 100%;
+  grid-column: 1/-1;
+  height: auto;
+  min-height: unset;
+}
+
+.home-cta .cta-form .ss-main:focus,
+.home-cta .cta-form .ss-main.ss-open-below,
+.home-cta .cta-form .ss-main.ss-open-above {
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.home-cta .cta-form .ss-main .ss-single-selected {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-family: var(--sans);
+  font-size: 14px;
+  height: auto;
+}
+
+.home-cta .cta-form .ss-main .ss-placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--sans);
+  font-size: 14px;
+}
+
+.home-cta .cta-form .ss-main .ss-arrow span {
+  border-color: rgba(255, 255, 255, 0.4) transparent transparent transparent;
+  transition: border-color 0.2s;
+}
+
+.home-cta .cta-form .ss-main.ss-open-below .ss-arrow span,
+.home-cta .cta-form .ss-main.ss-open-above .ss-arrow span {
+  border-color: var(--gold) transparent transparent transparent;
+}
+
+/* Dropdown panel */
+.home-cta .cta-form .ss-content {
+  background: var(--navy2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  font-family: var(--sans);
+}
+
+.home-cta .cta-form .ss-content .ss-search {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-cta .cta-form .ss-content .ss-search input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 13px;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  outline: none;
+  width: 100%;
+}
+.home-cta .cta-form .ss-content .ss-search input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.home-cta .cta-form .ss-content .ss-search input:focus {
+  border-color: var(--gold);
+}
+
+.home-cta .cta-form .ss-content .ss-list .ss-option {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 11px 18px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.home-cta .cta-form .ss-content .ss-list .ss-option:hover,
+.home-cta .cta-form .ss-content .ss-list .ss-option.ss-highlighted {
+  background: rgba(196, 150, 58, 0.15);
+  color: var(--gold-lt);
+  padding-left: 18px;
+}
+
+.home-cta .cta-form .ss-content .ss-list .ss-option.ss-selected {
+  background: rgba(196, 150, 58, 0.25);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.ss-content .ss-list .ss-option.ss-highlighted,
+.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
+  color: var(--ss-bg-color);
+  background-color: var(--navy2) !important;
+  transition: 0.2s;
+}
+
+.ss-content .ss-list .ss-option:hover:not(.ss-disabled) {
+  color: var(--ss-bg-color);
+  background-color: var(--gold) !important;
+  border-left: 0 !important;
+  transition: border-left var(--ss-animation-timing) ease;
+}
+
+.home-cta .cta-form .ss-main {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/*# sourceMappingURL=slim-select.css.map */

@@ -1,0 +1,235 @@
+@charset "utf-8";
+
+// ── MZ-Modal overrides для AJAX-форм ─────────
+
+#mz-form-modal {
+    background: transparent;
+    width: 540px;
+    max-width: calc(100% - 32px);
+    max-height: none;
+    overflow: hidden;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+#mz-form-modal + .modal-overlay {
+    background: #152040;
+}
+
+// ── FancyBox ────────────────────────────────
+
+.f-html {
+    border-radius: 12px;
+    padding: 0 !important;
+}
+
+.modal-form-container {
+    position: relative;
+    max-width: 900px;
+    width: 900px;
+
+    &.mini {
+        max-width: 600px;
+        width: 600px;
+    }
+
+    &.middle {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .modal_padding {
+        padding: 24px;
+    }
+
+    .form_title {
+        padding: 3px 0 30px 0;
+        position: relative;
+        cursor: pointer !important;
+
+        .form_title__h1 {
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 1.2em;
+            padding: 0 0 8px 0;
+
+        }
+
+        .form_title__h2 {
+            color: var(--color-grey);
+            font-size: 16px;
+            line-height: 1.2em;
+            padding: 0 0 5px 0;
+        }
+
+    }
+/** message_body **/
+    .cabinet-msg-item {
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 30px;
+        }
+
+        .username {
+            color: var(--color-grey);
+        }
+
+        .date_minute {
+            padding: 0 10px;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+        &.message_from_user {
+            small {
+                .date_minute {
+                    background: #43D38B;
+                }
+
+            }
+        }
+
+        &.message_from_rop {
+            small {
+                .date_minute {
+                    background: var(--color-red);
+                }
+
+            }
+        }
+
+        &.message_from_manager {
+            small {
+                .date_minute {
+                    background: var(--color-blue);
+
+                }
+
+            }
+        }
+        .message_body {
+padding: 10px 0 0 0;
+        }
+    }
+
+    /** message_body **/
+}
+
+
+/** manager_set_tarif modal **/
+.ms_tarif_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px 0 20px;
+}
+
+.fancybox__dialog .ms_tarif_card,
+.fancybox__dialog .ms_tarif_card * {
+    cursor: pointer !important;
+}
+
+.ms_tarif_card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: #fff;
+
+    &:hover {
+        border-color: #bbb;
+    }
+
+    &.is-selected {
+        border-color: var(--color-red);
+        background: #fff5f4;
+
+        .ms_tarif_card__radio::after {
+            opacity: 1;
+        }
+    }
+
+    &--none {
+        border-style: dashed;
+    }
+
+    &__radio {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        position: relative;
+        transition: border-color 0.2s;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--color-red);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    }
+
+    &.is-selected &__radio {
+        border-color: var(--color-red);
+    }
+
+    &__body {
+        flex: 1;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--color);
+    }
+
+    &__sub {
+        font-size: 14px;
+        color: var(--color-grey);
+        margin-top: 2px;
+    }
+
+    &__price {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--color);
+        white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .f-html {
+    }
+
+    .modal-form-container {
+        position: relative;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 742px) {
+    .f-html {
+        width: 96%;
+    }
+
+    .modal-form-container {
+        position: relative;
+
+
+        &.mini {
+            max-width: 742px;
+            width: 100%;
+        }
+
+    }
+}

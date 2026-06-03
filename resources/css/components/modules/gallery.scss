@@ -1,0 +1,183 @@
+.gallery-section {
+    margin-top: 48px;
+
+    .gallery-heading {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted, #6b7280);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &::after {
+            content: '';
+            display: block;
+            flex: 1;
+            height: 1px;
+            background: var(--border, #e2ddd4);
+        }
+    }
+}
+
+.gallery-grid--article {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+
+    // По умолчанию: 3 элемента в ряд (span 2 из 6)
+    .gallery-item {
+        grid-column: span 2;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        background: var(--bg2, #f5f3ee);
+        display: block;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.05);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(21, 32, 64, 0);
+            transition: background 0.3s;
+        }
+
+        &:hover::after {
+            background: rgba(21, 32, 64, 0.15);
+        }
+
+        .zoom-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1;
+        }
+
+        &:hover .zoom-icon {
+            opacity: 1;
+        }
+    }
+
+    // Каждые 5 элементов: первые 2 — широкие (span 3, 2 в ряд, 16/9)
+    // Паттерн: [широкий][широкий] / [узкий][узкий][узкий] / повтор
+    .gallery-item:nth-child(5n+1),
+    .gallery-item:nth-child(5n+2) {
+        grid-column: span 3;
+        aspect-ratio: 16/9;
+    }
+
+    @media (max-width: 767px) {
+        grid-template-columns: repeat(2, 1fr);
+
+        .gallery-item {
+            grid-column: span 1;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item:nth-child(5n+1),
+        .gallery-item:nth-child(5n+2) {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+    }
+
+    @media (max-width: 468px) {
+        grid-template-columns: repeat(2, 1fr);
+
+        .gallery-item,
+        .gallery-item:nth-child(5n+1),
+        .gallery-item:nth-child(5n+2) {
+            grid-column: span 1;
+            aspect-ratio: 1;
+        }
+    }
+}
+
+.home-gallery {
+    padding: 0;
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        height: 480px;
+        margin: 12px 0;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        &:hover img {
+            transform: scale(1.04);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(21, 32, 64, 0.5) 0%, transparent 60%);
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+  .home-gallery {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      height: auto;
+      grid-template-rows: 320px 220px;
+    }
+
+    .gallery-item:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .home-gallery {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      height: auto;
+    }
+
+    .gallery-item {
+      height: 240px;
+
+      &:first-child { grid-column: auto; }
+    }
+  }
+}

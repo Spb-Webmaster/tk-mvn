@@ -1,0 +1,227 @@
+@charset "utf-8";
+
+$maxWidth: 1440;
+@mixin adaptiv-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
+
+@mixin Roboto {
+    font-family: 'Roboto Variable', sans-serif;
+}
+
+@mixin RobotoFlex {
+    font-family: 'Roboto Flex Variable', sans-serif;
+}
+
+/* Локальный цвет кнопок — отличается от глобального --color-blue */
+$btnBlue: #002775;
+
+.button {
+
+    width: 100%;
+    height: 56px;
+    text-decoration: none;
+    text-transform: none;
+    background: $btnBlue;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    @include RobotoFlex;
+    position: relative;
+    margin: 0;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: 0.2s;
+    border: 1px solid $btnBlue;
+    cursor: pointer;
+
+
+    &:hover {
+        background:#fff ;
+        color: $btnBlue;
+        border: 1px solid #E6E0EC;
+    }
+
+
+
+    &.orange {
+        background: var(--color-orange);
+        border: 1px solid var(--color-orange);
+
+
+    }
+    &.orange:hover {
+        background: var(--color-orange);
+        border: 1px solid var(--color-orange);
+
+
+    }
+
+    &.white {
+        background: #fff;
+        color: $btnBlue;
+        border: 1px solid #E6E0EC;
+
+    }
+    &.white:hover {
+        background: $btnBlue;
+        color: #fff;
+        border: 1px solid $btnBlue;
+
+    }
+
+    &.green {
+        background: #2F6E4D;
+        color: #fff;
+        border: 1px solid #2F6E4D;
+
+    }
+    &.green:hover {
+        background: #fff;
+        color: green;
+        border: 1px solid #2F6E4D;
+
+    }
+    &.red {
+        background: #fff;
+        color: var(--color-red);
+        border: 1px solid #E6E0EC;
+
+    }
+    &.red:hover {
+        background: var(--color-red);
+        color: #fff;
+        border: 1px solid var(--color-red);
+
+    }
+    &.red2 {
+        background: var(--color-red);
+        color: #fff;
+        border: 1px solid var(--color-red);
+
+    }
+    &.red2:hover {
+        background: #fff;
+        color: var(--color-red);
+        border: 1px solid var(--color-red);
+
+    }
+
+
+}
+.button_middle {
+
+    width: 100%;
+    height: 48px;
+    text-decoration: none;
+    text-transform: none;
+    background: $btnBlue;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    @include RobotoFlex;
+    position: relative;
+    margin: 0;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: 0.2s;
+    border: 1px solid $btnBlue;
+    cursor: pointer;
+
+
+    &:hover {
+        background:#fff ;
+        color: $btnBlue;
+        border: 1px solid #E6E0EC;
+    }
+
+
+
+    &.orange {
+        background: var(--color-orange);
+        border: 1px solid var(--color-orange);
+
+
+    }
+    &.orange:hover {
+        background: var(--color-orange);
+        border: 1px solid var(--color-orange);
+
+
+    }
+
+    &.white {
+        background: #fff;
+        color: $btnBlue;
+        border: 1px solid #E6E0EC;
+
+    }
+    &.white:hover {
+        background: $btnBlue;
+        color: #fff;
+        border: 1px solid $btnBlue;
+
+    }
+    &.green {
+        background: #2F6E4D;
+        color: #fff;
+        border: 1px solid #2F6E4D;
+
+    }
+    &.green:hover {
+        background: #fff;
+        color: green;
+        border: 1px solid #2F6E4D;
+
+    }
+    &.red {
+        background: #fff;
+        color: var(--color-red);
+        border: 1px solid #E6E0EC;
+
+    }
+    &.red:hover {
+        background: var(--color-red);
+        color: #fff;
+        border: 1px solid var(--color-red);
+
+    }
+    &.red2 {
+        background: var(--color-red);
+        color: #fff;
+        border: 1px solid var(--color-red);
+
+    }
+    &.red2:hover {
+        background: #fff;
+        color: var(--color-red);
+        border: 1px solid var(--color-red);
+
+    }
+
+
+}
+
+
+@media screen and (max-width:865px) {
+    .button {
+
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .button_middle {
+
+        width: 100%;
+        height: 44px;
+        font-size: 16px;
+    }
+}

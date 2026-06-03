@@ -1,0 +1,490 @@
+// ── SCHEDULE WRAP ──
+.schedule-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 72px 46px 100px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: start;
+}
+
+// ── EVENT LIST ──
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+// ── EVENT CARD ──
+.event-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 0;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        border-color: rgba(196, 150, 58, 0.3);
+    }
+
+    &.past { opacity: 0.45; }
+}
+
+// ── DATE COLUMN ──
+.event-date-col {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 12px;
+    text-align: center;
+    min-width: 100px;
+
+    .event-day {
+        font-family: var(--serif);
+        font-size: 40px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1;
+    }
+
+    .event-range {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.45);
+        margin: 4px 0 2px;
+        letter-spacing: 0.05em;
+    }
+
+    .event-day2 {
+        font-family: var(--serif);
+        font-size: 26px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1;
+    }
+
+    .event-month {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 8px;
+    }
+
+    .event-day-cross {
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.5;
+        text-align: center;
+        padding: 0 4px;
+    }
+
+    .event-open-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    .event-open-year {
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 700;
+        color: #fff;
+        margin-top: 10px;
+    }
+}
+
+.event-date-col--past {
+    background: #2a3a5c;
+}
+
+// ── CARD BODY ──
+.event-body {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    .event-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .event-tag {
+        display: inline-block;
+        background: rgba(196, 150, 58, 0.1);
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 2px;
+
+        &.format {
+            background: rgba(21, 32, 64, 0.06);
+            color: var(--navy2);
+        }
+    }
+
+    .event-title {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--navy);
+        line-height: 1.25;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover { color: var(--gold); }
+    }
+
+    .event-meta {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .event-meta-item {
+        font-size: 13px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        svg { opacity: 0.5; flex-shrink: 0; }
+    }
+
+    .event-goals {
+        margin-top: 4px;
+        padding: 16px 20px;
+        background: var(--bg2);
+        border-left: 2px solid var(--gold);
+    }
+
+    .event-goals-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+    }
+
+    .event-goals ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        li {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.5;
+            padding-left: 16px;
+            position: relative;
+
+            &::before {
+                content: '—';
+                position: absolute;
+                left: 0;
+                color: var(--gold);
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+// ── PRICE COLUMN ──
+.event-price-col {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 16px;
+    min-width: 220px;
+    border-left: 1px solid var(--border);
+}
+
+.event-price-col--done {
+    justify-content: center;
+}
+
+.price-group { text-align: right; }
+
+.price-type {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+}
+
+.price-amount {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    justify-content: flex-end;
+
+    .price-currency {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--muted);
+    }
+}
+
+.price-amount--muted {
+    font-size: 20px;
+    color: var(--muted);
+}
+
+.price-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+}
+
+.event-done-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.btn-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: #fff;
+    text-decoration: none;
+    padding: 11px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius);
+    transition: background 0.2s;
+    white-space: nowrap;
+
+    &:hover { background: var(--gold-lt); }
+}
+
+.btn-register {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+}
+
+// ── SECTION DIVIDER ──
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+}
+
+.section-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.section-divider-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+// ── NO EVENTS ──
+.no-events {
+    padding: 60px;
+    text-align: center;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.no-events-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+// ── SIDEBAR ──
+.schedule-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.schedule-sidebar__card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 28px;
+
+    p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+        margin-bottom: 16px;
+
+        &:last-child { margin-bottom: 0; }
+    }
+
+    .btn-primary {
+        display: block;
+        background: var(--gold);
+        color: #fff;
+        text-decoration: none;
+        padding: 11px 22px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        border-radius: var(--radius);
+        transition: background 0.2s;
+        text-align: center;
+
+        &:hover { background: var(--gold-lt); }
+    }
+}
+
+.schedule-sidebar__card-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.25;
+}
+
+
+.schedule-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.schedule-news-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    a {
+        font-size: 14px;
+        color: var(--text);
+        line-height: 1.5;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+        display: block;
+
+        &:hover { color: var(--gold); }
+    }
+}
+
+.schedule-news-item__meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+// ── RESPONSIVE ──
+@media (max-width: 1199px) {
+    .schedule-wrap {
+        grid-template-columns: 1fr 280px;
+        gap: 40px;
+        padding: 60px 30px 80px;
+    }
+
+    .event-price-col {
+        min-width: 180px;
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .schedule-wrap {
+        grid-template-columns: 1fr;
+        padding: 40px 24px 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .event-card {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .event-price-col {
+        display: none;
+    }
+
+    .event-date-col {
+        min-width: 80px;
+        padding: 20px 8px;
+
+        .event-day { font-size: 32px; }
+        .event-day2 { font-size: 20px; }
+    }
+
+    .event-body {
+        padding: 20px;
+
+        .event-title { font-size: 18px; }
+        .event-goals { padding: 12px 16px; }
+    }
+}
+
+@media (max-width: 480px) {
+    .schedule-wrap {
+        padding: 30px 16px 60px;
+    }
+
+    .event-body {
+        padding: 16px;
+
+        .event-title { font-size: 17px; }
+    }
+}

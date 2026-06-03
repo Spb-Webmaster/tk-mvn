@@ -1,0 +1,297 @@
+// ── Вкладки категорий ────────────────────────────────────
+
+.photo-tabs-wrap {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: sticky;
+    top: 80px;
+    z-index: 50;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+}
+
+.photo-tabs-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 46px;
+    display: flex;
+}
+
+.photo-tab-btn {
+    padding: 18px 28px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    margin-bottom: -1px;
+    text-transform: uppercase;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    &.active {
+        color: var(--gold-lt);
+        border-bottom-color: var(--gold);
+    }
+}
+
+.photo-tab-panel {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+// ── Мобильный select ─────────────────────────────────────
+
+.photo-tabs-select-wrap {
+    display: none;
+    padding: 10px 20px;
+    position: relative;
+
+    &::after {
+        content: '▾';
+        position: absolute;
+        right: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+        pointer-events: none;
+        font-size: 14px;
+        line-height: 1;
+    }
+}
+
+.photo-tabs-select {
+    width: 100%;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px 36px 10px 14px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border-radius: var(--radius);
+    outline: none;
+
+    &:focus {
+        border-color: var(--gold);
+    }
+
+    option {
+        background: var(--navy);
+        color: #fff;
+    }
+}
+
+// ── Список фотоальбомов ──────────────────────────────────
+
+.photo-section {
+    padding: 0 0 100px;
+    background: var(--bg);
+}
+
+.photo-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 56px 46px 0;
+}
+
+// ── Сетка альбомов ───────────────────────────────────────
+
+.albums {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+// ── Карточка альбома ─────────────────────────────────────
+
+.album-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+}
+
+// ── Коллаж превью ────────────────────────────────────────
+
+.album-preview {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-main {
+    grid-row: 1 / 3;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+}
+
+.photo-thumb {
+    overflow: hidden;
+    border-left: 2px solid #fff;
+
+    &:first-of-type {
+        border-bottom: 1px solid #fff;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+}
+
+.album-card:hover .photo-main img,
+.album-card:hover .photo-thumb img {
+    transform: scale(1.06);
+}
+
+// ── Оверлей и бейджи ─────────────────────────────────────
+
+.album-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(21, 32, 64, 0.65) 0%, transparent 55%);
+    pointer-events: none;
+}
+
+.album-count {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.album-see-all {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+// ── Инфо-блок ────────────────────────────────────────────
+
+.album-info {
+    padding: 18px 20px 22px;
+}
+
+.album-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+}
+
+.album-card:hover .album-title {
+    color: var(--gold);
+}
+
+.album-sub {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.album-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: gap 0.2s;
+
+    &:hover {
+        gap: 10px;
+    }
+}
+
+// ── Адаптив ──────────────────────────────────────────────
+
+@media screen and (max-width: 1100px) {
+    .albums {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .photo-inner {
+        padding: 40px 24px 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .photo-tabs-inner {
+        display: none;
+    }
+    .photo-tabs-wrap {
+        padding:20px 0;
+        top: 64px;
+    }
+
+    .photo-tabs-select-wrap {
+        display: block;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .albums {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-section {
+        padding-bottom: 60px;
+    }
+
+    .album-preview {
+        height: 200px;
+    }
+}

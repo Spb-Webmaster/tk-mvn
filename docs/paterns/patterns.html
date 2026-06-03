@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Паттерны проекта</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f9f9f9;
+            color: #333;
+        }
+        h1 { color: #e3342f; }
+        h2 { margin-top: 40px; color: #e3342f; border-bottom: 2px solid #e3342f; padding-bottom: 6px; }
+        h3 { margin-top: 28px; color: #555; }
+        h4 { margin-top: 20px; color: #333; }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 14px 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        code { font-family: monospace; font-size: 14px; }
+        p code, li code, td code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: #c0392b;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #f0ad4e;
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .rule {
+            background: #e8f5e9;
+            border-left: 4px solid #43a047;
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        .schema {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        ul li { margin-bottom: 6px; }
+        .path { color: #888; font-size: 13px; margin-bottom: 4px; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+<h1>Паттерны проекта</h1>
+
+<!-- ============================================================ -->
+<h2>1. Laravel Page Pattern — от модели до вывода</h2>
+<p>Полный цикл создания страницы с выводом данных из БД и настроек админки. Пример — страница новостей <code>/poleznoe/novosti</code>.</p>
+
+<h3>Структура директорий</h3>
+<pre><code>src/Domain/{Section}/ViewModels/{Model}ViewModel.php
+app/Http/Controllers/Pages/{Section}Controller.php
+app/Enums/Pages/PageTemplate.php
+app/Enums/Resources/TeaserTemplate.php
+app/Enums/Resources/FullTemplate.php
+resources/views/pages/resources/list.blade.php        ← единый шаблон списка
+resources/views/pages/resources/show.blade.php        ← единый шаблон детальной
+resources/views/pages/common/pages/templates/{template}.blade.php
+resources/views/pages/common/resourses/templates/teaser/{template}.blade.php
+resources/views/pages/common/resourses/templates/full/{template}.blade.php
+resources/views/components/seo/meta-paginated.blade.php
+routes/web.php
+routes/breadcrumbs.php</code></pre>
+
+<h3>Именование маршрутов</h3>
+<p>URL-адреса — транслитерация (уже проиндексированы, не менять). Имена маршрутов — только английские слова.</p>
+<pre><code>// routes/web.php
+Route::get('/poleznoe/novosti',        'news')->name('resources.news');
+Route::get('/poleznoe/novosti/{slug}', 'newsShow')->name('resources.news.show');</code></pre>
+<table>
+    <tr><th>URL</th><th>Имя маршрута</th></tr>
+    <tr><td><code>/poleznoe/novosti</code></td><td><code>resources.news</code></td></tr>
+    <tr><td><code>/poleznoe/novosti/{slug}</code></td><td><code>resources.news.show</code></td></tr>
+</table>
+<div class="note"><strong>Важно:</strong> маршруты с <code>{slug}</code> на одном уровне с конкретными путями (например <code>/poleznoe/{slug}</code> и <code>/poleznoe/novosti</code>) должны стоять <strong>после</strong> конкретных маршрутов — иначе <code>{slug}</code> перехватит их раньше.</div>
+
+<h3>Шаг 1 — Модель: scopePublished</h3>
+<p class="path">app/Models/News.php</p>
+<pre><code>use Illuminate\Database\Eloquent\Builder;
+
+public function scopePublished(Builder $query): Builder
+{
+    return $query->where('published', 1)->orderBy('sorting');
+}</code></pre>
+<div class="note">Вызов в коде: <code>News::published()->...</code> — Laravel сам находит <code>scopePublished</code> через соглашение <code>scopeXxx</code>.</div>
+
+<h3>Шаг 2 — ViewModel</h3>
+<p class="path">src/Domain/News/ViewModels/NewsViewModel.php</p>
+<pre><code>namespace Domain\News\ViewModels;
+
+use App\Models\News;
+use App\Models\Setting;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Fluent;
+use Support\Traits\Makeable;
+
+class NewsViewModel
+{
+    use Makeable;
+
+    // Данные страницы из админки (MoonShine Settings)
+    public function getPageData(): Fluent
+    {
+        return new Fluent(Setting::getGroup('poleznoe_novosti')->data ?? []);
+    }
+
+    // Список записей с пагинацией
+    public function getPublished(): LengthAwarePaginator
+    {
+        return News::published()->paginate(config('site.constants.paginate'));
+    }
+
+    // Одна запись по slug для детальной страницы
+    public function getBySlug(string $slug): News
+    {
+        return News::published()->where('slug', $slug)->firstOrFail();
+    }
+}</code></pre>
+<div class="rule">
+    <strong>Правила:</strong>
+    <ul>
+        <li>Все запросы к БД — только в ViewModel, никогда в контроллере</li>
+        <li><code>Makeable</code> — трейт, добавляет <code>::make()</code> вместо <code>new</code></li>
+        <li><code>Fluent</code> — доступ через <code>$page->title</code>; несуществующий ключ возвращает <code>null</code>, не бросает ошибку</li>
+        <li><code>getPublished()</code> возвращает <code>LengthAwarePaginator</code>, не <code>Collection</code> — не ставить <code>?</code> перед типом</li>
+        <li>Количество записей на странице: <code>config('site.constants.paginate')</code></li>
+    </ul>
+</div>
+
+<h3>Шаг 3 — Контроллер (список)</h3>
+<p class="path">app/Http/Controllers/Pages/ResourcesController.php</p>
+<pre><code>public function news(): View
+{
+    $vm    = NewsViewModel::make();
+    $items = $vm->getPublished();
+    $page  = $vm->getPageData();
+
+    return view('pages.resources.list', [
+        'page'            => $page,
+        'items'           => $items,
+        'pageSuffix'      => $this->pageSuffix($items),
+        'template'        => PageTemplate::tryFrom($page->page_template ?? '')    ?? PageTemplate::Default,
+        'teaser_template' => TeaserTemplate::tryFrom($page->section_template ?? '') ?? TeaserTemplate::Default,
+        'section'         => 'resources.news',
+        'route'           => 'resources.news.show',
+    ]);
+}</code></pre>
+<div class="note"><code>$items</code> сохраняется в переменную и передаётся — иначе <code>getPublished()</code> вызовется дважды и будет два запроса к БД.</div>
+<div class="rule">
+    <strong>Правила:</strong>
+    <ul>
+        <li><code>section</code> и <code>route</code> передаются из контроллера — вьюха <code>list.blade.php</code> универсальна для всех моделей.</li>
+        <li><strong>Шаблоны ВСЕГДА читаются из настроек админки</strong> — <code>$page->page_template</code> и <code>$page->section_template</code> приходят из <code>getPageData()</code>, которая читает <code>Setting::getGroup(...)->data</code>.</li>
+        <li><strong>Никогда не хардкодить</strong> <code>PageTemplate::News</code>, <code>TeaserTemplate::Training</code> и т.д. напрямую — это игнорирует то, что выставлено в MoonShine.</li>
+        <li>Используй <code>tryFrom()</code> вместо <code>from()</code> — не бросает исключение если значение не найдено в Enum, возвращает <code>null</code>, который гасится через <code>??</code>.</li>
+    </ul>
+</div>
+
+<h3>Шаг 3б — Контроллер (детальная страница)</h3>
+<pre><code>public function newsShow(string $slug): View
+{
+    $vm   = NewsViewModel::make();
+    $item = $vm->getBySlug($slug);
+    $page = $vm->getPageData();
+
+    return view('pages.resources.show', [
+        'page'     => $page,
+        'item'     => $item,
+        'resource' => 'news',
+    ]);
+}</code></pre>
+<div class="note"><code>$resource</code> — строка, передаётся в <code>$item->template->view($resource)</code> для поиска секционного переопределения шаблона.</div>
+
+<h3>Шаг 4 — SEO-компонент с пагинацией</h3>
+<p class="path">resources/views/components/seo/meta-paginated.blade.php</p>
+<pre><code>@props(['page', 'items'])
+@php
+    $currentPage     = $items->currentPage();
+    $suffix          = $currentPage > 1 ? ' — Страница ' . $currentPage : '';
+    $baseTitle       = $page->metatitle ?: $page->title ?: '';
+    $baseDescription = $page->description ?: '';
+    $baseKeywords    = $page->keywords ?: '';
+@endphp
+&lt;x-seo.meta
+    title="{{ $baseTitle ? $baseTitle . $suffix : '' }}"
+    description="{{ $baseDescription ? $baseDescription . $suffix : '' }}"
+    keywords="{{ $baseKeywords ? $baseKeywords . $suffix : '' }}"
+/&gt;</code></pre>
+<div class="rule">
+    <ul>
+        <li>Суффикс <code>— Страница N</code> добавляется только если есть базовое значение</li>
+        <li>Если поле пустое — передаётся <code>''</code>, тогда <code>x-seo.meta</code> подставляет дефолт из конфига</li>
+        <li><code>metatitle</code> имеет приоритет над <code>title</code> для SEO</li>
+    </ul>
+</div>
+
+<h3>Шаг 4б — Три Enum шаблонов</h3>
+<p>Шаблоны разделены на три класса по назначению. Каждый Enum используется в своём контексте.</p>
+
+<h4>PageTemplate — шаблон блока страницы</h4>
+<p class="path">app/Enums/Pages/PageTemplate.php</p>
+<pre><code>enum PageTemplate: string
+{
+    case Default = 'default';
+
+    public function view(string $section): string
+    {
+        $specific = "pages.{$section}.pages.templates.{$this->value}";
+        $common   = "pages.common.pages.templates.{$this->value}";
+
+        if (view()->exists($specific)) return $specific;
+
+        return $common;
+    }
+}</code></pre>
+<div class="rule">
+    <ul>
+        <li><strong>Используется:</strong> в MoonShine Pages (поле <code>page_template</code>). Контроллер передаёт как <code>$template</code>.</li>
+        <li><strong>Шаблоны:</strong> <code>resources/views/pages/common/pages/templates/</code></li>
+        <li><strong>Вызов во вьюхе:</strong> <code>@include($template->view($section))</code></li>
+        <li>Приоритет: <code>pages/{section}/pages/templates/{value}.blade.php</code> → <code>pages/common/pages/templates/{value}.blade.php</code></li>
+    </ul>
+</div>
+
+<h4>TeaserTemplate — шаблон тизера (одного элемента списка)</h4>
+<p class="path">app/Enums/Resources/TeaserTemplate.php</p>
+<pre><code>enum TeaserTemplate: string
+{
+    case Default = 'default';
+
+    public function view(string $section): string
+    {
+        $specific = "pages.{$section}.resourses.templates.teaser.{$this->value}";
+        $common   = "pages.common.resourses.templates.teaser.{$this->value}";
+
+        if (view()->exists($specific)) return $specific;
+
+        return $common;
+    }
+}</code></pre>
+<div class="rule">
+    <ul>
+        <li><strong>Используется:</strong> в MoonShine Pages (поле <code>section_template</code>). Контроллер передаёт как <code>$teaser_template</code>.</li>
+        <li><strong>Шаблоны:</strong> <code>resources/views/pages/common/resourses/templates/teaser/</code></li>
+        <li><strong>Вызов во вьюхе:</strong> <code>@include($teaser_template->view($section), ['item' => $item, 'route' => $route])</code></li>
+        <li>Приоритет: <code>pages/{section}/resourses/templates/teaser/{value}.blade.php</code> → <code>pages/common/resourses/templates/teaser/{value}.blade.php</code></li>
+    </ul>
+</div>
+
+<h4>FullTemplate — шаблон полной страницы записи</h4>
+<p class="path">app/Enums/Resources/FullTemplate.php</p>
+<pre><code>enum FullTemplate: string
+{
+    case Default = 'default';
+
+    public function view(string $resource): string
+    {
+        $specific = "pages.resourses.{$resource}.templates.full.{$this->value}";
+        $common   = "pages.common.resourses.templates.full.{$this->value}";
+
+        if (view()->exists($specific)) return $specific;
+
+        return $common;
+    }
+}</code></pre>
+<div class="rule">
+    <ul>
+        <li><strong>Используется:</strong> в MoonShine Resources (поле <code>template</code> модели). Берётся из <code>$item->template</code>.</li>
+        <li><strong>Шаблоны:</strong> <code>resources/views/pages/common/resourses/templates/full/</code></li>
+        <li><strong>Вызов во вьюхе:</strong> <code>@include($item->template->view($resource), ['item' => $item])</code></li>
+        <li>Приоритет: <code>pages/resourses/{resource}/templates/full/{value}.blade.php</code> → <code>pages/common/resourses/templates/full/{value}.blade.php</code></li>
+    </ul>
+</div>
+<div class="note">Добавить новый шаблон = создать файл в соответствующей папке + добавить <code>case</code> с именем файла. Вьюха не меняется.</div>
+
+<h3>Шаг 4в — Шаблон блока страницы (PageTemplate::default)</h3>
+<p class="path">resources/views/pages/common/pages/templates/default.blade.php</p>
+<pre><code>@if($items->currentPage() === 1)
+    @if($page->desc)
+        &lt;div class="desc"&gt;{!! $page->desc !!}&lt;/div&gt;
+    @endif
+@endif</code></pre>
+<div class="rule">
+    <ul>
+        <li>Получает все переменные из родительской вьюхи через Blade scope inheritance</li>
+        <li>Отвечает только за контент уровня страницы (описание, доп. блоки)</li>
+        <li>Вывод описания — только на первой странице пагинации</li>
+    </ul>
+</div>
+
+<h3>Шаг 4г — Шаблон тизера (TeaserTemplate::default)</h3>
+<p class="path">resources/views/pages/common/resourses/templates/teaser/default.blade.php</p>
+<pre><code>&lt;div class="default"&gt;
+    &lt;a href="{{ route($route, $item->slug) }}" class="teaser"&gt;
+        &lt;span class="teaser__title"&gt;{{ $item->title }}&lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;</code></pre>
+<div class="rule">
+    <ul>
+        <li>Получает <code>$item</code> и <code>$route</code> явно из <code>@include</code></li>
+        <li>Отвечает за вид одной карточки в списке</li>
+        <li>Имя файла = значение <code>case</code> в Enum</li>
+    </ul>
+</div>
+
+<h3>Шаг 5 — Единый шаблон списка</h3>
+<p class="path">resources/views/pages/resources/list.blade.php</p>
+<pre><code>@extends('layouts.layout')
+&lt;x-seo.meta-paginated :page="$page" :items="$items" /&gt;
+@section('content')
+    &lt;div class="content_page"&gt;
+        &lt;div class="block"&gt;
+            &lt;div class="block_content__breadcrumbs"&gt;{{ Breadcrumbs::render(Route::currentRouteName()) }}&lt;/div&gt;
+            @if($page->title)
+                &lt;h1 class="h1"&gt;{{ $page->title }}&lt;/h1&gt;
+            @endif
+
+            @foreach($items as $item)
+                @include($teaser_template->view($section), ['item' => $item, 'route' => $route])
+            @endforeach
+            {{ $items->withQueryString()->links('pagination::default') }}
+
+            @include($template->view($section))
+        &lt;/div&gt;
+    &lt;/div&gt;
+@endsection</code></pre>
+<div class="rule">
+    <ul>
+        <li>Один файл для всех разделов — <code>news</code>, <code>laws</code>, <code>diplomas</code>, <code>seminar</code>, <code>important</code>, <code>resources</code></li>
+        <li><code>$teaser_template</code> — итерация элементов списка</li>
+        <li><code>$template</code> — блок уровня страницы (описание и пр.) после пагинации</li>
+        <li>Хлебные крошки: <code>Route::currentRouteName()</code> — имя маршрута не хардкодится</li>
+        <li><code>$section</code> и <code>$route</code> приходят из контроллера — вьюха универсальна</li>
+    </ul>
+</div>
+
+<h3>Шаг 5б — Единый шаблон детальной страницы</h3>
+<p class="path">resources/views/pages/resources/show.blade.php</p>
+<pre><code>@extends('layouts.layout')
+&lt;x-seo.meta
+    title="{{ $item->metatitle ?: $item->title }}"
+    description="{{ $item->description }}"
+    keywords="{{ $item->keywords }}"
+/&gt;
+@section('content')
+
+    &lt;div class="content_page"&gt;
+        &lt;div class="block"&gt;
+
+            &lt;div class="block_content__breadcrumbs"&gt;{{ Breadcrumbs::render(Route::currentRouteName(), $item) }}&lt;/div&gt;
+            @if($item->title)
+                &lt;h1 class="h1"&gt;{{ $item->title }}&lt;/h1&gt;
+            @endif
+
+            @include($item->template->view($resource), ['item' => $item])
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+@endsection</code></pre>
+<div class="rule">
+    <ul>
+        <li>Один файл для всех разделов — вместо отдельных <code>news-show</code>, <code>laws-show</code> и т.д.</li>
+        <li><code>$resource</code> приходит из контроллера — строка (<code>'news'</code>, <code>'laws'</code>, <code>'diplomas'</code> и т.д.)</li>
+        <li>SEO использует поля самой записи (<code>$item->metatitle</code>, <code>$item->description</code>, <code>$item->keywords</code>)</li>
+        <li><code>metatitle</code> имеет приоритет над <code>title</code> для SEO</li>
+        <li>Хлебные крошки получают <code>$item</code> вторым аргументом</li>
+    </ul>
+</div>
+
+<h3>Шаг 6 — Хлебные крошки</h3>
+<p class="path">routes/breadcrumbs.php</p>
+<pre><code>use Diglactic\Breadcrumbs\Breadcrumbs;
+
+Breadcrumbs::for('home', function ($trail) {
+    $trail->push('Главная', route('home'));
+});
+
+Breadcrumbs::for('resources.news', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Новости', route('resources.news'));
+});
+
+Breadcrumbs::for('resources.news.show', function ($trail, $item) {
+    $trail->parent('resources.news');
+    $trail->push($item->title, route('resources.news.show', $item->slug));
+});</code></pre>
+<div class="rule">
+    <ul>
+        <li>Имя для <code>Breadcrumbs::for(...)</code> совпадает с именем маршрута в <code>web.php</code></li>
+        <li>В вьюхе: <code>Breadcrumbs::render(Route::currentRouteName())</code> — имя берётся из текущего маршрута автоматически</li>
+        <li>Для детальной страницы <code>$item</code> передаётся вторым аргументом: <code>Breadcrumbs::render(Route::currentRouteName(), $item)</code></li>
+        <li>Цепочка строится через <code>$trail->parent(...)</code> — каждый уровень ссылается на родителя</li>
+    </ul>
+</div>
+
+<h3>Итоговая схема потока данных</h3>
+<div class="schema">
+<pre style="background:transparent; color:#1a1a1a; padding:0; margin:0;"><code>MoonShine Pages (настройки)
+  page_template    → PageTemplate enum   → $template         → pages/common/pages/templates/
+  section_template → TeaserTemplate enum → $teaser_template  → pages/common/resourses/templates/teaser/
+
+MoonShine Resources (поле записи)
+  template         → FullTemplate enum   → $item->template   → pages/common/resourses/templates/full/
+
+pages/resources/list.blade.php  (один файл для всех разделов)
+  @foreach → @include($teaser_template->view($section))   ← один тизер
+  @include($template->view($section))                     ← блок страницы (desc и пр.)
+
+pages/resources/show.blade.php  (один файл для всех разделов)
+  @include($item->template->view($resource))              ← полная страница записи
+  $resource = 'news' | 'laws' | 'diplomas' | ...         ← приходит из контроллера</code></pre>
+</div>
+<div class="rule">
+    <strong>Ключевое правило:</strong> шаблон страницы определяется только в MoonShine — контроллер <strong>читает</strong> значение через <code>$page->page_template</code> / <code>$page->section_template</code>, а не задаёт его хардкодом. Если в контроллере написано <code>PageTemplate::News</code> или <code>TeaserTemplate::Training</code> напрямую — это ошибка.
+</div>
+
+</body>
+</html>
