@@ -1,0 +1,78 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Build frontend assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy files via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: >-
+            -avzr --delete
+            --exclude='.git'
+            --exclude='node_modules'
+            --exclude='.env'
+            --exclude='vendor'
+            --exclude='public_html'
+            --exclude='storage/logs'
+            --exclude='storage/framework/sessions'
+            --exclude='storage/framework/cache'
+            --exclude='storage/framework/views'
+            --exclude='public/build/.vite'
+          path: ./
+          remote_path: /home/axeld1975_test/axeld.ru/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Post-deploy tasks
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /home/axeld1975_test/axeld.ru
+
+            # Write .env from GitHub secret
+            echo "${{ secrets.ENV_PRODUCTION }}" > .env
+
+            # PHP dependencies
+            composer install --no-dev --optimize-autoloader --no-interaction --quiet
+
+            # Database
+            php8.3 artisan migrate --force
+
+            # Production caches
+            php8.3 artisan config:cache
+            php8.3 artisan route:cache
+            php8.3 artisan view:cache
+
+            # Storage symlink
+            php8.3 artisan storage:link --force
+
+            # public_html → public (выполняется один раз)
+            if [ ! -L /home/axeld1975_test/axeld.ru/public_html ]; then
+              rm -rf /home/axeld1975_test/axeld.ru/public_html
+              ln -sf /home/axeld1975_test/axeld.ru/public /home/axeld1975_test/axeld.ru/public_html
+            fi
