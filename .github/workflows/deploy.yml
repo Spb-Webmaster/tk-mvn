@@ -63,7 +63,9 @@ jobs:
             ${{ secrets.ENV_PRODUCTION }}
             __ENV_EOF__
 
-            php8.3 ~/composer2.phar install --no-dev --optimize-autoloader --no-interaction --quiet
+            php8.3 ~/composer2.phar install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
+            php8.3 artisan package:discover --ansi
 
             php8.3 artisan migrate --force
             php8.3 artisan config:cache
