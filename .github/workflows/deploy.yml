@@ -29,6 +29,9 @@ jobs:
           switches: >-
             -avzr --delete
             --exclude='.git'
+            --exclude='.ssh'
+            --exclude='.cache'
+            --exclude='composer2.phar'
             --exclude='node_modules'
             --exclude='.env'
             --exclude='vendor'
@@ -52,19 +55,14 @@ jobs:
             set -e
             cd ~
 
-            # Write .env from GitHub secret
-            echo "${{ secrets.ENV_PRODUCTION }}" > .env
+            cat > .env << '__ENV_EOF__'
+            ${{ secrets.ENV_PRODUCTION }}
+            __ENV_EOF__
 
-            # PHP dependencies
-            composer install --no-dev --optimize-autoloader --no-interaction --quiet
+            php8.3 ~/composer2.phar install --no-dev --optimize-autoloader --no-interaction --quiet
 
-            # Database
             php8.3 artisan migrate --force
-
-            # Production caches
             php8.3 artisan config:cache
             php8.3 artisan route:cache
             php8.3 artisan view:cache
-
-            # Storage symlink
             php8.3 artisan storage:link --force
