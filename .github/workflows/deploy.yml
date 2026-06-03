@@ -33,7 +33,8 @@ jobs:
 
       - name: Deploy files via rsync
         run: |
-          rsync -avzr --delete \
+          rsync -rltz --delete \
+            --no-perms --no-owner --no-group \
             --exclude='.git' \
             --exclude='.ssh' \
             --exclude='.cache' \
