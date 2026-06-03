@@ -34,7 +34,7 @@ jobs:
       - name: Deploy files via rsync
         run: |
           rsync -rltz --delete \
-            --no-perms --no-owner --no-group \
+            --no-perms --no-owner --no-group --omit-dir-times \
             --exclude='.git' \
             --exclude='.ssh' \
             --exclude='.cache' \
