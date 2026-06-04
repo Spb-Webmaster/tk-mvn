@@ -66,11 +66,11 @@ Route::controller(ResponseController::class)->group(function () {
 
 
 /** Регистрация на тренинг **/
-Route::post('/trainings/register', [TrainingRegistrationController::class, 'store'])->middleware('throttle:5,10')->name('training.register');
+Route::post('/trainings/register', [TrainingRegistrationController::class, 'store'])->middleware('throttle:10,10')->name('training.register');
 /** ///Регистрация на тренинг **/
 
 /** Форма обратной связи (контакты) **/
-Route::post('/zapros', [ContactFormController::class, 'store'])->middleware('throttle:3,10')->name('form.zapros');
+Route::post('/zapros', [ContactFormController::class, 'store'])->middleware('throttle:10,10')->name('form.zapros');
 /** ///Форма обратной связи **/
 
 /** Обучение **/
