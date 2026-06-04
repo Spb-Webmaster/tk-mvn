@@ -153,7 +153,7 @@ jobs:
             --exclude='composer2.phar' \
             --exclude='node_modules' \
             --exclude='.env' \
-            --exclude='vendor' \
+            --exclude='/vendor' \
             --exclude='storage/app/public' \
             --exclude='storage/logs' \
             --exclude='storage/framework/sessions' \
