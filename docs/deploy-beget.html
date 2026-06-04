@@ -195,7 +195,18 @@ jobs:
   <tr><td><code>Please provide a valid cache path</code></td><td>Нет <code>storage/framework/views</code></td><td><code>mkdir -p storage/framework/{cache/data,sessions,testing,views}</code></td></tr>
   <tr><td><code>package:discover exit 1</code></td><td>Отсутствующие директории</td><td>Сначала <code>mkdir -p</code>, потом artisan</td></tr>
   <tr><td>Composer устарел</td><td>Версия 1.x на Beget</td><td>Установить <code>~/composer2.phar</code> вручную</td></tr>
+  <tr><td>Белый экран в <code>/admin/</code></td><td><code>vendor/</code> заблокирован в .htaccess, JS/CSS MoonShine не грузятся (403)</td><td>Добавить <code>RewriteRule ^vendor/(.*)$ public/vendor/$1</code> ДО блокирующих правил</td></tr>
+  <tr><td><code>View [default] not found</code> (500 на страницах с пагинацией)</td><td><code>--exclude='vendor'</code> в rsync исключает и <code>resources/views/vendor/</code></td><td>Использовать <code>--exclude='/vendor'</code> (с ведущим слэшем)</td></tr>
 </table>
+
+<h2>Исправление: белый экран в /admin/ (MoonShine)</h2>
+<p>MoonShine загружает ассеты по URL вида <code>/vendor/moonshine/assets/app.js</code>. Блокирующее правило в <code>.htaccess</code>:</p>
+<pre><code>RewriteRule ^(app|bootstrap|config|...|vendor)(/|$) - [F,L]</code></pre>
+<p>срабатывает <strong>до</strong> редиректа на <code>public/</code> и возвращает <strong>403</strong> на любой <code>/vendor/*</code> запрос — из-за чего Alpine.js и CSS не загружаются, страница выглядит пустой.</p>
+<p>Решение: добавить явный редирект <code>vendor/ → public/vendor/</code> <strong>до</strong> блокирующих правил:</p>
+<pre><code># Публичные ассеты из public/vendor/ (MoonShine, TinyMCE и др.)
+RewriteRule ^vendor/(.*)$ public/vendor/$1 [L,QSA]</code></pre>
+<div class="tip">Почему это безопасно: PHP-пакеты в корневом <code>vendor/</code> недоступны — <code>public/vendor/</code> содержит только опубликованные статические ассеты. Запросы вида <code>/vendor/laravel/framework/...</code> вернут 404.</div>
 
 </body>
 </html>

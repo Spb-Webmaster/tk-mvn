@@ -231,6 +231,8 @@ jobs:
 | `Please provide a valid cache path` | Нет `storage/framework/views` | `mkdir -p storage/framework/{cache/data,sessions,testing,views}` |
 | `package:discover exit 1` | Падает из-за отсутствующих директорий | Сначала `mkdir -p`, потом `artisan` |
 | `composer` устарел | Версия 1.x на Beget | Установить `~/composer2.phar` вручную |
+| Белый экран в `/admin/` | `vendor/` заблокирован в `.htaccess`, JS/CSS MoonShine не грузятся | Добавить `RewriteRule ^vendor/(.*)$ public/vendor/$1` ДО блоков |
+| `View [default] not found` (500 на страницах с пагинацией) | `--exclude='vendor'` в rsync исключает и `resources/views/vendor/` | Использовать `--exclude='/vendor'` (с ведущим слэшем) |
 
 ---
 
@@ -254,6 +256,29 @@ jobs:
 ```
 
 Почему это безопасно: `public/storage/` — симлинк только на `storage/app/public/`. Запросы к `storage/logs/`, `storage/framework/` и т.д. через этот редирект вернут 404, так как этих папок внутри `storage/app/public/` нет.
+
+---
+
+## Исправление: белый экран в /admin/ (MoonShine)
+
+MoonShine загружает ассеты по URL вида `/vendor/moonshine/assets/app.js`. Блокирующее правило в `.htaccess`:
+
+```apache
+RewriteRule ^(app|bootstrap|config|...|vendor)(/|$) - [F,L]
+```
+
+срабатывает **до** редиректа на `public/` и возвращает **403** на любой `/vendor/*` запрос — из-за чего Alpine.js и CSS не загружаются, страница выглядит пустой.
+
+Решение: добавить явный редирект `vendor/ → public/vendor/` **до** блокирующих правил:
+
+```apache
+# Публичные ассеты из public/vendor/ (MoonShine, TinyMCE и др.)
+RewriteRule ^vendor/(.*)$ public/vendor/$1 [L,QSA]
+```
+
+Почему это безопасно: PHP-пакеты находятся в корневом `vendor/`, а `public/vendor/` содержит только опубликованные статические ассеты. Запросы вида `/vendor/laravel/framework/...` вернут 404, так как таких файлов в `public/vendor/` нет.
+
+---
 
 ### Загрузка медиафайлов через SFTP
 
