@@ -42,10 +42,12 @@ jobs:
             --exclude='node_modules' \
             --exclude='.env' \
             --exclude='vendor' \
+            --exclude='storage/app/public' \
             --exclude='storage/logs' \
             --exclude='storage/framework/sessions' \
             --exclude='storage/framework/cache' \
             --exclude='storage/framework/views' \
+            --exclude='public/storage' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
 

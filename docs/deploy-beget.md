@@ -154,10 +154,12 @@ jobs:
             --exclude='node_modules' \
             --exclude='.env' \
             --exclude='vendor' \
+            --exclude='storage/app/public' \
             --exclude='storage/logs' \
             --exclude='storage/framework/sessions' \
             --exclude='storage/framework/cache' \
             --exclude='storage/framework/views' \
+            --exclude='public/storage' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
 
@@ -205,7 +207,7 @@ jobs:
 
 ## Медиафайлы (storage)
 
-Директории `storage/logs`, `storage/framework/*` исключены из rsync чтобы не затирать данные между деплоями. Их нужно создать при первом деплое (делается автоматически через `mkdir -p`).
+Директории `storage/app/public`, `storage/logs`, `storage/framework/*` и `public/storage` исключены из rsync чтобы не затирать данные между деплоями. Без `--exclude='storage/app/public'` и `--exclude='public/storage'` rsync с флагом `--delete` удалит загруженные пользователем медиафайлы и симлинк, созданный `artisan storage:link`. Их нужно создать при первом деплое (делается автоматически через `mkdir -p`).
 
 Медиафайлы загружённые через админку хранятся в `storage/app/public/` — они **не деплоятся через git**. При первичной настройке загружать по SFTP:
 
