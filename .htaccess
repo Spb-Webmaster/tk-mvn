@@ -1,5 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    Options +FollowSymLinks
+
+    # Публичные медиафайлы через storage:link (public/storage → storage/app/public)
+    RewriteRule ^storage/(.*)$ public/storage/$1 [L,QSA]
 
     # Блокируем прямой доступ к служебным файлам и директориям
     RewriteRule ^\.env - [F,L]
