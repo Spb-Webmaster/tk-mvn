@@ -6,7 +6,7 @@
 />
 @section('content')
 
-<div class="home-page">
+<div class="home-page" data-home="">
 
 <!-- HERO -->
 <x-modules.hero
