@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="home-page">
-
+2222222222222222222222222222222222
 <!-- HERO -->
 <x-modules.hero
     :eyebrow="$home['hero_eyebrow'] ?? ''"
