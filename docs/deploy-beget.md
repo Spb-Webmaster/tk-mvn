@@ -224,6 +224,43 @@ jobs:
 |---|---|---|
 | `rsync exit code 23` | Права на директорию | Добавить `--no-perms --no-owner --no-group --omit-dir-times` |
 | `403 Forbidden` на `/` | `!-d` в `.htaccess` | Убрать `!-d` из финального RewriteRule |
+| `403 Forbidden` на `/storage/...` | `storage/` заблокирован правилами `.htaccess` | Добавить правило ДО блоков (см. ниже) |
+| `404` на `/storage/...` после снятия 403 | Файлы загружены не туда или не через SFTP | Проверить путь и протокол (SFTP, порт 22, логин `axeld1975_test`) |
 | `Please provide a valid cache path` | Нет `storage/framework/views` | `mkdir -p storage/framework/{cache/data,sessions,testing,views}` |
 | `package:discover exit 1` | Падает из-за отсутствующих директорий | Сначала `mkdir -p`, потом `artisan` |
 | `composer` устарел | Версия 1.x на Beget | Установить `~/composer2.phar` вручную |
+
+---
+
+## Исправление: доступ к /storage/ (медиафайлы)
+
+По умолчанию `.htaccess` блокирует весь `storage/` чтобы защитить логи и кэш. Но URL вида `/storage/images/...` должен вести на симлинк `public/storage/` → `storage/app/public/`.
+
+Правило нужно добавить **до** блокирующих строк:
+
+```apache
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    Options +FollowSymLinks
+
+    # Публичные медиафайлы через storage:link (public/storage → storage/app/public)
+    RewriteRule ^storage/(.*)$ public/storage/$1 [L,QSA]
+
+    # Блокируем прямой доступ к служебным файлам и директориям
+    RewriteRule ^\.env - [F,L]
+    ...
+```
+
+Почему это безопасно: `public/storage/` — симлинк только на `storage/app/public/`. Запросы к `storage/logs/`, `storage/framework/` и т.д. через этот редирект вернут 404, так как этих папок внутри `storage/app/public/` нет.
+
+### Загрузка медиафайлов через SFTP
+
+Обязательно использовать **SFTP** (не FTP), иначе файлы попадут в другую директорию другого пользователя.
+
+| Параметр | Значение |
+|---|---|
+| Протокол | SFTP (порт 22) |
+| Хост | `axeld1975.beget.tech` |
+| Логин | `axeld1975_test` |
+| Корень в клиенте | `/` = `public_html/` |
+| Путь для медиа | `/storage/app/public/` |
