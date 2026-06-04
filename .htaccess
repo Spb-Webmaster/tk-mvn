@@ -5,6 +5,9 @@
     # Публичные медиафайлы через storage:link (public/storage → storage/app/public)
     RewriteRule ^storage/(.*)$ public/storage/$1 [L,QSA]
 
+    # Публичные ассеты из public/vendor/ (MoonShine, TinyMCE и др.)
+    RewriteRule ^vendor/(.*)$ public/vendor/$1 [L,QSA]
+
     # Блокируем прямой доступ к служебным файлам и директориям
     RewriteRule ^\.env - [F,L]
     RewriteRule ^artisan - [F,L]
