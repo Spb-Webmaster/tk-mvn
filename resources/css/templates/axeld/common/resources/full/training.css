@@ -208,6 +208,17 @@
 .training-page .about .s-ttl {
   color: #fff;
 }
+.training-page .about2 {
+  background: #fff;
+  padding: 36px 40px;
+  margin-bottom: 48px;
+}
+.training-page .about2 .s-eye {
+  color: rgba(196, 150, 58, 0.72);
+}
+.training-page .about2 .s-ttl {
+  color: #fff;
+}
 .training-page .mlbl {
   font-size: 12px;
   font-weight: 700;

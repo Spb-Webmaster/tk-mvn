@@ -105,7 +105,7 @@
                 </div>
             @endif
             @if($item->desc2)
-                <div class="about">
+                <div class="about2">
                     <div class="desc">
                         {!! $item->desc2 !!}
                     </div>
