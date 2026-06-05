@@ -210,7 +210,7 @@
 }
 .training-page .about2 {
   background: #fff;
-  padding: 36px 40px;
+  padding: 10px 20px 10px 0;
   margin-bottom: 48px;
 }
 .training-page .about2 .s-eye {
@@ -218,6 +218,13 @@
 }
 .training-page .about2 .s-ttl {
   color: #fff;
+}
+.training-page .about2 h2 {
+  font-size: clamp(20px, 2vw, 28px);
+  color: var(--navy);
+}
+.training-page .about2 h3 {
+  font-size: clamp(20px, 2vw, 25px);
 }
 .training-page .mlbl {
   font-size: 12px;
