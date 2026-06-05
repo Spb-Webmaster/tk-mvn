@@ -24,26 +24,7 @@
         }
     }
 
-    .about-quote {
-        border-left: 3px solid var(--gold);
-        padding: 20px 24px;
-        background: rgba(255, 255, 255, 0.04);
-        margin: 24px 0 0;
-        font-size: 18px;
-        font-style: italic;
-        color: rgba(255, 255, 255, 0.8);
-        font-family: var(--serif);
-        line-height: 1.6;
 
-        span {
-            display: block;
-            font-size: 15px;
-            font-style: normal;
-            font-family: var(--sans);
-            opacity: 0.55;
-            margin-top: 10px;
-        }
-    }
 
     // ── blk-lead ─────────────────────────────────────────────────────────────
     .blk-lead {
@@ -499,6 +480,26 @@
                 justify-content: center;
             }
         }
+    }
+}
+.about-quote {
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    margin: 24px 0 0;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--serif);
+    line-height: 1.6;
+
+    span {
+        display: block;
+        font-size: 15px;
+        font-style: normal;
+        font-family: var(--sans);
+        opacity: 0.55;
+        margin-top: 10px;
     }
 }
 // ── SIDEBAR ADDITIONS ─────────────────────────────────────────────────────
