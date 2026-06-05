@@ -104,6 +104,13 @@
                     </div>
                 </div>
             @endif
+            @if($item->desc2)
+                <div class="about">
+                    <div class="desc">
+                        {!! $item->desc2 !!}
+                    </div>
+                </div>
+            @endif
 
             <!-- ВИДЕО -->
             @if($item->video && count($item->video))
