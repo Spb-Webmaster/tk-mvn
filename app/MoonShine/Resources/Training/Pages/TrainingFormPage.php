@@ -167,7 +167,7 @@ final class TrainingFormPage extends FormPage
                             Column::make([
                                 Box::make('Даты и место', [
                                     DateRange::make('Даты проведения', 'ev_date')
-                                        ->fromTo('ev_date_from', 'ev_date_to'),
+                                        ->fromTo('ev_date_from', 'ev_date_to')->nullable(),
                                     Text::make('Время проведения', 'ev_time'),
                                     Text::make('Место проведения', 'ev_location')->default('Санкт-Петербург'),
                                     Text::make('Формат', 'ev_format')->default('Online'),
