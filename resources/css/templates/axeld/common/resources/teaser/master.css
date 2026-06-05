@@ -399,7 +399,7 @@
   font-family: var(--serif);
   line-height: 1.6;
 }
-.about-quote span, .about-quote i {
+.about-quote span, .about-quote i, .about-quote em {
   display: block;
   font-size: 15px;
   font-style: normal;

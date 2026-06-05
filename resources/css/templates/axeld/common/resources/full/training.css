@@ -222,9 +222,11 @@
 .training-page .about2 h2 {
   font-size: clamp(20px, 2vw, 28px);
   color: var(--navy);
+  line-height: 1.4;
 }
 .training-page .about2 h3 {
   font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.3;
 }
 .training-page .mlbl {
   font-size: 12px;
