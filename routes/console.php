@@ -11,7 +11,7 @@ Schedule::command('queue:work --stop-when-empty')
     ->everyMinute()
     ->withoutOverlapping();
 
-Schedule::command('sitemap:cron')->dailyAt('03:00');
+Schedule::command('sitemap:cron')->everyMinute();
 
 Schedule::command('training:clear-dates')->dailyAt('00:10');
 //Schedule::command('training:clear-dates')->everyMinute();
