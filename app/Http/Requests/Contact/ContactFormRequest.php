@@ -24,6 +24,7 @@ class ContactFormRequest extends FormRequest
                 }
             }],
             'email'   => ['nullable', 'email', 'max:150'],
+            'represent'  => ['nullable', 'string', 'in:company,personal'],
             'message'    => ['nullable', 'string', 'max:3000'],
             '_form_time' => ['required', new FormTimestamp()],
         ];
