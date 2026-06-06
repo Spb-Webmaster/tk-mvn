@@ -56,7 +56,7 @@ class MasterPage extends Page
                                     ->hint('Флагманская программа'),
                                 Text::make('Заголовок h1', 'hero_title')
                                     ->hint('Допустим HTML'),
-                                Textarea::make('Подзаголовок', 'hero_lead'),
+                                Textarea::make('Подзаголовок', 'hero_lead')->unescape(),
                             ]),
                             Box::make('Мета-строка', [
                                 Text::make('Уровни (жирный текст)', 'meta_levels_strong')
@@ -79,6 +79,7 @@ class MasterPage extends Page
                                 Text::make('Заголовок', 'about_title'),
                                 TinyMce::make('Текст', 'about_text'),
                                 Textarea::make('Цитата', 'about_quote')
+                                    ->unescape()
                                     ->hint('Текст без кавычек — они добавляются автоматически'),
                                 Text::make('Автор цитаты', 'about_quote_author')
                                     ->hint('— Василий Никольский, бизнес-тренер'),
@@ -90,7 +91,7 @@ class MasterPage extends Page
                                 Text::make('Метка', 'levels_eyebrow')
                                     ->hint('Структура программы'),
                                 Text::make('Заголовок', 'levels_title'),
-                                Textarea::make('Подзаголовок', 'levels_lead'),
+                                Textarea::make('Подзаголовок', 'levels_lead')->unescape(),
                             ]),
                         ])->icon('list-bullet'),
 
@@ -102,7 +103,7 @@ class MasterPage extends Page
                                 Json::make('Карточки', 'method_cards')
                                     ->fields([
                                         Text::make('Заголовок', 'title'),
-                                        Textarea::make('Описание', 'desc'),
+                                        Textarea::make('Описание', 'desc')->unescape(),
                                     ])
                                     ->creatable(limit: 6)
                                     ->removable(),
@@ -112,7 +113,7 @@ class MasterPage extends Page
                         Tab::make('Сайдбар', [
                             Box::make('Блок «Корпоративная версия»', [
                                 Text::make('Заголовок', 'sidebar_corp_title'),
-                                Textarea::make('Текст', 'sidebar_corp_text'),
+                                Textarea::make('Текст', 'sidebar_corp_text')->unescape(),
                                 Text::make('Текст кнопки', 'sidebar_corp_btn')
                                     ->hint('Обсудить'),
                             ]),

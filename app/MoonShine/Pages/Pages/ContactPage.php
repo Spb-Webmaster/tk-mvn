@@ -95,8 +95,10 @@ class ContactPage extends Page
                             ]),
                             Box::make('Адреса', [
                                 Textarea::make('Юридический адрес', 'legal_address')
+                                    ->unescape()
                                     ->hint('195279, г. Санкт-Петербург, шоссе Революции, дом 69, литера А, пом. 56Н, офис № 309'),
                                 Textarea::make('Фактический адрес', 'actual_address')
+                                    ->unescape()
                                     ->hint('195279, г. Санкт-Петербург, шоссе Революции, дом 69, литера А, пом. 56Н, офис № 309'),
                             ]),
                             Box::make('Банковские реквизиты', [
@@ -121,6 +123,7 @@ class ContactPage extends Page
                             Box::make('Яндекс.Карты', [
                                 Divider::make('Embed-ссылка из Яндекс.Карт'),
                                 Textarea::make('src для iframe', 'map_src')
+                                    ->unescape()
                                     ->hint('https://yandex.ru/map-widget/v1/?ll=30.315868%2C59.939095&z=12&pt=30.315868,59.939095,pm2rdm'),
                             ]),
                         ])->icon('map-pin'),

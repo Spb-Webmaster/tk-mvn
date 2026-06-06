@@ -108,7 +108,7 @@ class ResponsePage extends Page
                                     Json::make('', 'faq')->fields([
                                         Text::make('Заголовок', 'title'),
                                         Json::make('Опции', 'options')->fields([
-                                            Textarea::make('Вопрос', 'question'),
+                                            Textarea::make('Вопрос', 'question')->unescape(),
                                             TinyMce::make('Ответ', 'answer'),
                                         ])->vertical()->creatable(limit: 50)->removable(),
                                     ])->vertical()->creatable(limit: 1)->removable(),

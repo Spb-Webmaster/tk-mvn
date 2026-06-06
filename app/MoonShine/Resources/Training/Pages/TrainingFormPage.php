@@ -136,7 +136,7 @@ final class TrainingFormPage extends FormPage
                             Column::make([])->columnSpan(3),
 
                             Column::make([
-                                Textarea::make('HTML-блок', 'html'),
+                                Textarea::make('HTML-блок', 'html')->unescape(),
                                 TinyMce::make('Описание', 'desc'),
 
                                 Image::make(__('Изображение на всю ширину'), 'img2')
@@ -145,7 +145,7 @@ final class TrainingFormPage extends FormPage
                                     ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif', 'svg'])
                                     ->removable(),
 
-                                Textarea::make('HTML-блок 2', 'html2'),
+                                Textarea::make('HTML-блок 2', 'html2')->unescape(),
                                 TinyMce::make('Описание 2', 'desc2'),
                             ])->columnSpan(12),
                         ]),
@@ -184,7 +184,7 @@ final class TrainingFormPage extends FormPage
                                     Json::make('', 'ev_goals')->fields([
                                         Text::make('Название блока', 'title'),
                                         Json::make('Пункты', 'items')->fields([
-                                            Textarea::make('', 'value'),
+                                            Textarea::make('', 'value')->unescape(),
                                         ])->vertical()->creatable(limit: 30)->removable(),
                                     ])->vertical()->creatable()->removable(),
                                 ]),
@@ -194,7 +194,7 @@ final class TrainingFormPage extends FormPage
                                 Box::make('Задачи тренинга', [
                                     Json::make('', 'ev_tasks')->fields([
                                         Text::make('Название блока', 'title'),
-                                        Textarea::make('', 'value'),
+                                        Textarea::make('', 'value')->unescape(),
                                     ])->vertical()->creatable()->removable(),
                                 ]),
                             ])->columnSpan(6),
@@ -203,7 +203,7 @@ final class TrainingFormPage extends FormPage
                                     Json::make('', 'ev_methods')->fields([
                                         Text::make('Название блока', 'title'),
                                         Json::make('Пункты', 'items')->fields([
-                                            Textarea::make('', 'value'),
+                                            Textarea::make('', 'value')->unescape(),
                                         ])->vertical()->creatable(limit: 30)->removable(),
                                     ])->vertical()->creatable()->removable(),
                                 ]),
@@ -213,7 +213,7 @@ final class TrainingFormPage extends FormPage
                                     Json::make('', 'ev_results')->fields([
                                         Text::make('Название блока', 'title'),
                                         Json::make('Пункты', 'items')->fields([
-                                            Textarea::make('', 'value'),
+                                            Textarea::make('', 'value')->unescape(),
                                         ])->vertical()->creatable(limit: 30)->removable(),
                                     ])->vertical()->creatable()->removable(),
                                 ]),
@@ -243,7 +243,7 @@ final class TrainingFormPage extends FormPage
                                 Json::make('', 'faq')->fields([
                                     Text::make('Заголовок', 'title'),
                                     Json::make('Опции', 'options')->fields([
-                                        Textarea::make('Вопрос', 'question'),
+                                        Textarea::make('Вопрос', 'question')->unescape(),
                                         TinyMce::make('Ответ', 'answer'),
                                     ])->vertical()->creatable(limit: 50)->removable(),
                                 ])->vertical()->creatable(limit: 1)->removable(),

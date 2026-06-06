@@ -60,8 +60,9 @@ class TrainerPage extends Page
                                 Text::make('Подзаголовок', 'hero_subtitle')
                                     ->hint('Например: Бизнес-тренер · Консультант · Коуч'),
                                 Textarea::make('Цитата', 'hero_quote')
+                                    ->unescape()
                                     ->hint('Отображается в рамке с золотой левой полосой'),
-                                Textarea::make('Описание', 'hero_desc'),
+                                Textarea::make('Описание', 'hero_desc')->unescape(),
                             ]),
                         ])->icon('home'),
 
@@ -80,7 +81,7 @@ class TrainerPage extends Page
                                 Text::make('Заголовок', 'distinctions_title'),
                                 Json::make('Пункты', 'distinctions_items')
                                     ->fields([
-                                        Textarea::make('Текст', 'text'),
+                                        Textarea::make('Текст', 'text')->unescape(),
                                     ])
                                     ->vertical()
                                     ->creatable(limit: 12)
@@ -125,7 +126,7 @@ class TrainerPage extends Page
                             ]),
                             Box::make('Блок записи', [
                                 Text::make('Заголовок', 'sidebar_contact_title'),
-                                Textarea::make('Текст', 'sidebar_contact_text'),
+                                Textarea::make('Текст', 'sidebar_contact_text')->unescape(),
                                 Text::make('Телефон', 'sidebar_phone'),
                             ]),
                         ])->icon('rectangle-stack'),

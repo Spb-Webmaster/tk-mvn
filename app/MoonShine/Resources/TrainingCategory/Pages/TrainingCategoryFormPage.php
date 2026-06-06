@@ -52,7 +52,7 @@ final class TrainingCategoryFormPage extends FormPage
             ]),
 
             Box::make('Описание', [
-                Textarea::make('Краткое описание', 'short_description'),
+                Textarea::make('Краткое описание', 'short_description')->unescape(),
                 TinyMce::make('Полное описание', 'description'),
             ]),
         ];

@@ -63,7 +63,7 @@ class HomePage extends Page
                                     ->required(),
                                 Text::make('Подзаголовок', 'hero_subtitle')
                                     ->hint('Например: Тренинги · Консалтинг · Коучинг'),
-                                Textarea::make('Описание', 'hero_desc'),
+                                Textarea::make('Описание', 'hero_desc')->unescape(),
                             ]),
                         ])->icon('home'),
 
@@ -73,7 +73,7 @@ class HomePage extends Page
                                     ->hint('Например: Форматы обучения'),
                                 Text::make('Заголовок', 'programs_title')
                                     ->hint('Например: Что мы предлагаем'),
-                                Textarea::make('Краткое описание', 'programs_lead'),
+                                Textarea::make('Краткое описание', 'programs_lead')->unescape(),
                             ]),
 
                         ])->icon('academic-cap'),
@@ -130,7 +130,7 @@ class HomePage extends Page
                                     Json::make('', 'faq')->fields([
                                         Text::make('Заголовок', 'title'),
                                         Json::make('Опции', 'options')->fields([
-                                            Textarea::make('Вопрос', 'question'),
+                                            Textarea::make('Вопрос', 'question')->unescape(),
                                             TinyMce::make('Ответ', 'answer'),
                                         ])->vertical()->creatable(limit: 50)->removable(),
                                     ])->vertical()->creatable(limit: 1)->removable(),
