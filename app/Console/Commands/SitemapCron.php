@@ -28,13 +28,9 @@ class SitemapCron extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
-        ini_set('memory_limit', '8192M');
-
-        $s = new SitemapController();
-        $s->sitemap();
-
+        (new SitemapController())->sitemap();
     }
 
 
