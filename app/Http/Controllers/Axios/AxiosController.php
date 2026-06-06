@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Axios;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\Form\SendContactFormJob;
 use Illuminate\Http\Request;
 
 class AxiosController extends Controller
@@ -18,13 +19,29 @@ class AxiosController extends Controller
 
     public function callMeBlue(Request $request)
     {
-        // stub — заглушка
+        $payload = array_filter([
+            'ФИО'     => $request->input('ФИО'),
+            'Телефон' => $request->input('Телефон'),
+            'Email'   => $request->input('Email'),
+        ]);
+
+        SendContactFormJob::dispatch($payload);
+
         return response()->json(['response' => 'ok']);
     }
 
     public function sendRequest(Request $request)
     {
-        // stub — заглушка
+        $payload = array_filter([
+            'Тип клиента' => $request->input('client_type'),
+            'Имя'         => $request->input('name'),
+            'Телефон'     => $request->input('phone'),
+            'Email'       => $request->input('email'),
+            'Запрос'      => $request->input('request'),
+        ]);
+
+        SendContactFormJob::dispatch($payload);
+
         return response()->json(['response' => 'ok']);
     }
 }
