@@ -91,6 +91,10 @@
         </div>
     </div>
 
+    @if($item->html)
+        {!!   $item->html !!}
+    @endif
+
     <!-- MAIN LAYOUT -->
     <div class="page-wrap">
         <div class="main-col">
@@ -104,6 +108,11 @@
                     </div>
                 </div>
             @endif
+
+            @if($item->html2)
+                {!!  $item->html2 !!}
+            @endif
+
             @if($item->desc2)
                 <div class="about2">
                     <div class="desc">
@@ -111,6 +120,9 @@
                     </div>
                 </div>
             @endif
+
+
+
 
             <!-- ВИДЕО -->
             @if($item->video && count($item->video))
