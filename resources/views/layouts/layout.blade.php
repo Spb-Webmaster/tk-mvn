@@ -31,6 +31,9 @@
     </main>
 </div><!--.content_-->
 @include('templates.axeld.footer')
+@if(!empty($constants['yandex_metrika']))
+    {!! $constants['yandex_metrika'] !!}
+@endif
 </body>
 </html>
 

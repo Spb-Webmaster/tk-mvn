@@ -18,6 +18,7 @@ use MoonShine\UI\Components\Tabs\Tab;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 
 class ConstantsPage extends Page
 {
@@ -75,6 +76,11 @@ class ConstantsPage extends Page
                             Number::make('Юр. лицо', 'master_price_legal')
                                 ->hint('Стоимость для юридических лиц, ₽'),
                         ])->icon('currency-dollar'),
+                        Tab::make('Метрика', [
+                            Divider::make('Яндекс.Метрика'),
+                            Textarea::make('Код счётчика', 'yandex_metrika')
+                                ->hint('Вставьте код счётчика Яндекс.Метрики целиком, включая тег <script>'),
+                        ])->icon('chart-pie'),
                         Tab::make('E-mail адреса', [
                             Divider::make('Получатели писем с форм сайта'),
                             Json::make('E-mail адреса', 'emails')->fields([
