@@ -79,7 +79,7 @@ class ConstantsPage extends Page
                         Tab::make('Метрика', [
                             Divider::make('Яндекс.Метрика'),
                             Textarea::make('Код счётчика', 'yandex_metrika')
-                                ->hint('Вставьте код счётчика Яндекс.Метрики целиком, включая тег <script>'),
+                                ->hint('Вставьте код счётчика Яндекс.Метрики целиком, включая тег script'),
                         ])->icon('chart-pie'),
                         Tab::make('E-mail адреса', [
                             Divider::make('Получатели писем с форм сайта'),
