@@ -20,7 +20,9 @@
 /.zed
 /auth.json
 /node_modules
+/docs
 /public/build
+/public/sitemap*.xml
 /public/hot
 /public/storage
 /storage/*.key

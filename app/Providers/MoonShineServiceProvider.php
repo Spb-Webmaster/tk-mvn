@@ -67,7 +67,6 @@ class MoonShineServiceProvider extends ServiceProvider
                 ResponsePage::class,
                 ConstantsPage::class,
                 MasterPage::class,
-
                 SchedulePage::class,
             ])
         ;
