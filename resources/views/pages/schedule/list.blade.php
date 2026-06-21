@@ -51,11 +51,14 @@
                             <div class="event-range">—</div>
                             <div class="event-day2">{{ $training->ev_date_to->day }}</div>
                             <div class="event-month">{{ $months[$training->ev_date_from->month] }}</div>
+                            <div class="event-year">{{ $training->ev_date_from->year }}</div>
                         @elseif($hasRange)
                             <div class="event-day-cross">{{ $training->ev_day_range }}</div>
+                            <div class="event-year">{{ $training->ev_date_from->year }}</div>
                         @else
                             <div class="event-day">{{ $training->ev_date_from->day }}</div>
                             <div class="event-month">{{ $months[$training->ev_date_from->month] }}</div>
+                            <div class="event-year">{{ $training->ev_date_from->year }}</div>
                         @endif
                     </div>
 

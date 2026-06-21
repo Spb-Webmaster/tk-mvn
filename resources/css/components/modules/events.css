@@ -175,6 +175,11 @@
   color: var(--muted);
 }
 
+.event-year {
+  padding: 10px 0 0 0;
+  color: #fff;
+}
+
 @media (max-width: 1023px) {
   .home-events .event-card,
   .home-trainings .event-card {

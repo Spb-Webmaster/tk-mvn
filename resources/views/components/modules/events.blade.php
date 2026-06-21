@@ -21,6 +21,7 @@
           <div class="event-day2">{{ $event->ev_date_to->day }}</div>
           @endif
           <div class="event-month">{{ $months[$event->ev_date_from->month] }}</div>
+          <div class="event-year">{{ $event->ev_date_from->year }}</div>
         </div>
         <div class="event-info">
           <div class="event-tag">{{ $event->categories->first()?->title ?? '' }}</div>
