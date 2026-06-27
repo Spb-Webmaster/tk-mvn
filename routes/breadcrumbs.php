@@ -70,6 +70,16 @@ Breadcrumbs::for('video.show', function ($trail, $item) {
     $trail->push($item->title, route('video.show', $item->slug));
 });
 
+Breadcrumbs::for('admin-video', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Видео для администратора', route('admin-video'));
+});
+
+Breadcrumbs::for('admin-video.show', function ($trail, $item) {
+    $trail->parent('admin-video');
+    $trail->push($item->title, route('admin-video.show', $item->slug));
+});
+
 Breadcrumbs::for('response', function ($trail) {
     $trail->parent('home');
     $trail->push('Отзывы', route('response'));

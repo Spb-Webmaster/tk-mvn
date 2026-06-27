@@ -21,6 +21,7 @@ use App\MoonShine\Resources\Photo\PhotoResource;
 use App\MoonShine\Resources\PhotoCategory\PhotoCategoryResource;
 use App\MoonShine\Resources\Response\ResponseResource;
 use App\MoonShine\Resources\ResponseCategory\ResponseCategoryResource;
+use App\MoonShine\Resources\AdminVideo\AdminVideoResource;
 use App\MoonShine\Resources\Video\VideoResource;
 use Illuminate\Support\ServiceProvider;
 use App\MoonShine\Resources\News\NewsResource;
@@ -49,6 +50,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 PhotoResource::class,
                 PhotoCategoryResource::class,
                 VideoResource::class,
+                AdminVideoResource::class,
                 ResponseResource::class,
                 ResponseCategoryResource::class,
                 MoonShineUserResource::class,

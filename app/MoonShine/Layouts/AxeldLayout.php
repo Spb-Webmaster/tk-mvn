@@ -15,6 +15,7 @@ use App\MoonShine\Pages\Pages\SchedulePage;
 use App\MoonShine\Pages\Pages\TrainerPage;
 use App\MoonShine\Pages\Pages\TrainingPage;
 use App\MoonShine\Pages\Pages\VideoPage;
+use App\MoonShine\Resources\AdminVideo\AdminVideoResource;
 use App\MoonShine\Resources\MailLog\MailLogResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\News\NewsResource;
@@ -104,6 +105,7 @@ final class AxeldLayout extends AppLayout
 
             MenuGroup::make(static fn() => __('Настройки'), [
                 MenuItem::make(ConstantsPage::class, 'Константы', 'adjustments-vertical'),
+                MenuItem::make(AdminVideoResource::class, 'Закрытый канал', 'video-camera'),
                 MenuItem::make(MailLogResource::class, 'Исходящие письма', 'envelope'),
                 MenuItem::make(MediaManagerPage::class, 'Media', 'film'),
            ])->icon('cog-6-tooth'),

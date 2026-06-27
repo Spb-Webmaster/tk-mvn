@@ -12,6 +12,7 @@ use App\Http\Controllers\Dev\ResponseImportController;
 use App\Http\Controllers\Dev\VideoImportController;
 use App\Http\Controllers\FancyBox\FancyBoxController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminVideo\AdminVideoController;
 use App\Http\Controllers\New\NewController;
 use App\Http\Controllers\Pages\ContactController;
 use App\Http\Controllers\Pages\ContactFormController;
@@ -80,6 +81,13 @@ Route::controller(TrainingController::class)->group(function () {
     Route::get('/trainings/{categorySlug}/{slug}', 'show')->name('training.show');
 });
 /** ///Обучение **/
+
+/** Видео для администратора **/
+Route::controller(AdminVideoController::class)->group(function () {
+    Route::get('/admin-video', 'list')->name('admin-video');
+    Route::get('/admin-video/{slug}', 'show')->name('admin-video.show');
+});
+/** ///Видео для администратора **/
 
 /** Новости **/
 Route::controller(NewController::class)->group(function () {

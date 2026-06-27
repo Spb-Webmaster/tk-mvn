@@ -14,6 +14,7 @@ enum TeaserTemplate: string
     case Photo = 'photo';
     case Video = 'video';
     case Response = 'response';
+    case AdminVideo = 'adminvideo';
 
     public function label(): string
     {
@@ -26,6 +27,7 @@ enum TeaserTemplate: string
             self::Photo => 'Фото',
             self::Video => 'Видео',
             self::Response => 'Отзывы',
+            self::AdminVideo => 'Видео для администратора',
         };
     }
 
