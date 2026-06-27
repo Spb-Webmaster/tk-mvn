@@ -84,8 +84,8 @@ Route::controller(TrainingController::class)->group(function () {
 
 /** Видео для администратора **/
 Route::controller(AdminVideoController::class)->group(function () {
-    Route::get('/admin-video', 'list')->name('admin-video');
-    Route::get('/admin-video/{slug}', 'show')->name('admin-video.show');
+    Route::get('/youtube', 'list')->name('admin-video');
+    Route::get('/youtube/{slug}', 'show')->name('admin-video.show');
 });
 /** ///Видео для администратора **/
 
