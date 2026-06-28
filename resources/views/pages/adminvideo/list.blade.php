@@ -6,6 +6,7 @@
         <div class="block_content__breadcrumbs">
             <div class="breadcrumb">{{ Breadcrumbs::render(Route::currentRouteName()) }}</div>
         </div>
+        <div class="av-page-eyebrow">Видео для администратора</div>
         <h1 class="page-title">{{ $page->title ?: 'Видео для администратора' }}</h1>
     </div>
 </div>

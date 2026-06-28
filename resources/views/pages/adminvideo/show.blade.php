@@ -11,6 +11,7 @@
         <div class="block_content__breadcrumbs">
             {{ Breadcrumbs::render(Route::currentRouteName(), $item) }}
         </div>
+        <div class="av-page-eyebrow">Видео для администратора</div>
         <h1 class="av-page-title">{{ $item->title }}</h1>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="av-article-wrap">
-    <main class="av-article-main">
+    <div class="av-article-main">
 
         @if($item->video)
         <div class="av-video-player">
@@ -10,12 +10,12 @@
         @endif
 
         @if($item->desc)
-        <div class="av-article-body desc">
+        <div class="av-article-body">
             {!! $item->desc !!}
         </div>
         @endif
 
-    </main>
+    </div>
 </div>
 
 @if(isset($prev) || isset($next))
