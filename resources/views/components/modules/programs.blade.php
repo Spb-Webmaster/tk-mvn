@@ -10,7 +10,7 @@
         <div class="s-eye">{{ $eyebrow }}</div>
         @endif
         @if(!empty($title))
-        <{{ $headingTag }} class="section-title">{{ $title }}</{{ $headingTag }}>
+                <a href="https://tkmvn-spb.ru/youtube" target="_blank" style="color:#152040; text-decoration: none !important; "><{{ $headingTag }} class="section-title">{{ $title }}</{{ $headingTag }}></a>
         @endif
       </div>
       @if(!empty($lead))

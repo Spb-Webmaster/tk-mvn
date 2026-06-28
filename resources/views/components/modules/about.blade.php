@@ -6,9 +6,7 @@
 <section class="home-about" id="about">
     <div class="about-inner">
         <div class="about-photo">
-            <a href="https://tkmvn-spb.ru/youtube">
                 <img src="{{ asset('storage/images/home/04_4.jpg') }}" alt="Василий Никольский">
-            </a>
         </div>
         <div class="about-content">
             <div class="section-eyebrow eyebrow">О тренере</div>
