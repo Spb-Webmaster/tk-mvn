@@ -16,7 +16,6 @@ use MoonShine\UI\Components\Layout\Divider;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Tabs\Tab;
-use MoonShine\UI\Fields\File;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
@@ -54,11 +53,8 @@ final class AdminVideoFormPage extends FormPage
                     ])->icon('document-text'),
 
                     Tab::make('Медиа', [
-                        File::make('Видео', 'video')
-                            ->disk('public')
-                            ->dir('content/admin-videos')
-                            ->accept('video/*')
-                            ->removable(),
+                        Text::make('Путь к файлу', 'video')
+                            ->hint('Относительный путь от корня storage/app/public, например: content/admin-videos/lecture.mp4'),
                         TinyMce::make('Описание', 'desc'),
                     ])->icon('film'),
                 ]),
