@@ -24,6 +24,7 @@ final class AdminVideoIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
             Text::make('Заголовок', 'title')->unescape()->updateOnPreview(),
+            Text::make('Файл', 'video')->updateOnPreview(),
             Number::make('Сортировка', 'sorting')->updateOnPreview()->sortable(),
         ];
     }
