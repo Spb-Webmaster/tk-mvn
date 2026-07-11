@@ -123,10 +123,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
           cache: 'npm'
@@ -142,6 +142,31 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Verify deploy target path
+        # Домашняя директория SSH-пользователя должна быть строго
+        # public_html целевого сайта. Проверяем это ДО rsync, потому что
+        # rsync ниже идёт с --delete: если домашняя папка вдруг окажется
+        # настроена на что-то другое, --delete молча удалит там всё, что не
+        # совпадает с репозиторием. ЗАМЕНИТЬ EXPECTED на реальный путь
+        # (узнать через `pwd` при первом ручном подключении, не полагаться
+        # на аналогию с другим проектом — путь мог оказаться другим).
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            EXPECTED="/home/a/USERNAME/DOMAIN/public_html"
+            ACTUAL="$(pwd)"
+            if [ "$ACTUAL" != "$EXPECTED" ]; then
+              echo "Ожидался путь: $EXPECTED"
+              echo "Реальный путь: $ACTUAL"
+              echo "Расхождение! Останавливаю деплой, чтобы не залить файлы не туда."
+              exit 1
+            fi
+            echo "Путь подтверждён: $ACTUAL"
 
       - name: Deploy files via rsync
         run: |
