@@ -6,7 +6,7 @@
 <section class="home-about" id="about">
     <div class="about-inner">
         <div class="about-photo">
-                <img src="{{ asset('storage/images/home/04_4.jpg') }}" alt="Василий Никольский">
+                <img src="{{ asset('storage/images/home/04_4_2.jpg') }}" alt="Василий Никольский">
         </div>
         <div class="about-content">
             <div class="section-eyebrow eyebrow">О тренере</div>
