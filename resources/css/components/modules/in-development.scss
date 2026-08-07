@@ -1,0 +1,137 @@
+// ── Раздел в разработке (нет опубликованных материалов) ──
+
+.in-dev {
+    background: var(--bg2);
+    padding: 90px 0 110px;
+
+    .in-dev-box {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 78px 56px 72px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: 0 24px 60px rgba(21, 32, 64, 0.07);
+        text-align: center;
+        overflow: hidden;
+    }
+
+    // Золотая полоса сверху карточки
+    .in-dev-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(to right, var(--gold) 0%, var(--gold-lt) 40%, transparent 85%);
+    }
+
+    // Внутренняя декоративная рамка
+    .in-dev-box::after {
+        content: '';
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(196, 150, 58, 0.28);
+        border-radius: var(--radius);
+        pointer-events: none;
+    }
+
+    .in-dev-badge {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 26px;
+    }
+
+    .in-dev-badge::before,
+    .in-dev-badge::after {
+        content: '';
+        display: block;
+        width: 26px;
+        height: 1px;
+        background: var(--gold);
+    }
+
+    .in-dev-title {
+        position: relative;
+        font-family: var(--serif);
+        font-size: clamp(30px, 4.4vw, 58px);
+        font-weight: 700;
+        line-height: 1.15;
+        color: var(--navy);
+        margin: 0 auto 22px;
+        max-width: 700px;
+    }
+
+    .in-dev-text {
+        position: relative;
+        font-size: 17px;
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 520px;
+        margin: 0 auto 36px;
+    }
+
+    .in-dev-link {
+        position: relative;
+        display: inline-block;
+        padding: 16px 38px;
+        background: var(--gold);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: background 0.2s;
+    }
+
+    .in-dev-link:hover {
+        background: var(--gold-lt);
+        text-decoration: none;
+    }
+
+    .desc {
+        max-width: 900px;
+        margin: 48px auto 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .in-dev {
+        padding: 56px 0 70px;
+
+        .in-dev-box {
+            padding: 52px 22px 48px;
+        }
+
+        .in-dev-box::after {
+            inset: 8px;
+        }
+
+        .in-dev-badge {
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            margin-bottom: 20px;
+        }
+
+        .in-dev-text {
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .in-dev-link {
+            padding: 14px 28px;
+            font-size: 13px;
+        }
+    }
+}

@@ -23,7 +23,7 @@ class MasterPage extends Page
 {
     public function getTitle(): string
     {
-        return 'Мастер коммуникаций';
+        return 'Программа подготовки переговорщиков для бизнеса';
     }
 
     private function getSetting(): Setting

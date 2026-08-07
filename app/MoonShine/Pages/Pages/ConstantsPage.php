@@ -70,7 +70,7 @@ class ConstantsPage extends Page
                             ])->creatable()->removable(),
                         ])->icon('chart-bar'),
                         Tab::make('Стоимость', [
-                            Divider::make('Программа «Мастер коммуникаций»'),
+                            Divider::make('Программа «Программа подготовки переговорщиков для бизнеса»'),
                             Number::make('Физ. лицо', 'master_price_individual')
                                 ->hint('Стоимость для физических лиц, ₽'),
                             Number::make('Юр. лицо', 'master_price_legal')

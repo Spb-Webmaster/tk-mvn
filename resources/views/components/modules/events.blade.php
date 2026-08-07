@@ -34,7 +34,7 @@
     </div>
     <div class="events-promo">
       <div>
-        <div class="events-promo-title">Программа «Мастер коммуникаций»</div>
+        <div class="events-promo-title">Программа «Программа подготовки переговорщиков для бизнеса»</div>
         <div class="events-promo-desc">Системный курс переговорной практики. Набор открыт.</div>
       </div>
       <button type="button" class="btn-primary open-fancybox" data-form="zapros" style="flex-shrink:0;">Узнать подробнее</button>

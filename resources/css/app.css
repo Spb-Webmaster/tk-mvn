@@ -48,6 +48,7 @@
 @import 'components/modules/desc.scss';
 @import 'components/modules/cta.scss';
 @import 'components/modules/master-nav.scss';
+@import 'components/modules/in-development.scss';
 @import 'components/admin/inline-edit.scss';
 @import 'style.scss';
 

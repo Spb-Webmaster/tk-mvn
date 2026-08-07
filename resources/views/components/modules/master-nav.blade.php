@@ -1,6 +1,6 @@
 @if($trainings->isNotEmpty())
 <div class="sb-card">
-    <div class="sb-nav-ttl pad_b19">Программа «Мастер коммуникаций»</div>
+    <div class="sb-nav-ttl pad_b19">Программа «Программа подготовки переговорщиков для бизнеса»</div>
     <ul class="sb-nav">
         @foreach($trainings as $training)
             @php

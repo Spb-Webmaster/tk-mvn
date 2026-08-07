@@ -84,7 +84,7 @@ final class AxeldLayout extends AppLayout
                MenuItem::make(TrainingCategoryResource::class, 'Категории', 'tag'),
                MenuItem::make(TrainingLevelResource::class, 'Уровни', 'bars-3'),
                MenuItem::make(TrainingResource::class, 'Страницы', 'document-text'),
-               MenuItem::make(MasterPage::class, 'Мастер коммуникаций', 'star'),
+               MenuItem::make(MasterPage::class, 'Программа подготовки переговорщиков для бизнеса', 'star'),
            ])->icon('academic-cap'),
 
                MenuItem::make(NewsResource::class, 'Новости', 'document-text'),
