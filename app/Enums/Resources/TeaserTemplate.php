@@ -22,7 +22,7 @@ enum TeaserTemplate: string
             self::Default => 'Стандартный',
             self::Colomns => 'Колонки',
             self::Training => 'Обучение',
-            self::Master => 'Мастер Коммуникации',
+            self::Master => 'Программа подготовки переговорщиков',
             self::News => 'Новости',
             self::Photo => 'Фото',
             self::Video => 'Видео',
