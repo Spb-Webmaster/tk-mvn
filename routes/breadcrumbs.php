@@ -89,3 +89,8 @@ Breadcrumbs::for('response.show', function ($trail, $item) {
     $trail->parent('response');
     $trail->push($item->title, route('response.show', $item->slug));
 });
+
+Breadcrumbs::for('privacy', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Политика обработки персональных данных', route('privacy'));
+});

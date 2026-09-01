@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminVideo\AdminVideoController;
 use App\Http\Controllers\New\NewController;
 use App\Http\Controllers\Pages\ContactController;
 use App\Http\Controllers\Pages\ContactFormController;
+use App\Http\Controllers\Pages\PrivacyController;
 use App\Http\Controllers\Pages\TrainerController;
 use App\Http\Controllers\Pages\TrainingController;
 use App\Http\Controllers\Photo\PhotoController;
@@ -37,6 +38,10 @@ Route::get('/vasilij-nikolskij', [TrainerController::class, 'index'])->name('tra
 /** Контакты **/
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact');
 /** ///Контакты **/
+
+/** Политика обработки персональных данных **/
+Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy');
+/** ///Политика обработки персональных данных **/
 
 /** Изображения **/
 Route::controller(PhotoController::class)->group(function () {

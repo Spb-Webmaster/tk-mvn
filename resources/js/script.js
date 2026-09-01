@@ -18,6 +18,10 @@ import {mzSelect} from "./include/select/mz-select";
 import {initInlineEdit} from "./include/site/inline-edit";
 import {initVideoThumb} from "./include/site/video-thumb";
 import {discussTaskForm} from "./include/site/discuss-task-form";
+import {validateAgree} from "./include/site/form-agree";
+
+/** формы со встроенными в blade скриптами вызывают проверку отсюда **/
+window.validateAgree = validateAgree;
 
 
 

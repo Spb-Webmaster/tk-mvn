@@ -14,7 +14,8 @@ class TrainingRegistrationController extends Controller
     {
         $data = $request->validated();
 
-        $training = $data['training_id'] ? Training::find($data['training_id']) : null;
+        // поле приходит не из каждой формы — компонент рендерит его только при известном тренинге
+        $training = !empty($data['training_id']) ? Training::find($data['training_id']) : null;
 
         $payload = array_filter([
             'Обучение'    => $training?->title,

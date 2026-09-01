@@ -1,3 +1,5 @@
+import {validateAgree} from './form-agree.js';
+
 export function discussTaskForm() {
     const form = document.getElementById('discuss-task-form');
     if (!form) return;
@@ -31,6 +33,10 @@ export function discussTaskForm() {
 
         if (phoneInput.value.replace(/\D/g, '').length < 11) {
             showError(phoneInput, 'Введите телефон');
+            valid = false;
+        }
+
+        if (!validateAgree(form)) {
             valid = false;
         }
 

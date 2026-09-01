@@ -4,6 +4,7 @@ import '../mz-modal/mz-modal.js';
 import {asyncExecution} from "../form_async/async_execution";
 import {scrollCabinetMessages} from "./cabinet_message";
 import {mzSelectInit} from "../select/mz-select";
+import {validateAgree} from "../site/form-agree";
 
 /** ── MZ-Modal для AJAX-форм ── **/
 const _formModalEl = document.createElement('div');
@@ -109,6 +110,10 @@ function initZaprosModal(container) {
             : phoneInput.value.replace(/\D/g, '');
         if (digits.length < 11) {
             showError(phoneInput, 'Введите телефон');
+            valid = false;
+        }
+
+        if (!validateAgree(form)) {
             valid = false;
         }
 

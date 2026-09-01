@@ -26,6 +26,8 @@
                                 <label class="input-group__label">Email <span>*</span></label>
                             </div>
 
+                            <x-form.agree name="Согласие" input-class="app_input_name" />
+
                             <div class="input-button">
                                 <button class="btn btn-big app_form_button" data-url="call-me-blue">Отправить</button>
                             </div>

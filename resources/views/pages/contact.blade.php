@@ -175,8 +175,9 @@
                         <x-form.input name="email"   label="Email"     type="email" placeholder="mail@example.com" />
                         <x-form.textarea name="message" label="Сообщение" placeholder="Ваш вопрос или пожелание..." />
                     </div>
+                    <x-form.agree style="margin-top:14px" />
                     <button type="submit" class="btn-primary" style="width:100%;margin-top:14px">Отправить</button>
-                    <div class="contact-form-note">* — обязательное поле. Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</div>
+                    <div class="contact-form-note">* — обязательное поле.</div>
                 </form>
             </div>
         </div>
@@ -216,7 +217,7 @@
         form.querySelectorAll('.reg-error-msg').forEach(el => el.remove());
 
         let valid = true;
-        form.querySelectorAll('input[required]').forEach(function (input) {
+        form.querySelectorAll('input[required]:not([type="checkbox"])').forEach(function (input) {
             if (input.type === 'tel') {
                 if (getPhoneDigits(input).length < 11) {
                     showError(input, 'Введите телефон');
@@ -238,6 +239,11 @@
                 }
             }
         });
+
+        if (window.validateAgree && !window.validateAgree(form)) {
+            valid = false;
+        }
+
         return valid;
     }
 

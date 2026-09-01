@@ -25,6 +25,7 @@ class TrainingRegistrationRequest extends FormRequest
             'company'     => ['required_if:type,yur', 'nullable', 'string', 'max:255'],
             'inn'         => ['required_if:type,yur', 'nullable', 'digits_between:5,12'],
             'position'    => ['nullable', 'string', 'max:100'],
+            'agree'       => ['accepted'],
             '_form_time'  => ['required', new FormTimestamp()],
         ];
     }
@@ -38,6 +39,7 @@ class TrainingRegistrationRequest extends FormRequest
             'company.required_if'     => 'Укажите название организации.',
             'inn.required_if'         => 'Укажите ИНН организации.',
             'inn.digits_between'      => 'ИНН должен содержать от 5 до 12 цифр.',
+            'agree.accepted'          => 'Необходимо согласие на обработку персональных данных.',
         ];
     }
 }

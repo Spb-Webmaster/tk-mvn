@@ -21,6 +21,7 @@
 @import 'components/form/form-input.scss';
 @import 'components/form/form-blue-component.scss';
 @import 'components/form/modal-zapros.scss';
+@import 'components/form/form-agree.scss';
 @import 'buttons/buttons.scss';
 @import 'templates/axeld/breadcrumbs.scss';
 @import 'templates/axeld/common/pages/default.scss';
@@ -49,6 +50,7 @@
 @import 'components/modules/cta.scss';
 @import 'components/modules/master-nav.scss';
 @import 'components/modules/in-development.scss';
+@import 'components/modules/cookie-notice.scss';
 @import 'components/admin/inline-edit.scss';
 @import 'style.scss';
 
@@ -59,4 +61,5 @@
 @import 'pages/response.scss';
 @import 'pages/schedule.scss';
 @import 'pages/adminvideo.scss';
+@import 'pages/privacy.scss';
 

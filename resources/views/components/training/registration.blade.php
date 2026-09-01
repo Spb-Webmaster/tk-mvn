@@ -31,9 +31,10 @@
                 <x-form.input name="email" label="Email"   :required="true" type="email" placeholder="mail@example.com" />
                 <x-form.textarea name="comment" label="Комментарий" placeholder="Ваш вопрос или пожелание..." />
             </div>
+            <x-form.agree />
             <div class="fbtns">
                 <button type="submit" class="btn-sub">Записаться</button>
-                <p class="fnote" style="color: #f2f2f2">* — обязательные поля. Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+                <p class="fnote" style="color: #f2f2f2">* — обязательные поля.</p>
             </div>
         </form>
     </div>
@@ -60,6 +61,7 @@
                 <x-form.input name="position" label="Должность"                                          placeholder="Директор по развитию" />
                 <x-form.textarea name="comment" label="Комментарий" placeholder="Количество участников, особые пожелания..." />
             </div>
+            <x-form.agree />
             <div class="fbtns">
                 <button type="submit" class="btn-sub">Записаться</button>
                 <p class="fnote">* — обязательные поля. Предоплата 50% для бронирования места. НДС не облагается.</p>
@@ -110,7 +112,7 @@
             form.querySelectorAll('.reg-error-msg').forEach(el => el.remove());
 
             let valid = true;
-            form.querySelectorAll('input[required]').forEach(function (input) {
+            form.querySelectorAll('input[required]:not([type="checkbox"])').forEach(function (input) {
                 if (input.type === 'tel') {
                     if (getPhoneDigits(input).length < 11) {
                         showRegError(input, 'Введите телефон');
@@ -132,6 +134,11 @@
                     }
                 }
             });
+
+            if (window.validateAgree && !window.validateAgree(form)) {
+                valid = false;
+            }
+
             return valid;
         }
 

@@ -58,7 +58,8 @@ export function asyncExecution() {
                    /** Формируем объект с ключами и значениями **/
                    appInputsName.forEach(input => {
                        const {name, value} = input;
-                       resultObject[name] = value;
+                       /** чекбокс отдаёт значение только когда отмечен **/
+                       resultObject[name] = input.type === 'checkbox' ? (input.checked ? value : '') : value;
                    });
 
                }

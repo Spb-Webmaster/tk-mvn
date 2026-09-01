@@ -1,0 +1,112 @@
+// ── Согласие на обработку персональных данных (components/form/agree.blade.php) ──
+// Базовый вариант рассчитан на тёмный фон формы (--navy), в котором на сайте
+// живёт большинство форм. Для формы на светлом фоне добавляется .form-agree--light.
+
+.form-agree {
+    margin: 4px 0 0;
+    text-align: left;
+
+    .form-agree-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.62);
+    }
+
+    // Нативный чекбокс скрыт, но остаётся доступным для клавиатуры и валидации
+    input[type="checkbox"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        margin: 0;
+        pointer-events: none;
+    }
+
+    .form-agree-box {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 3px;
+        transition: background 0.15s, border-color 0.15s;
+
+        svg {
+            opacity: 0;
+            transform: scale(0.6);
+            transition: opacity 0.15s, transform 0.15s;
+        }
+    }
+
+    .form-agree-text a {
+        color: var(--gold-lt);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--gold);
+        }
+    }
+
+    input[type="checkbox"]:checked + .form-agree-box {
+        background: var(--gold);
+        border-color: var(--gold);
+
+        svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    input[type="checkbox"]:focus-visible + .form-agree-box {
+        outline: 2px solid var(--gold-lt);
+        outline-offset: 2px;
+    }
+
+    .form-agree-error {
+        display: block;
+        margin-top: 6px;
+        padding-left: 28px;
+        font-size: 12px;
+        color: #ff8a8a;
+    }
+
+    // Класс вешает JS при неудачной проверке на клиенте
+    &.form-agree--error .form-agree-box {
+        border-color: #ff8a8a;
+    }
+}
+
+// ── Форма на светлом фоне ──
+.form-agree--light {
+    .form-agree-label {
+        color: var(--muted);
+    }
+
+    .form-agree-box {
+        border-color: rgba(26, 26, 46, 0.3);
+    }
+
+    .form-agree-text a {
+        color: var(--gold);
+
+        &:hover {
+            color: var(--gold-lt);
+        }
+    }
+
+    .form-agree-error {
+        color: #d64545;
+    }
+
+    &.form-agree--error .form-agree-box {
+        border-color: #d64545;
+    }
+}

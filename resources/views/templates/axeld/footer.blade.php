@@ -9,6 +9,7 @@
       <a href="{{ route('response') }}">Отзывы</a>
       <a href="{{ route('photo') }}">Фото</a>
       <a href="{{ route('video') }}">Видео</a>
+      <a href="{{ route('privacy') }}">Политика конфиденциальности</a>
     </div>
     @if(!empty($constants['contact_phone']))
     <a href="tel:{{ preg_replace('/\D/', '', $constants['contact_phone']) }}" class="footer-phone">{{ $constants['contact_phone'] }}</a>

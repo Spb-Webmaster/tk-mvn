@@ -31,6 +31,7 @@
     </main>
 </div><!--.content_-->
 @include('templates.axeld.footer')
+@include('partials.cookie-notice')
 @if(!empty($constants['yandex_metrika']))
     {!! $constants['yandex_metrika'] !!}
 @endif

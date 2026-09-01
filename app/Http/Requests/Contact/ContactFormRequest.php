@@ -26,6 +26,7 @@ class ContactFormRequest extends FormRequest
             'email'   => ['nullable', 'email', 'max:150'],
             'represent'  => ['nullable', 'string', 'in:company,personal'],
             'message'    => ['nullable', 'string', 'max:3000'],
+            'agree'      => ['accepted'],
             '_form_time' => ['required', new FormTimestamp()],
         ];
     }
@@ -35,6 +36,7 @@ class ContactFormRequest extends FormRequest
         return [
             'phone.required' => 'Укажите номер телефона.',
             'email.email'    => 'Некорректный формат email.',
+            'agree.accepted' => 'Необходимо согласие на обработку персональных данных.',
         ];
     }
 }

@@ -47,8 +47,10 @@
 
         <div class="mzr-divider"></div>
 
+        <x-form.agree class="form-agree--light" />
+
         <div class="mzr-modal__footer">
-            <p class="mzr-modal__hint">Нажимая кнопку, вы соглашаетесь с&nbsp;политикой обработки персональных данных.</p>
+            <p class="mzr-modal__hint">Поля со&nbsp;звёздочкой обязательны для&nbsp;заполнения.</p>
             <button type="submit" class="mzr-btn-submit">Отправить</button>
         </div>
 
