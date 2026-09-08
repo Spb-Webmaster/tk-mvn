@@ -11,6 +11,7 @@
       <h2 class="section-title">Открытые программы</h2>
       <p class="section-lead">Присоединяйтесь к тренингам в открытом формате — для частных специалистов и корпоративных участников.</p>
     </div>
+    @if($events->isNotEmpty())
     <div class="events-grid">
       @foreach($events as $event)
       <div class="event-card card-hover">
@@ -39,5 +40,12 @@
       </div>
       <button type="button" class="btn-primary open-fancybox" data-form="zapros" style="flex-shrink:0;">Узнать подробнее</button>
     </div>
+    @else
+    <div class="events-empty">
+      <div class="events-empty__eye">Расписание</div>
+      <div class="events-empty__title">На данный момент открытые мероприятия не планируются</div>
+      <p class="events-empty__desc">Следите за обновлениями — анонсы новых открытых программ появятся здесь.</p>
+    </div>
+    @endif
   </div>
 </section>
