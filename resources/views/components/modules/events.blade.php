@@ -6,12 +6,12 @@
 
 <section class="home-events home-section" id="events">
   <div class="container">
+    @if($events->isNotEmpty())
     <div class="section-head">
       <div class="s-eye">Ближайшие мероприятия</div>
       <h2 class="section-title">Открытые программы</h2>
       <p class="section-lead">Присоединяйтесь к тренингам в открытом формате — для частных специалистов и корпоративных участников.</p>
     </div>
-    @if($events->isNotEmpty())
     <div class="events-grid">
       @foreach($events as $event)
       <div class="event-card card-hover">
