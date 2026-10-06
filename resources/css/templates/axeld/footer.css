@@ -19,6 +19,7 @@
 .site-footer .footer-links {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
 }
 .site-footer .footer-links a {
   color: rgba(255, 255, 255, 0.45);
@@ -34,6 +35,24 @@
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
+}
+
+@media (max-width: 1023px) {
+  .site-footer {
+    padding: 40px 32px;
+  }
+}
+@media (max-width: 767px) {
+  .site-footer {
+    padding: 36px 20px;
+  }
+  .site-footer .footer-inner {
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .site-footer .footer-links {
+    gap: 10px 20px;
+  }
 }
 
 /*# sourceMappingURL=footer.css.map */

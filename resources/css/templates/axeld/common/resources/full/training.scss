@@ -846,6 +846,31 @@
         padding: 24px 26px;
     }
 
+    /* заглушка вместо даты и стоимости, когда мероприятие прошло */
+    .sb-empty {
+        background: var(--navy);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 24px 26px;
+
+        .sb-empty__title {
+            font-family: var(--serif);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+        }
+
+        .sb-empty__desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.55;
+            margin: 0;
+        }
+    }
+
     .sbd-lbl {
         font-size: 13px;
         font-weight: 700;

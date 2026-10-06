@@ -333,38 +333,24 @@
         <!-- SIDEBAR -->
         <div class="sidebar">
 
+            @if($item->ev_is_upcoming)
             <div class="sb-date">
                 <div class="sbd-lbl">Дата проведения</div>
-                @if($item->ev_date_from)
-                    <div class="sbd-main">{{ $item->ev_day_month }}</div>
-                    <div class="sbd-yr">{{ $item->ev_date_from->year }} года@if($item->ev_location)
-                            · {{ $item->ev_location }}
-                        @endif</div>
-                    <div class="sbd-rows">
-                        <div class="sbd-row">Длительность <strong>{{ $item->ev_duration_days }}@if($item->ev_time)
-                                    &nbsp;·&nbsp;{{ $item->ev_time }}
-                                @endif</strong></div>
-                        @if($item->ev_format)
-                            <div class="sbd-row">Формат <strong>{{ $item->ev_format }}</strong></div>
-                        @endif
-                        @if($item->ev_location)
-                            <div class="sbd-row">Место <strong>{{ $item->ev_location }}</strong></div>
-                        @endif
-                    </div>
-                @else
-                    <div class="sbd-yr" style="color: #ffffff; text-transform: uppercase; padding: 10px 0">По мере формирования группы</div>
-                    <div class="sbd-yr">{{ date('Y') }} года@if($item->ev_location)
-                            · {{ $item->ev_location }}
-                        @endif</div>
-                    <div class="sbd-rows">
-                        @if($item->ev_format)
-                            <div class="sbd-row">Формат <strong>{{ $item->ev_format }}</strong></div>
-                        @endif
-                        @if($item->ev_location)
-                            <div class="sbd-row">Место <strong>{{ $item->ev_location }}</strong></div>
-                        @endif
-                    </div>
-                @endif
+                <div class="sbd-main">{{ $item->ev_day_month }}</div>
+                <div class="sbd-yr">{{ $item->ev_date_from->year }} года@if($item->ev_location)
+                        · {{ $item->ev_location }}
+                    @endif</div>
+                <div class="sbd-rows">
+                    <div class="sbd-row">Длительность <strong>{{ $item->ev_duration_days }}@if($item->ev_time)
+                                &nbsp;·&nbsp;{{ $item->ev_time }}
+                            @endif</strong></div>
+                    @if($item->ev_format)
+                        <div class="sbd-row">Формат <strong>{{ $item->ev_format }}</strong></div>
+                    @endif
+                    @if($item->ev_location)
+                        <div class="sbd-row">Место <strong>{{ $item->ev_location }}</strong></div>
+                    @endif
+                </div>
             </div>
 
             <x-training.price-card
@@ -372,6 +358,13 @@
                 :price-legal="$item->ev_price_legal"
                 note="Бронирование места — предоплата 50%. Место формируется по мере набора группы."
             />
+            @else
+            <div class="sb-empty">
+                <div class="s-eye">Расписание</div>
+                <div class="sb-empty__title">На данный момент открытые мероприятия не планируются</div>
+                <p class="sb-empty__desc">Следите за обновлениями — анонсы новых открытых программ появятся здесь.</p>
+            </div>
+            @endif
 
         </div><!-- /sidebar -->
     </div><!-- /page-wrap -->

@@ -175,4 +175,15 @@ class Training extends Model
             return $days . ' ' . $word;
         });
     }
+
+    // Мероприятие актуально — тот же критерий, что в выборке на главной:
+    // дата начала задана и мероприятие ещё не закончилось
+    protected function evIsUpcoming(): Attribute
+    {
+        return Attribute::get(function () {
+            if (!$this->ev_date_from) return false;
+
+            return ($this->ev_date_to ?? $this->ev_date_from)->gte(today());
+        });
+    }
 }
