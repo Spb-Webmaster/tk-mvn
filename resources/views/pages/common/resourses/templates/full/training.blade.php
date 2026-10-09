@@ -322,11 +322,13 @@
             @endif
 
             <!-- ЗАПИСЬ -->
+            @if($item->ev_is_upcoming)
             <x-training.registration
     :price-individual="$item->ev_price_individual"
     :price-legal="$item->ev_price_legal"
     :training-id="$item->id"
 />
+            @endif
 
         </div><!-- /main-col -->
 
