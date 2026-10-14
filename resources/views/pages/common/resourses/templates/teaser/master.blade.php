@@ -213,6 +213,7 @@
                     @endforeach
                 </ul>
             </div>
+@if($hasUpcomingEvents ?? false)
 <x-modules.sb-card
 
     :title="$ms['sidebar_corp_title']"
@@ -220,6 +221,7 @@
     :link="$ms['sidebar_corp_btn']"
 
 />
+@endif
 
 
         </div><!-- /sidebar -->
