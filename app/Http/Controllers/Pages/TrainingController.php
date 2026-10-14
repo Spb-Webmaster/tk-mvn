@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Enums\Pages\PageTemplate;
 use App\Enums\Resources\TeaserTemplate;
 use App\Models\Setting;
+use App\Models\Training;
 use App\Models\TrainingCategory;
 use App\Models\TrainingLevel;
 use Domain\Training\ViewModels\TrainingViewModel;
@@ -77,6 +78,8 @@ class TrainingController extends PageController
             ->filter(fn($level) => $level->trainings->isNotEmpty());
 
             $viewData['masterSettings'] = Setting::getGroup('master')->data ?? [];
+
+            $viewData['hasUpcomingEvents'] = Training::published()->upcoming()->exists();
         }
 
         return view('pages.training.list', $viewData);

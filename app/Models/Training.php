@@ -65,6 +65,19 @@ class Training extends Model
         return $query->where('published', 1)->orderBy('sorting');
     }
 
+    // Актуальные мероприятия — те же условия, что в аксессоре ev_is_upcoming:
+    // дата начала задана и мероприятие ещё не закончилось
+    public function scopeUpcoming(Builder $query): Builder
+    {
+        return $query->whereNotNull('ev_date_from')
+            ->where(function ($q) {
+                $q->where('ev_date_to', '>=', today())
+                  ->orWhere(function ($q) {
+                      $q->whereNull('ev_date_to')->where('ev_date_from', '>=', today());
+                  });
+            });
+    }
+
     protected function casts(): array
     {
         return [

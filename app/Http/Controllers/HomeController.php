@@ -13,13 +13,7 @@ class HomeController extends Controller
         $home = Setting::getGroup('home')->data;
 
         $events = Training::published()
-            ->whereNotNull('ev_date_from')
-            ->where(function ($q) {
-                $q->where('ev_date_to', '>=', today())
-                  ->orWhere(function ($q) {
-                      $q->whereNull('ev_date_to')->where('ev_date_from', '>=', today());
-                  });
-            })
+            ->upcoming()
             ->with(['categories', 'trainingLevel'])
             ->orderBy('ev_date_from')
             ->get();

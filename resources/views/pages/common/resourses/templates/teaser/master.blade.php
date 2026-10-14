@@ -176,18 +176,28 @@
             </div>
 
             <!-- REGISTRATION FORM -->
+            @if($hasUpcomingEvents ?? false)
             <x-training.registration :price-individual="30000" :price-legal="36000" />
+            @endif
         </div><!-- /main-col -->
 
         <!-- SIDEBAR -->
         <div class="sidebar">
 
-            @php $masterPrices = \App\Models\Setting::getGroup('constants')->data ?? []; @endphp
-            <x-training.price-card
-                :price-individual="$masterPrices['master_price_individual'] ?? null"
-                :price-legal="$masterPrices['master_price_legal'] ?? null"
-                note="За один модуль (2 дня). Для бронирования места — предоплата 50%."
-            />
+            @if($hasUpcomingEvents ?? false)
+                @php $masterPrices = \App\Models\Setting::getGroup('constants')->data ?? []; @endphp
+                <x-training.price-card
+                    :price-individual="$masterPrices['master_price_individual'] ?? null"
+                    :price-legal="$masterPrices['master_price_legal'] ?? null"
+                    note="За один модуль (2 дня). Для бронирования места — предоплата 50%."
+                />
+            @else
+                <div class="sb-empty">
+                    <div class="s-eye">Расписание</div>
+                    <div class="sb-empty__title">На данный момент открытые мероприятия не планируются</div>
+                    <p class="sb-empty__desc">Следите за обновлениями — анонсы новых открытых программ появятся здесь.</p>
+                </div>
+            @endif
 
             <div class="sb-card">
                 <div class="sb-nav-ttl pad_b15_important">Модули программы</div>
