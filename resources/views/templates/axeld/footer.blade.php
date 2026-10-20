@@ -5,7 +5,9 @@
       © 2010–2026 · Санкт-Петербург
     </div>
     <div class="footer-links">
+      {{-- Ссылка «Расписание» убрана из меню футера
       <a href="{{ route('schedule') }}">Расписание</a>
+      --}}
       <a href="{{ route('response') }}">Отзывы</a>
       <a href="{{ route('photo') }}">Фото</a>
       <a href="{{ route('video') }}">Видео</a>

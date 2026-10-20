@@ -25,7 +25,8 @@ class TopMenu extends Component
 
         $items = [
             ['label' => 'Главная',                                          'route' => 'home',           'url' => null, 'pattern' => 'home'],
-            ['label' => 'Расписание',                                          'route' => 'schedule',           'url' => null, 'pattern' => 'schedule'],
+            // Пункт «Расписание» убран из меню
+            // ['label' => 'Расписание', 'route' => 'schedule', 'url' => null, 'pattern' => 'schedule'],
             ['label' => $training['menu_title'] ?? 'Программы',             'route' => 'training',       'url' => null, 'pattern' => 'training*', 'hasDropdown' => true],
             ['label' => 'О тренере',                                        'route' => 'trainer',        'url' => null, 'pattern' => 'trainer'],
             [
