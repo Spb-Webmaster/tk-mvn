@@ -64,10 +64,10 @@ class AxiosController extends Controller
         }
 
         $payload = array_filter([
-            'Тип клиента' => $request->input('client_type'),
             'Имя'         => $request->input('name'),
             'Телефон'     => $request->input('phone'),
             'Email'       => $request->input('email'),
+            'Компания'    => $request->input('company'),
             'Запрос'      => $request->input('request'),
         ]);
 

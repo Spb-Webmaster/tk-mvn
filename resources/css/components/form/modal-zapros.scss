@@ -81,60 +81,6 @@
     gap: 20px;
 }
 
-// ── Переключатель типа клиента ───────────────
-
-.mzr-radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.mzr-radio-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.mzr-radio-row {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-
-    input[type="radio"] { display: none; }
-
-    label {
-        flex: 1;
-        text-align: center;
-        padding: 10px 16px;
-        font-size: 13px;
-        font-weight: 600;
-        line-height: 1.5;
-        color: var(--muted);
-        cursor: pointer;
-        transition: background 0.18s, color 0.18s;
-        user-select: none;
-        border-right: 1px solid var(--border);
-        letter-spacing: 0.02em;
-
-        &:last-of-type { border-right: none; }
-
-        &:hover {
-            background: var(--bg2);
-            color: var(--navy);
-        }
-    }
-
-    input[type="radio"]:checked + label {
-        background: var(--navy);
-        color: #fff;
-
-        &:hover { background: var(--navy2); }
-    }
-}
-
 // ── Разделитель ─────────────────────────────
 
 .mzr-divider {

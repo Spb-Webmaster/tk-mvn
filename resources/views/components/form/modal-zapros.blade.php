@@ -12,18 +12,6 @@
 
     <form class="mzr-modal__body" id="mzr-form" novalidate>
 
-        <div class="mzr-radio-group">
-            <div class="mzr-radio-label">Тип клиента</div>
-            <div class="mzr-radio-row">
-                <input type="radio" name="client_type" id="mzr-type-company" value="company" checked>
-                <label for="mzr-type-company">Компания</label>
-                <input type="radio" name="client_type" id="mzr-type-person" value="person">
-                <label for="mzr-type-person">Частное лицо</label>
-            </div>
-        </div>
-
-        <div class="mzr-divider"></div>
-
         <div class="mzr-field-row">
             <div class="mzr-field">
                 <label for="mzr-name" class="mzr-label--required">Имя</label>
@@ -38,6 +26,11 @@
         <div class="mzr-field">
             <label for="mzr-email">Почта</label>
             <input type="email" id="mzr-email" name="email" placeholder="example@company.ru" autocomplete="email">
+        </div>
+
+        <div class="mzr-field">
+            <label for="mzr-company">Компания</label>
+            <input type="text" id="mzr-company" name="company" placeholder="ООО «Компания»" autocomplete="organization">
         </div>
 
         <div class="mzr-field">
