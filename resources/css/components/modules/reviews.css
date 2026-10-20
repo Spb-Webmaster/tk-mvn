@@ -1,5 +1,6 @@
 .home-reviews {
   background: var(--bg);
+  padding-top: 24px;
 }
 .home-reviews .section-lead {
   line-height: 1.5;

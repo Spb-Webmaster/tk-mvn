@@ -1,5 +1,8 @@
 .home-reviews {
   background: var(--bg);
+  // Блок идёт сразу после .home-desc-section с таким же фоном —
+  // верхний отступ секции сокращаем, иначе два паддинга дают пустую полосу.
+  padding-top: 24px;
 
   .section-lead {
     line-height: 1.5;
