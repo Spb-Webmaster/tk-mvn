@@ -30,10 +30,12 @@
             @if(!empty($trainer['hero_desc']))
             <p class="profile-desc">{{ $trainer['hero_desc'] }}</p>
             @endif
+            {{-- Кнопки «Отправить запрос» и «Расписание тренингов» в шапке убраны
             <div class="hero-actions">
                 <button type="button" class="btn-primary open-fancybox" data-form="zapros">Отправить запрос</button>
                 <a href="{{ route('schedule') }}" class="btn-outline-dark">Расписание тренингов</a>
             </div>
+            --}}
         </div>
 
         <div class="mosaic-col">
