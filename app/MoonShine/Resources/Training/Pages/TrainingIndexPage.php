@@ -34,8 +34,7 @@ final class TrainingIndexPage extends IndexPage
                 : '—'),
             Image::make('Картинка', 'img'),
 
-            Number::make('Цена физ лиц', 'ev_price_individual')->updateOnPreview(),
-            Number::make('Цена юр лиц', 'ev_price_legal')->updateOnPreview(),
+            Number::make('Стоимость', 'ev_price_legal')->updateOnPreview(),
             Text::make('Заголовок', 'title')->unescape()->updateOnPreview(),
             Text::make('Шаблон', 'template', fn($item) => $item->template?->label() ?? '—'),
             InlineSelectField::make('Категории', 'categories')

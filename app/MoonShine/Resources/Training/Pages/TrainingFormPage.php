@@ -175,8 +175,7 @@ final class TrainingFormPage extends FormPage
                             ])->columnSpan(6),
                             Column::make([
                                 Box::make('Стоимость', [
-                                    Number::make('Цена для физических лиц', 'ev_price_individual'),
-                                    Number::make('Цена для юридических лиц', 'ev_price_legal'),
+                                    Number::make('Стоимость участия', 'ev_price_legal'),
                                 ]),
                             ])->columnSpan(6),
                             Column::make([

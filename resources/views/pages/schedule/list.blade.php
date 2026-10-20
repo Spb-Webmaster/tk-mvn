@@ -112,20 +112,13 @@
 
                     {{-- Колонка цены --}}
                     <div class="event-price-col">
-                        @if($training->ev_price_individual)
-                            <div class="price-group">
-                                <div class="price-type">Для физ. лиц</div>
-                                <div class="price-amount">{{ number_format($training->ev_price_individual, 0, '.', ' ') }} <span class="price-currency">₽</span></div>
-                            </div>
-                            <div class="price-divider"></div>
-                        @endif
                         @if($training->ev_price_legal)
                             <div class="price-group">
-                                <div class="price-type">Для юр. лиц</div>
+                                <div class="price-type">Стоимость</div>
                                 <div class="price-amount">{{ number_format($training->ev_price_legal, 0, '.', ' ') }} <span class="price-currency">₽</span></div>
                             </div>
                             <div class="price-divider"></div>
-                        @elseif(!$training->ev_price_individual)
+                        @else
                             <div class="price-group">
                                 <div class="price-type">Стоимость</div>
                                 <div class="price-amount price-amount--muted">По запросу</div>

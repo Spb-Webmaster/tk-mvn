@@ -1,7 +1,6 @@
 @props([
-    'priceIndividual' => null,
-    'priceLegal'      => null,
-    'trainingId'      => null,
+    'price'      => null,
+    'trainingId' => null,
 ])
 
 <div class="reg" id="reg">
@@ -13,10 +12,10 @@
     </div>
 
     <div class="rform active" id="f-fiz">
-        @if($priceIndividual)
+        @if($price)
             <div class="rprice">
-                <div class="rprice-n">{{ price($priceIndividual) }}&thinsp;{{ config('site.currency') }}</div>
-                <div class="rprice-l">Стоимость<br>для физических лиц</div>
+                <div class="rprice-n">{{ price($price) }}&thinsp;{{ config('site.currency') }}</div>
+                <div class="rprice-l">Стоимость<br>участия</div>
             </div>
         @endif
         <form action="{{ route('training.register') }}" method="POST" novalidate>
@@ -40,10 +39,10 @@
     </div>
 
     <div class="rform" id="f-yur">
-        @if($priceLegal)
+        @if($price)
             <div class="rprice">
-                <div class="rprice-n">{{ price($priceLegal) }}&thinsp;{{ config('site.currency') }}</div>
-                <div class="rprice-l">Стоимость<br>для юридических лиц</div>
+                <div class="rprice-n">{{ price($price) }}&thinsp;{{ config('site.currency') }}</div>
+                <div class="rprice-l">Стоимость<br>участия</div>
             </div>
         @endif
         <form action="{{ route('training.register') }}" method="POST" novalidate>

@@ -48,23 +48,14 @@
                                 <strong>{{ $item->ev_location }}</strong>
                             </div>
                         @endif
-                        @if($item->ev_price_individual || $item->ev_price_legal)
+                        @if($item->ev_price_legal)
                             <div class="hm">
                                 <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor"
                                      stroke-width="1.5">
                                     <rect x="1.5" y="2.5" width="11" height="9" rx="1"/>
                                     <path d="M5 1.5v3M9 1.5v3M1.5 6.5h11"/>
                                 </svg>
-                                @if($item->ev_price_individual)
-                                    <strong>{{ price($item->ev_price_individual) }}
-                                        &nbsp;{{ config('site.currency') }}</strong>
-                                @endif
-                                @if($item->ev_price_individual && $item->ev_price_legal)
-                                    &nbsp;/&nbsp;
-                                @endif
-                                @if($item->ev_price_legal)
-                                    {{ price($item->ev_price_legal) }}&nbsp;{{ config('site.currency') }} (юр.лицо)
-                                @endif
+                                <strong>{{ price($item->ev_price_legal) }}&nbsp;{{ config('site.currency') }}</strong>
                             </div>
                         @endif
                     </div>
@@ -271,8 +262,7 @@
             <!-- ЗАПИСЬ -->
             @if($item->ev_is_upcoming)
             <x-training.registration
-    :price-individual="$item->ev_price_individual"
-    :price-legal="$item->ev_price_legal"
+    :price="$item->ev_price_legal"
     :training-id="$item->id"
 />
             @endif
@@ -356,8 +346,7 @@
             </div>
 
             <x-training.price-card
-                :price-individual="$item->ev_price_individual"
-                :price-legal="$item->ev_price_legal"
+                :price="$item->ev_price_legal"
                 note="Бронирование места — предоплата 50%. Место формируется по мере набора группы."
             />
             @else

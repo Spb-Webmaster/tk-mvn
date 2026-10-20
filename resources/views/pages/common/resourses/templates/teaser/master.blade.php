@@ -123,12 +123,8 @@
                                                 @if($training->ev_duration_days)
                                                     <span>{{ $training->ev_duration_days }}</span>
                                                 @endif
-                                                @if($training->ev_price_individual || $training->ev_price_legal)
-                                                    <span>
-                                                        @if($training->ev_price_individual){{ number_format($training->ev_price_individual, 0, '.', ' ') }}&nbsp;₽@endif
-                                                        @if($training->ev_price_individual && $training->ev_price_legal) / @endif
-                                                        @if($training->ev_price_legal){{ number_format($training->ev_price_legal, 0, '.', ' ') }}&nbsp;₽@endif
-                                                    </span>
+                                                @if($training->ev_price_legal)
+                                                    <span>{{ number_format($training->ev_price_legal, 0, '.', ' ') }}&nbsp;₽</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -177,7 +173,7 @@
 
             <!-- REGISTRATION FORM -->
             @if($hasUpcomingEvents ?? false)
-            <x-training.registration :price-individual="30000" :price-legal="36000" />
+            <x-training.registration :price="36000" />
             @endif
         </div><!-- /main-col -->
 
@@ -187,8 +183,7 @@
             @if($hasUpcomingEvents ?? false)
                 @php $masterPrices = \App\Models\Setting::getGroup('constants')->data ?? []; @endphp
                 <x-training.price-card
-                    :price-individual="$masterPrices['master_price_individual'] ?? null"
-                    :price-legal="$masterPrices['master_price_legal'] ?? null"
+                    :price="$masterPrices['master_price_legal'] ?? null"
                     note="За один модуль (2 дня). Для бронирования места — предоплата 50%."
                 />
             @else
