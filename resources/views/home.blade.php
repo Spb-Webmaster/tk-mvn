@@ -44,6 +44,9 @@
 <!-- DESC -->
 <x-modules.desc :content="$home['desc'] ?? ''" />
 
+<!-- REVIEWS -->
+<x-modules.reviews :reviews="$reviews" />
+
 <!-- CTA / CONTACT -->
 <x-modules.cta />
 

@@ -47,6 +47,7 @@
 @import 'components/modules/gallery.scss';
 @import 'components/modules/clients.scss';
 @import 'components/modules/desc.scss';
+@import 'components/modules/reviews.scss';
 @import 'components/modules/cta.scss';
 @import 'components/modules/master-nav.scss';
 @import 'components/modules/in-development.scss';
