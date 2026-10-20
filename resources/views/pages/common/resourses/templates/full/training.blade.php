@@ -124,59 +124,6 @@
 
 
 
-            <!-- ВИДЕО -->
-            @if($item->video && count($item->video))
-            @php
-                $videos = collect($item->video)->filter(function($v) {
-                    return !empty($v['url']) || !empty($v['rutube']) || !empty($v['file']);
-                })->values();
-            @endphp
-            @if($videos->count())
-            <div class="blk" id="vblk">
-                <div class="mlbl">Видеоматериалы</div>
-                <div class="vgrid" id="vg" data-count="{{ $videos->count() }}">
-                    @foreach($videos as $video)
-                    @php
-                        if (!empty($video['url'])) {
-                            preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $video['url'], $m);
-                            $embedUrl = isset($m[1]) ? 'https://www.youtube.com/embed/' . $m[1] : null;
-                        } elseif (!empty($video['rutube'])) {
-                            preg_match('/rutube\.ru\/video\/([a-zA-Z0-9]+)/', $video['rutube'], $m);
-                            $embedUrl = isset($m[1]) ? 'https://rutube.ru/play/embed/' . $m[1] . '/' : null;
-                        } elseif (!empty($video['file'])) {
-                            $embedUrl = Storage::url($video['file']);
-                        } else {
-                            $embedUrl = null;
-                        }
-                        $isRutube = !empty($video['rutube']);
-                        $poster = !empty($video['poster']) ? Storage::url($video['poster']) : null;
-                    @endphp
-                    @if($embedUrl)
-                    <div class="vi">
-                        <a class="vph"
-                           href="{{ $embedUrl }}{{ str_contains($embedUrl, '?') ? '&' : '?' }}autoplay=1{{ $isRutube ? '' : '&rel=0' }}"
-                           data-fancybox="video-{{ $item->id }}"
-                           data-type="iframe"
-                           data-width="1280"
-                           data-height="720"
-                           @if($poster) style="background-image:url('{{ $poster }}');background-size:cover;background-position:center;" @endif>
-                            <div class="vplay{{ $poster ? ' active' : '' }}">
-                                <svg width="18" height="18" viewBox="0 0 20 20" fill="white">
-                                    <polygon points="6,3 17,10 6,17"/>
-                                </svg>
-                            </div>
-                            @if(!empty($video['title']))
-                                <div class="vtxt">{{ $video['title'] }}</div>
-                            @endif
-                        </a>
-                    </div>
-                    @endif
-                    @endforeach
-                </div>
-            </div>
-            @endif
-            @endif
-
             <!-- ФОТО -->
             @if($item->gallery && count($item->gallery))
             <div class="blk" id="iblk">
@@ -328,6 +275,59 @@
     :price-legal="$item->ev_price_legal"
     :training-id="$item->id"
 />
+            @endif
+
+            <!-- ВИДЕО -->
+            @if($item->video && count($item->video))
+            @php
+                $videos = collect($item->video)->filter(function($v) {
+                    return !empty($v['url']) || !empty($v['rutube']) || !empty($v['file']);
+                })->values();
+            @endphp
+            @if($videos->count())
+            <div class="blk" id="vblk">
+                <div class="mlbl">Видеоматериалы</div>
+                <div class="vgrid" id="vg" data-count="{{ $videos->count() }}">
+                    @foreach($videos as $video)
+                    @php
+                        if (!empty($video['url'])) {
+                            preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $video['url'], $m);
+                            $embedUrl = isset($m[1]) ? 'https://www.youtube.com/embed/' . $m[1] : null;
+                        } elseif (!empty($video['rutube'])) {
+                            preg_match('/rutube\.ru\/video\/([a-zA-Z0-9]+)/', $video['rutube'], $m);
+                            $embedUrl = isset($m[1]) ? 'https://rutube.ru/play/embed/' . $m[1] . '/' : null;
+                        } elseif (!empty($video['file'])) {
+                            $embedUrl = Storage::url($video['file']);
+                        } else {
+                            $embedUrl = null;
+                        }
+                        $isRutube = !empty($video['rutube']);
+                        $poster = !empty($video['poster']) ? Storage::url($video['poster']) : null;
+                    @endphp
+                    @if($embedUrl)
+                    <div class="vi">
+                        <a class="vph"
+                           href="{{ $embedUrl }}{{ str_contains($embedUrl, '?') ? '&' : '?' }}autoplay=1{{ $isRutube ? '' : '&rel=0' }}"
+                           data-fancybox="video-{{ $item->id }}"
+                           data-type="iframe"
+                           data-width="1280"
+                           data-height="720"
+                           @if($poster) style="background-image:url('{{ $poster }}');background-size:cover;background-position:center;" @endif>
+                            <div class="vplay{{ $poster ? ' active' : '' }}">
+                                <svg width="18" height="18" viewBox="0 0 20 20" fill="white">
+                                    <polygon points="6,3 17,10 6,17"/>
+                                </svg>
+                            </div>
+                            @if(!empty($video['title']))
+                                <div class="vtxt">{{ $video['title'] }}</div>
+                            @endif
+                        </a>
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+            @endif
             @endif
 
         </div><!-- /main-col -->
