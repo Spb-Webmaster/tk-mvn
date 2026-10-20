@@ -37,8 +37,9 @@
 <!-- GALLERY -->
 <x-modules.gallery />
 
-<!-- CLIENTS -->
+{{-- CLIENTS — блок «Работаем с лидерами рынка» убран с главной
 <x-modules.clients />
+--}}
 
 <!-- DESC -->
 <x-modules.desc :content="$home['desc'] ?? ''" />

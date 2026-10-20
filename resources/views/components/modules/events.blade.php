@@ -4,9 +4,9 @@
     $months = ['','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 @endphp
 
+@if($events->isNotEmpty())
 <section class="home-events home-section" id="events">
   <div class="container">
-    @if($events->isNotEmpty())
     <div class="section-head">
       <div class="s-eye">Ближайшие мероприятия</div>
       <h2 class="section-title">Открытые программы</h2>
@@ -40,12 +40,18 @@
       </div>
       <button type="button" class="btn-primary open-fancybox" data-form="zapros" style="flex-shrink:0;">Узнать подробнее</button>
     </div>
+  </div>
+</section>
+@endif
+
+{{-- Заглушка «мероприятия не планируются» временно отключена: когда открытых
+     мероприятий нет, блок на главной не выводится вовсе. Вернуть — убрать @if
+     выше и раскомментировать ветку @else.
+
     @else
     <div class="events-empty">
       <div class="events-empty__eye">Расписание</div>
       <div class="events-empty__title">На данный момент открытые мероприятия не планируются</div>
       <p class="events-empty__desc">Следите за обновлениями — анонсы новых открытых программ появятся здесь.</p>
     </div>
-    @endif
-  </div>
-</section>
+--}}
