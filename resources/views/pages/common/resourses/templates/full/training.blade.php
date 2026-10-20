@@ -193,6 +193,31 @@
             </x-admin.inline-edit>
             @endif
 
+            <!-- РЕЗУЛЬТАТЫ -->
+            @if(($item->ev_results && count($item->ev_results)) || auth('moonshine')->check())
+            <x-admin.inline-edit :model="$item" field="ev_results" label="Что получают участники" type="json">
+            <div class="blk">
+                <div class="s-eye">Что получают участники</div>
+                @if($item->ev_results && count($item->ev_results))
+                    @foreach($item->ev_results as $block)
+                        @if(!empty($block['title']))
+                            <h2 class="s-ttl">{{ $block['title'] }}</h2>
+                        @endif
+                        @if(!empty($block['items']))
+                            <ul class="cl">
+                                @foreach($block['items'] as $blockItem)
+                                    <li>{{ $blockItem['value'] }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    @endforeach
+                @else
+                    <p style="opacity:0.4;font-size:13px;">— не заполнено —</p>
+                @endif
+            </div>
+            </x-admin.inline-edit>
+            @endif
+
             <!-- МОДУЛИ -->
             @if(($item->ev_modules && count($item->ev_modules)) || auth('moonshine')->check())
             <x-admin.inline-edit :model="$item" field="ev_modules" label="Модули тренинга" type="json">
@@ -225,31 +250,6 @@
                 <div class="s-eye">Методы ведения</div>
                 @if($item->ev_methods && count($item->ev_methods))
                     @foreach($item->ev_methods as $block)
-                        @if(!empty($block['title']))
-                            <h2 class="s-ttl">{{ $block['title'] }}</h2>
-                        @endif
-                        @if(!empty($block['items']))
-                            <ul class="cl">
-                                @foreach($block['items'] as $blockItem)
-                                    <li>{{ $blockItem['value'] }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    @endforeach
-                @else
-                    <p style="opacity:0.4;font-size:13px;">— не заполнено —</p>
-                @endif
-            </div>
-            </x-admin.inline-edit>
-            @endif
-
-            <!-- РЕЗУЛЬТАТЫ -->
-            @if(($item->ev_results && count($item->ev_results)) || auth('moonshine')->check())
-            <x-admin.inline-edit :model="$item" field="ev_results" label="Что получают участники" type="json">
-            <div class="blk">
-                <div class="s-eye">Что получают участники</div>
-                @if($item->ev_results && count($item->ev_results))
-                    @foreach($item->ev_results as $block)
                         @if(!empty($block['title']))
                             <h2 class="s-ttl">{{ $block['title'] }}</h2>
                         @endif
