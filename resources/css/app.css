@@ -21,6 +21,7 @@
 @import 'components/form/form-input.scss';
 @import 'components/form/form-blue-component.scss';
 @import 'components/form/modal-zapros.scss';
+@import 'components/form/sidebar-request.scss';
 @import 'components/form/form-agree.scss';
 @import 'buttons/buttons.scss';
 @import 'templates/axeld/breadcrumbs.scss';

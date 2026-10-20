@@ -18,6 +18,7 @@ import {mzSelect} from "./include/select/mz-select";
 import {initInlineEdit} from "./include/site/inline-edit";
 import {initVideoThumb} from "./include/site/video-thumb";
 import {discussTaskForm} from "./include/site/discuss-task-form";
+import {sidebarRequestForm} from "./include/site/sidebar-request-form";
 import {validateAgree} from "./include/site/form-agree";
 
 /** формы со встроенными в blade скриптами вызывают проверку отсюда **/
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     mzSelect() // select
     initInlineEdit()
     initVideoThumb()
+    sidebarRequestForm() // форма запроса в сайдбаре программы
     discussTaskForm()
 
     //   datepicker_date_birthday() // календарик день рождения
