@@ -18,6 +18,7 @@ use App\MoonShine\Pages\Pages\VideoPage;
 use App\MoonShine\Resources\AdminVideo\AdminVideoResource;
 use App\MoonShine\Resources\MailLog\MailLogResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
+use App\MoonShine\Resources\Article\ArticleResource;
 use App\MoonShine\Resources\News\NewsResource;
 use App\MoonShine\Resources\Photo\PhotoResource;
 use App\MoonShine\Resources\PhotoCategory\PhotoCategoryResource;
@@ -88,6 +89,7 @@ final class AxeldLayout extends AppLayout
            ])->icon('academic-cap'),
 
                MenuItem::make(NewsResource::class, 'Новости', 'document-text'),
+               MenuItem::make(ArticleResource::class, 'Статьи', 'document-text'),
 
            MenuGroup::make(static fn() => __('Фотографии'), [
                MenuItem::make(PhotoCategoryResource::class, 'Категории', 'tag'),

@@ -24,6 +24,7 @@ use App\MoonShine\Resources\ResponseCategory\ResponseCategoryResource;
 use App\MoonShine\Resources\AdminVideo\AdminVideoResource;
 use App\MoonShine\Resources\Video\VideoResource;
 use Illuminate\Support\ServiceProvider;
+use App\MoonShine\Resources\Article\ArticleResource;
 use App\MoonShine\Resources\News\NewsResource;
 use App\MoonShine\Resources\Training\TrainingResource;
 use App\MoonShine\Resources\TrainingCategory\TrainingCategoryResource;
@@ -44,6 +45,7 @@ class MoonShineServiceProvider extends ServiceProvider
         $core
             ->resources([
                 NewsResource::class,
+                ArticleResource::class,
                 TrainingResource::class,
                 TrainingCategoryResource::class,
                 TrainingLevelResource::class,
