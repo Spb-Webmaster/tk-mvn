@@ -29,7 +29,7 @@
         </div>
 
         <div class="mzr-field">
-            <label for="mzr-company">Компания</label>
+            <label for="mzr-company">Название компании</label>
             <input type="text" id="mzr-company" name="company" placeholder="ООО «Компания»" autocomplete="organization">
         </div>
 

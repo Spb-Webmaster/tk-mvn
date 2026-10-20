@@ -67,7 +67,7 @@ class AxiosController extends Controller
             'Имя'         => $request->input('name'),
             'Телефон'     => $request->input('phone'),
             'Email'       => $request->input('email'),
-            'Компания'    => $request->input('company'),
+            'Название компании' => $request->input('company'),
             'Запрос'      => $request->input('request'),
         ]);
 
