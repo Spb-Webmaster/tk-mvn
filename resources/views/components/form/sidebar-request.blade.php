@@ -7,7 +7,7 @@
 
         <div class="sbf-field">
             <label for="sbf-name">Имя</label>
-            <input type="text" id="sbf-name" name="name" placeholder="Василий" autocomplete="given-name" required>
+            <input type="text" id="sbf-name" name="name" placeholder="Ваше имя" autocomplete="given-name" required>
         </div>
         <div class="sbf-field">
             <label for="sbf-company">Название компании</label>

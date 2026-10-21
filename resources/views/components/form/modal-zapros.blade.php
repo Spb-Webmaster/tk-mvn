@@ -15,7 +15,7 @@
         <div class="mzr-field-row">
             <div class="mzr-field">
                 <label for="mzr-name" class="mzr-label--required">Имя</label>
-                <input type="text" id="mzr-name" name="name" placeholder="Василий" autocomplete="given-name" required>
+                <input type="text" id="mzr-name" name="name" placeholder="Ваше имя" autocomplete="given-name" required>
             </div>
             <div class="mzr-field">
                 <label for="mzr-phone" class="mzr-label--required">Телефон</label>
