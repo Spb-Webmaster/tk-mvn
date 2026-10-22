@@ -21,7 +21,9 @@ class ResponseViewModel
     public function getCategories(): \Illuminate\Database\Eloquent\Collection
     {
         return ResponseCategory::with(['responses' => function ($q) {
-            $q->where('published', 1)->orderByDesc('created_at');
+            // От старых к новым. Вторичный ключ по id нужен потому, что
+            // у части записей created_at совпадает с точностью до секунды.
+            $q->where('published', 1)->orderBy('created_at')->orderBy('id');
         }])
         ->orderBy('sorting')
         ->get()
