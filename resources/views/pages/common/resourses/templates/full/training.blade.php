@@ -237,14 +237,6 @@
             </x-admin.inline-edit>
             @endif
 
-            <!-- ЗАПИСЬ -->
-            @if($item->ev_is_upcoming)
-            <x-training.registration
-    :price="$item->ev_price_legal"
-    :training-id="$item->id"
-/>
-            @endif
-
             <!-- ФОТО -->
             @if($item->gallery && count($item->gallery))
             <div class="blk" id="iblk">
@@ -318,6 +310,14 @@
                 </div>
             </div>
             @endif
+            @endif
+
+            <!-- ЗАПИСЬ -->
+            @if($item->ev_is_upcoming)
+            <x-training.registration
+    :price="$item->ev_price_legal"
+    :training-id="$item->id"
+/>
             @endif
 
         </div><!-- /main-col -->

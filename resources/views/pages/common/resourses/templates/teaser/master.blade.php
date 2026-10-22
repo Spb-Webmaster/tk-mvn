@@ -12,20 +12,37 @@
                     <div class="page-eyebrow">{{ $ms['hero_eyebrow'] ?? 'Флагманская программа' }}</div>
                     <h1 class="page-title">{!! $ms['hero_title'] ?? 'Многоуровневая программа подготовки переговорщиков <br>«<em>Программа подготовки переговорщиков для бизнеса</em>»' !!}</h1>
                     <p class="page-lead">{{ $ms['hero_lead'] ?? 'Системный курс развития переговорных компетенций — от основ делового общения до мастерства в жёстких коммуникациях.' }}</p>
+                    @php
+                        // Незаполненные поля мета-строки не выводятся совсем:
+                        // ни подставленного значения по умолчанию, ни висящего разделителя.
+                        $metaLevelsStrong   = trim($ms['meta_levels_strong'] ?? '');
+                        $metaLevelsRest     = trim($ms['meta_levels_rest'] ?? '');
+                        $metaLocationStrong = trim($ms['meta_location_strong'] ?? '');
+                        $metaLocationRest   = trim($ms['meta_location_rest'] ?? '');
+                        $metaStatus         = trim($ms['meta_status'] ?? '');
+                    @endphp
+                    @if($metaLevelsStrong !== '' || $metaLocationStrong !== '' || $metaStatus !== '')
                     <div class="hdr-meta">
+                        @if($metaLevelsStrong !== '')
                         <div class="hm">
                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4v3l2 1.5"/></svg>
-                            <strong>{{ $ms['meta_levels_strong'] ?? '4 уровня' }}</strong>&nbsp;· {{ $ms['meta_levels_rest'] ?? '8 модулей' }}
+                            <strong>{{ $metaLevelsStrong }}</strong>@if($metaLevelsRest !== '')&nbsp;· {{ $metaLevelsRest }}@endif
                         </div>
+                        @endif
+                        @if($metaLocationStrong !== '')
                         <div class="hm">
                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3.5 4.5 6.5 4.5 6.5S11.5 9.5 11.5 6c0-2.5-2-4.5-4.5-4.5z"/><circle cx="7" cy="6" r="1.5"/></svg>
-                            <strong>{{ $ms['meta_location_strong'] ?? 'Санкт-Петербург' }}</strong>&nbsp;· {{ $ms['meta_location_rest'] ?? 'выезд по России' }}
+                            <strong>{{ $metaLocationStrong }}</strong>@if($metaLocationRest !== '')&nbsp;· {{ $metaLocationRest }}@endif
                         </div>
+                        @endif
+                        @if($metaStatus !== '')
                         <div class="hm">
                             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="10" height="9" rx="1"/><path d="M5 1.5v3M9 1.5v3M2 6.5h10"/></svg>
-                            <strong>{{ $ms['meta_status'] ?? 'Набор открыт' }}</strong>&nbsp;· {{ date("Y") }}
+                            <strong>{{ $metaStatus }}</strong>&nbsp;· {{ date("Y") }}
                         </div>
+                        @endif
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
