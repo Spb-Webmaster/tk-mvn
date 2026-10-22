@@ -34,6 +34,9 @@ class TrainingRegistrationController extends Controller
 
         flash()->info('Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
 
+        // Цель Яндекс.Метрики отправится из layout после редиректа
+        session()->flash('ym_goal', 'training_signup');
+
         return redirect()->back();
     }
 }

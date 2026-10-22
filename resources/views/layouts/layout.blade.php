@@ -34,6 +34,29 @@
 @include('partials.cookie-notice')
 @if(!empty($constants['yandex_metrika']))
     {!! $constants['yandex_metrika'] !!}
+
+    @php
+        // ID счётчика достаём из самого кода — отдельного поля в настройках нет
+        preg_match('/ym\(\s*(\d+)/', $constants['yandex_metrika'], $ymMatch);
+        $ymId = $ymMatch[1] ?? null;
+    @endphp
+
+    @if($ymId)
+        <script>
+            // Единая точка отправки целей Метрики: window.ymGoal('identifier')
+            window.YM_ID = {{ $ymId }};
+            window.ymGoal = function (goal) {
+                if (typeof window.ym === 'function' && window.YM_ID) {
+                    window.ym(window.YM_ID, 'reachGoal', goal);
+                }
+            };
+        </script>
+
+        {{-- Цель, выставленная контроллером перед редиректом (формы с перезагрузкой страницы) --}}
+        @if(session('ym_goal'))
+            <script>window.ymGoal(@json(session('ym_goal')));</script>
+        @endif
+    @endif
 @endif
 </body>
 </html>
