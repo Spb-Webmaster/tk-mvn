@@ -76,6 +76,9 @@ function initForm(container) {
             if (!result.errors) {
                 form.style.display = 'none';
                 successEl.classList.add('show');
+
+                // Цель Метрики — только при реальном успехе, не при ошибке валидации
+                if (typeof window.ymGoal === 'function') window.ymGoal('sidebar_request');
             }
         } catch (err) {
             console.error('Sidebar request form error:', err);

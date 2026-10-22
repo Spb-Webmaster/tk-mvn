@@ -35,7 +35,10 @@ class ContactFormController extends Controller
         // Цель Яндекс.Метрики отправится из layout после редиректа.
         // Берём из белого списка, а не из запроса напрямую, чтобы
         // в счётчик нельзя было подсунуть произвольную цель.
-        $goals = ['discuss_task' => 'discuss_task'];
+        $goals = [
+            'discuss_task' => 'discuss_task',
+            'contact'      => 'contact_form',
+        ];
         $goal  = $goals[$request->input('form_source')] ?? null;
 
         if ($goal) {
