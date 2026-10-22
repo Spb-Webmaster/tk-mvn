@@ -4,6 +4,8 @@
 <form id="discuss-task-form" class="cta-form" action="{{ route('form.zapros') }}" method="POST" novalidate>
   @csrf
   <x-form.timestamp />
+  {{-- Источник заявки: по нему контроллер выбирает цель Яндекс.Метрики --}}
+  <input type="hidden" name="form_source" value="discuss_task">
   <div class="cta-field">
     <input type="text" name="name" placeholder="Ваше имя">
   </div>
