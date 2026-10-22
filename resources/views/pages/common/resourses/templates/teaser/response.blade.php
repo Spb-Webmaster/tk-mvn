@@ -34,9 +34,10 @@
                                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="2" width="16" height="22" rx="1" fill="rgba(255,255,255,0.12)" stroke="var(--gold)" stroke-width="1.2"></rect><path d="M16 2v6h6" stroke="var(--gold)" stroke-width="1.2" fill="none"></path><path d="M8 11h10M8 15h10M8 19h6" stroke="rgba(255,255,255,0.4)" stroke-width="1.1" stroke-linecap="round"></path></svg>
                                 </div>
 
-                                <div class="dc-num">Письмо № {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
-                                <div class="dc-title">Благодарственное письмо</div>
-                                    <div class="dc-sub">{{ $item->title }}</div>
+                                <div class="dc-num">Благодарность</div>
+                                <div class="dc-title">{{ $item->title }}</div>
+                                {{-- Пустой при незаполненном подзаголовке — держит «Открыть документ» у нижнего края --}}
+                                <div class="dc-sub">{{ $item->subtitle }}</div>
                                 <div class="dc-open">Открыть документ →</div>
 
                             </a>

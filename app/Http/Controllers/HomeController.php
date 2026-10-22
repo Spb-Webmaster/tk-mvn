@@ -19,10 +19,9 @@ class HomeController extends Controller
             ->orderBy('ev_date_from')
             ->get();
 
-        // Отзывы-цитаты (без сканов писем) для блока на главной
-        $reviews = Response::published()
-            ->where(fn($q) => $q->whereNull('img')->orWhere('img', ''))
-            ->limit(3)
+        // Благодарственные письма, отмеченные галочкой «На главной»
+        $letters = Response::published()
+            ->lettersOnHome()
             ->get();
 
         if(auth()->check()) {
@@ -35,7 +34,7 @@ class HomeController extends Controller
                 'user'   => $user,
                 'home'   => $home,
                 'events' => $events,
-                'reviews' => $reviews,
+                'letters' => $letters,
             ]
         );
     }

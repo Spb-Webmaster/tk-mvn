@@ -61,6 +61,9 @@ final class ResponseFormPage extends FormPage
                                 Box::make([
                                     Divider::make('Статус публикации'),
                                     Switcher::make('Опубликовано', 'published')->default(1),
+                                    Switcher::make('На главной', 'on_home')
+                                        ->default(0)
+                                        ->hint('Благодарственное письмо попадёт в блок на главной. Нужна загруженная картинка письма.'),
                                     Divider::make('Сортировка'),
                                     Number::make('Сортировка', 'sorting')->default(0),
                                     Divider::make('Шаблон вывода'),

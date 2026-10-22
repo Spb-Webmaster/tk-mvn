@@ -35,6 +35,7 @@ final class ResponseIndexPage extends IndexPage
                 ->saveUrl(fn(Response $item) => route('response.categories.update', $item->id)),
             Date::make('Дата', 'created_at')->format('d.m.Y')->sortable(),
             Switcher::make('Опубликовано', 'published')->updateOnPreview(),
+            Switcher::make('На главной', 'on_home')->updateOnPreview(),
         ];
     }
 }

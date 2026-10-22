@@ -22,6 +22,7 @@ class Response extends Model
         'html',
         'html2',
         'published',
+        'on_home',
         'params',
         'video',
         'gallery',
@@ -45,10 +46,19 @@ class Response extends Model
         return $query->where('published', 1)->orderByDesc('created_at');
     }
 
+    // Благодарственные письма, отмеченные для вывода на главной
+    public function scopeLettersOnHome(Builder $query): Builder
+    {
+        return $query->where('on_home', 1)
+            ->whereNotNull('img')
+            ->where('img', '!=', '');
+    }
+
     protected function casts(): array
     {
         return [
             'published' => 'integer',
+            'on_home'   => 'integer',
             'sorting'   => 'integer',
             'template'  => FullTemplate::class,
             'video'     => 'array',
