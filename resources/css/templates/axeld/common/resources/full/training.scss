@@ -25,8 +25,7 @@
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 48px;
+        grid-template-columns: 1fr;
         align-items: end;
     }
 
@@ -108,55 +107,6 @@
             color: rgba(255, 255, 255, 0.82);
             font-weight: 600;
         }
-    }
-
-    .date-box {
-        background: var(--gold);
-        padding: 32px 36px;
-        text-align: center;
-        align-self: stretch;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-width: 210px;
-    }
-
-    .date-box-lbl {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.65);
-        margin-bottom: 10px;
-    }
-
-    .date-box-main {
-        font-family: var(--serif);
-        font-size: 42px;
-        font-weight: 700;
-        color: #fff;
-        line-height: 1;
-        margin-bottom: 4px;
-    }
-
-    .date-box-month {
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.85);
-        font-weight: 600;
-        margin-bottom: 16px;
-    }
-
-    .date-box-div {
-        height: 1px;
-        background: rgba(255, 255, 255, 0.25);
-        margin-bottom: 15px;
-    }
-
-    .date-box-sub {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 600;
-        letter-spacing: 0.04em;
     }
 
     /* ── LAYOUT ── */
@@ -1081,7 +1031,6 @@
     @media (max-width: 1023px) {
         .ph-inner {
             padding: 0 32px;
-            gap: 32px;
         }
         .page-wrap {
             padding: 48px 32px 72px;
@@ -1099,15 +1048,10 @@
             padding-top: 72px;
         }
         .ph-inner {
-            grid-template-columns: 1fr;
             padding: 0 20px;
-            gap: 0;
         }
         .breadcrumb {
             font-size: 13px;
-        }
-        .date-box {
-            display: none;
         }
         .hdr-meta {
             gap: 14px;

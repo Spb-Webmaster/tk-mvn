@@ -62,23 +62,6 @@
                 </div>
 
             </div>
-            <div class="date-box">
-                <div class="date-box-lbl">Дата проведения</div>
-                @if($item->ev_date_from)
-                    <div class="date-box-main">{{ $item->ev_day_range }}</div>
-                    <div class="date-box-month">{{ $item->ev_month_year }}</div>
-                    <div class="date-box-div"></div>
-                    <div class="date-box-sub">{{ $item->ev_duration_days }}@if($item->ev_time)
-                            &nbsp;·&nbsp;{{ $item->ev_time }}
-                        @endif</div>
-                @else
-                    <div class="date-box-month">по мере формирования группы</div>
-                    <div class="date-box-div"></div>
-                    <div class="date-box-sub">{{ date('Y') }}@if($item->ev_location)
-                            &nbsp;·&nbsp;{{ $item->ev_location }}
-                        @endif</div>
-                @endif
-            </div>
         </div>
     </div>
 
