@@ -46,12 +46,16 @@ class Response extends Model
         return $query->where('published', 1)->orderByDesc('created_at');
     }
 
-    // Благодарственные письма, отмеченные для вывода на главной
+    // Благодарственные письма, отмеченные для вывода на главной.
+    // reorder() сбрасывает сортировку по дате из scopePublished —
+    // порядок на главной задаётся полем «Сортировка» в админке.
     public function scopeLettersOnHome(Builder $query): Builder
     {
         return $query->where('on_home', 1)
             ->whereNotNull('img')
-            ->where('img', '!=', '');
+            ->where('img', '!=', '')
+            ->reorder('sorting')
+            ->orderBy('id');
     }
 
     protected function casts(): array

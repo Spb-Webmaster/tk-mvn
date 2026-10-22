@@ -33,6 +33,7 @@ final class ResponseIndexPage extends IndexPage
             InlineSelectField::make('Категории', 'categories')
                 ->options(fn() => ResponseCategory::orderBy('title')->pluck('title', 'id'))
                 ->saveUrl(fn(Response $item) => route('response.categories.update', $item->id)),
+            Text::make('Сортировка', 'sorting')->updateOnPreview()->sortable(),
             Date::make('Дата', 'created_at')->format('d.m.Y')->sortable(),
             Switcher::make('Опубликовано', 'published')->updateOnPreview(),
             Switcher::make('На главной', 'on_home')->updateOnPreview(),
