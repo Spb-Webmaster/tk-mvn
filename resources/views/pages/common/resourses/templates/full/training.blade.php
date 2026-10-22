@@ -115,28 +115,6 @@
 
 
 
-            <!-- ФОТО -->
-            @if($item->gallery && count($item->gallery))
-            <div class="blk" id="iblk">
-                <div class="mlbl">Фотоматериалы</div>
-                <div class="igrid" id="ig" data-count="{{ count($item->gallery) }}">
-                    @foreach($item->gallery as $photo)
-                        @if(!empty($photo['image']))
-                        <div class="ii">
-                            <a href="{{ Storage::url($photo['image']) }}"
-                               data-fancybox="gallery-{{ $item->id }}"
-                               @if(!empty($photo['label'])) data-caption="{{ $photo['label'] }}" @endif>
-                                <img src="{{ asset(intervention(config('thumbnail.training_gallery'), $photo['image'], 'content/gallery')) }}"
-                                     alt="{{ $photo['label'] ?? '' }}"
-                                     loading="lazy">
-                            </a>
-                        </div>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
             <!-- 4 БЛОКА -->
             @if(($item->ev_tasks && count($item->ev_tasks)) || auth('moonshine')->check())
             <x-admin.inline-edit :model="$item" field="ev_tasks" label="О тренинге" type="json">
@@ -265,6 +243,28 @@
     :price="$item->ev_price_legal"
     :training-id="$item->id"
 />
+            @endif
+
+            <!-- ФОТО -->
+            @if($item->gallery && count($item->gallery))
+            <div class="blk" id="iblk">
+                <div class="mlbl">Фотоматериалы</div>
+                <div class="igrid" id="ig" data-count="{{ count($item->gallery) }}">
+                    @foreach($item->gallery as $photo)
+                        @if(!empty($photo['image']))
+                        <div class="ii">
+                            <a href="{{ Storage::url($photo['image']) }}"
+                               data-fancybox="gallery-{{ $item->id }}"
+                               @if(!empty($photo['label'])) data-caption="{{ $photo['label'] }}" @endif>
+                                <img src="{{ asset(intervention(config('thumbnail.training_gallery'), $photo['image'], 'content/gallery')) }}"
+                                     alt="{{ $photo['label'] ?? '' }}"
+                                     loading="lazy">
+                            </a>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
             @endif
 
             <!-- ВИДЕО -->
