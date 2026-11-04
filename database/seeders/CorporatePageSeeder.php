@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Setting;
+use App\Models\TrainingCategory;
 use Illuminate\Database\Seeder;
 
 /**
@@ -60,32 +61,9 @@ class CorporatePageSeeder extends Seeder
             'programs_eyebrow' => 'Программы',
             'programs_title'   => 'Выберите программу',
             'programs_lead'    => 'Каждая программа — это практика, а не лекция. Тренер не читает, он тренирует.',
-            'programs'         => [
-                [
-                    'title' => 'Программа подготовки переговорщиков для бизнеса',
-                    'note'  => '8 модулей, 4 уровня подготовки',
-                    'desc'  => 'Флагманская многоуровневая программа: от основ делового общения до мастерства в жёстких переговорах.',
-                    'link'  => '/trainings/master-kommunikatsij',
-                    'btn'   => 'Подробнее',
-                    'image' => '',
-                ],
-                [
-                    'title' => 'Программа подготовки кадрового резерва',
-                    'note'  => '',
-                    'desc'  => 'Подготовка руководителей нового поколения. Лидерство, управление командой, принятие решений.',
-                    'link'  => '/trainings/programma-podgotovki-kadrovogo-rezerva',
-                    'btn'   => 'Подробнее',
-                    'image' => '',
-                ],
-                [
-                    'title' => 'Практики развития персонала',
-                    'note'  => '',
-                    'desc'  => 'Стратегические сессии, ассессмент, консалтинг по построению системы обучения в организации. Системный подход к T&D.',
-                    'link'  => '/trainings/praktiki-razvitiia-personala',
-                    'btn'   => 'Подробнее',
-                    'image' => '',
-                ],
-            ],
+            // Программы привязаны к категориям обучения: ссылка и — если поля
+            // пустые — название с описанием подставляются из категории
+            'programs' => $this->programs(),
 
             'metatitle'   => 'Корпоративное обучение для компаний — МВН, Санкт-Петербург',
             'description' => 'Практические бизнес-тренинги для руководителей и команд: переговоры, управление, развитие персонала. Программы под задачи компании, выезд по всей России.',
@@ -95,5 +73,28 @@ class CorporatePageSeeder extends Seeder
         $setting->save();
 
         $this->command?->info('Страница «Компаниям» заполнена начальным контентом.');
+    }
+
+    /**
+     * Карточки программ из ТЗ. Категорию ищем по slug — если её нет,
+     * карточка всё равно создаётся, но без ссылки.
+     */
+    private function programs(): array
+    {
+        $ids = TrainingCategory::pluck('id', 'slug');
+
+        $items = [
+            ['slug' => 'master-kommunikatsij',                 'note' => '8 модулей, 4 уровня подготовки', 'desc' => 'Флагманская многоуровневая программа: от основ делового общения до мастерства в жёстких переговорах.'],
+            ['slug' => 'programma-podgotovki-kadrovogo-rezerva', 'note' => '',                              'desc' => 'Подготовка руководителей нового поколения. Лидерство, управление командой, принятие решений.'],
+            ['slug' => 'praktiki-razvitiia-personala',          'note' => '',                              'desc' => 'Стратегические сессии, ассессмент, консалтинг по построению системы обучения в организации. Системный подход к T&D.'],
+        ];
+
+        return array_map(static fn(array $item): array => [
+            'category_id' => isset($ids[$item['slug']]) ? (string) $ids[$item['slug']] : '',
+            'title'       => '',
+            'note'        => $item['note'],
+            'desc'        => $item['desc'],
+            'btn'         => 'Подробнее',
+        ], $items);
     }
 }

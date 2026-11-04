@@ -13,8 +13,24 @@
         ->map(fn($p) => trim(is_array($p) ? ($p['value'] ?? '') : $p))
         ->filter()
         ->values();
-    $formats  = collect($corporate['formats'] ?? [])->filter(fn($f) => !empty($f['title']))->values();
-    $programs = collect($corporate['programs'] ?? [])->filter(fn($p) => !empty($p['title']))->values();
+    $formats = collect($corporate['formats'] ?? [])->filter(fn($f) => !empty($f['title']))->values();
+
+    // Карточка программы берёт заголовок, описание и ссылку из выбранной
+    // категории; заполненные вручную поля её перекрывают.
+    $programs = collect($corporate['programs'] ?? [])
+        ->map(function ($p) use ($categories) {
+            $category = $categories[$p['category_id'] ?? null] ?? null;
+
+            $p['title'] = trim($p['title'] ?? '') ?: ($category->title ?? '');
+            $p['desc']  = trim($p['desc'] ?? '') ?: ($category->short_description ?? '');
+            $p['link']  = $category
+                ? route('training.category.show', $category->slug)
+                : trim($p['link'] ?? '');
+
+            return $p;
+        })
+        ->filter(fn($p) => $p['title'] !== '')
+        ->values();
     $metaYears   = trim($corporate['meta_years'] ?? '');
     $metaClients = trim($corporate['meta_clients'] ?? '');
 @endphp

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Pages;
 
 use App\Models\Setting;
+use App\Models\TrainingCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use MoonShine\Crud\JsonResponse;
@@ -17,6 +18,7 @@ use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Tabs\Tab;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
@@ -187,12 +189,16 @@ class CorporatePage extends Page
                             ]),
                             Box::make('Карточки программ', [
                                 Json::make('', 'programs')->fields([
-                                    Text::make('Заголовок', 'title')->unescape(),
-                                    Textarea::make('Описание', 'desc')->unescape(),
+                                    Select::make('Программа', 'category_id')
+                                        ->options(fn() => TrainingCategory::orderBy('sorting')->pluck('title', 'id')->toArray())
+                                        ->searchable()
+                                        ->hint('Ссылка на раздел подставится автоматически'),
+                                    Text::make('Заголовок', 'title')->unescape()
+                                        ->hint('Если пусто — возьмётся название программы'),
+                                    Textarea::make('Описание', 'desc')->unescape()
+                                        ->hint('Если пусто — возьмётся краткое описание программы'),
                                     Text::make('Подпись под заголовком', 'note')->unescape()
                                         ->hint('8 модулей, 4 уровня подготовки'),
-                                    Text::make('Ссылка', 'link')
-                                        ->hint('https://tkmvn-spb.ru/trainings/master-kommunikatsij'),
                                     Text::make('Текст кнопки', 'btn')
                                         ->hint('Подробнее'),
                                     Image::make('Изображение', 'image')
