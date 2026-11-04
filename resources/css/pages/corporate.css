@@ -13,7 +13,7 @@
   pointer-events: none;
 }
 .corp-page .corp-hero--image {
-  background-image: linear-gradient(90deg, rgba(21, 32, 64, 0.94) 0%, rgba(21, 32, 64, 0.8) 26%, rgba(21, 32, 64, 0.4) 50%, rgba(21, 32, 64, 0.1) 72%, rgba(21, 32, 64, 0) 100%), var(--corp-hero-bg);
+  background-image: linear-gradient(90deg, rgba(21, 32, 64, 0.95) 0%, rgba(21, 32, 64, 0.94) 50%, rgba(21, 32, 64, 0.88) 58%, rgba(21, 32, 64, 0.55) 68%, rgba(21, 32, 64, 0.22) 80%, rgba(21, 32, 64, 0.04) 92%, rgba(21, 32, 64, 0) 100%), var(--corp-hero-bg);
   background-repeat: no-repeat;
   background-position: right center;
   background-size: auto 100%;
@@ -218,6 +218,11 @@
   gap: 10px;
 }
 
+@media (min-width: 1024px) and (max-width: 1500px) {
+  .corp-page .corp-hero--image {
+    background-image: linear-gradient(90deg, rgba(21, 32, 64, 0.95) 0%, rgba(21, 32, 64, 0.94) 58%, rgba(21, 32, 64, 0.88) 68%, rgba(21, 32, 64, 0.55) 78%, rgba(21, 32, 64, 0.2) 90%, rgba(21, 32, 64, 0) 100%), var(--corp-hero-bg);
+  }
+}
 @media (min-width: 1600px) {
   .corp-page .corp-hero--image {
     min-height: 580px;
@@ -230,7 +235,7 @@
 }
 @media (max-width: 1023px) {
   .corp-page .corp-hero {
-    padding: 64px 0 56px;
+    padding: 96px 0 56px;
   }
   .corp-page .corp-hero--image {
     min-height: 440px;
@@ -246,7 +251,7 @@
 }
 @media (max-width: 767px) {
   .corp-page .corp-hero {
-    padding: 48px 0 44px;
+    padding: 84px 0 44px;
   }
   .corp-page .corp-hero--image {
     min-height: 0;
