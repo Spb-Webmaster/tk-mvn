@@ -22,8 +22,9 @@
 <div class="corp-page">
 
     {{-- HERO --}}
+    {{-- Сам фон и его затемнение описаны в SCSS, сюда приходит только путь к файлу --}}
     <section class="corp-hero @if($heroImage) corp-hero--image @endif"
-             @if($heroImage) style="background-image: linear-gradient(90deg, rgba(21,32,64,0.96) 0%, rgba(21,32,64,0.82) 55%, rgba(21,32,64,0.55) 100%), url('{{ $heroImage }}');" @endif>
+             @if($heroImage) style="--corp-hero-bg: url('{{ $heroImage }}');" @endif>
         <div class="corp-hero__inner">
             <div class="block_content__breadcrumbs">
                 <div class="breadcrumb">{{ Breadcrumbs::render(Route::currentRouteName()) }}</div>

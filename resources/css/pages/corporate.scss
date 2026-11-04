@@ -21,8 +21,23 @@
         }
     }
 
+    // Фон приходит из шаблона в переменной --corp-hero-bg.
+    // Затемнение плотное слева, под текстом, и сходит на нет справа —
+    // иначе картинка с коллажем и спикером полностью уходит в темноту.
     .corp-hero--image {
+        background-image:
+            linear-gradient(90deg,
+                rgba(21, 32, 64, 0.94) 0%,
+                rgba(21, 32, 64, 0.80) 26%,
+                rgba(21, 32, 64, 0.40) 50%,
+                rgba(21, 32, 64, 0.10) 72%,
+                rgba(21, 32, 64, 0) 100%),
+            var(--corp-hero-bg);
         background-repeat: no-repeat;
+        background-position: right center;
+        min-height: 520px;
+        display: flex;
+        align-items: center;
     }
 
     .corp-hero__inner {
@@ -31,6 +46,7 @@
         padding: 0 46px;
         position: relative;
         z-index: 1;
+        width: 100%;
     }
 
     .corp-hero__title {
@@ -259,6 +275,19 @@
         .corp-hero {
             padding: 64px 0 56px;
         }
+        .corp-hero--image {
+            min-height: 440px;
+            // Кадр узкий — уводим его правее, чтобы спикер оставался в кадре,
+            // и усиливаем затемнение: текст идёт поверх картинки, а не рядом.
+            background-position: 76% center;
+            background-image:
+                linear-gradient(90deg,
+                    rgba(21, 32, 64, 0.95) 0%,
+                    rgba(21, 32, 64, 0.86) 40%,
+                    rgba(21, 32, 64, 0.55) 75%,
+                    rgba(21, 32, 64, 0.35) 100%),
+                var(--corp-hero-bg);
+        }
         .corp-hero__inner {
             padding: 0 32px;
         }
@@ -272,6 +301,15 @@
     .corp-page {
         .corp-hero {
             padding: 48px 0 44px;
+        }
+        .corp-hero--image {
+            min-height: 0;
+            background-position: 80% center;
+            background-image:
+                linear-gradient(180deg,
+                    rgba(21, 32, 64, 0.95) 0%,
+                    rgba(21, 32, 64, 0.90) 100%),
+                var(--corp-hero-bg);
         }
         .corp-hero__inner {
             padding: 0 20px;
