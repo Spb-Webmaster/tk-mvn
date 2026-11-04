@@ -90,11 +90,11 @@ class CorporatePageSeeder extends Seeder
         ];
 
         return array_map(static fn(array $item): array => [
-            'category_id' => isset($ids[$item['slug']]) ? (string) $ids[$item['slug']] : '',
-            'title'       => '',
-            'note'        => $item['note'],
-            'desc'        => $item['desc'],
-            'btn'         => 'Подробнее',
+            'target' => isset($ids[$item['slug']]) ? 'c:' . $ids[$item['slug']] : '',
+            'title'  => '',
+            'note'   => $item['note'],
+            'desc'   => $item['desc'],
+            'btn'    => 'Подробнее',
         ], $items);
     }
 }

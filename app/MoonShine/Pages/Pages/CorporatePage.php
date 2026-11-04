@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages\Pages;
 
 use App\Models\Setting;
+use App\Models\Training;
 use App\Models\TrainingCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -117,6 +118,29 @@ class CorporatePage extends Page
         return is_string($keptValue) && $keptValue !== '' ? $keptValue : null;
     }
 
+    /**
+     * Список для выбора программы: разделы обучения и отдельные программы
+     * в двух группах. Префикс в значении говорит, где искать запись:
+     * «c:» — категория, «t:» — конкретный тренинг.
+     */
+    private function programOptions(): array
+    {
+        $categories = TrainingCategory::orderBy('sorting')
+            ->pluck('title', 'id')
+            ->mapWithKeys(static fn($title, $id) => ["c:$id" => $title])
+            ->toArray();
+
+        $trainings = Training::published()
+            ->pluck('title', 'id')
+            ->mapWithKeys(static fn($title, $id) => ["t:$id" => $title])
+            ->toArray();
+
+        return [
+            'Разделы обучения'    => $categories,
+            'Отдельные программы' => $trainings,
+        ];
+    }
+
     private function form(): FormBuilder
     {
         return FormBuilder::make()
@@ -189,10 +213,10 @@ class CorporatePage extends Page
                             ]),
                             Box::make('Карточки программ', [
                                 Json::make('', 'programs')->fields([
-                                    Select::make('Программа', 'category_id')
-                                        ->options(fn() => TrainingCategory::orderBy('sorting')->pluck('title', 'id')->toArray())
+                                    Select::make('Программа', 'target')
+                                        ->options(fn() => $this->programOptions())
                                         ->searchable()
-                                        ->hint('Ссылка на раздел подставится автоматически'),
+                                        ->hint('Раздел целиком или отдельная программа — ссылка подставится автоматически'),
                                     Text::make('Заголовок', 'title')->unescape()
                                         ->hint('Если пусто — возьмётся название программы'),
                                     Textarea::make('Описание', 'desc')->unescape()
