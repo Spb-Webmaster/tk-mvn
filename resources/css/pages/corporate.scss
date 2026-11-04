@@ -35,6 +35,11 @@
             var(--corp-hero-bg);
         background-repeat: no-repeat;
         background-position: right center;
+        // Баннер шире блока по пропорции (2.33:1 против ~3:1), поэтому cover
+        // растягивает его по ширине и срезает верх и низ — вместе с головой
+        // спикера. Вписываем по высоте: картинка упирается в правый край,
+        // слева остаётся фон под текст.
+        background-size: auto 100%;
         min-height: 520px;
         display: flex;
         align-items: center;
@@ -63,7 +68,7 @@
         font-size: 17px;
         color: rgba(255, 255, 255, 0.62);
         line-height: 1.7;
-        max-width: 620px;
+        max-width: 606px;
         margin-bottom: 28px;
     }
 
@@ -267,6 +272,26 @@
 
     .corp-program:hover .corp-program__link {
         gap: 10px;
+    }
+}
+
+// ── Большие мониторы ──────────────────────────────────────────────────
+// Ширину баннера задаёт высота блока, а не ширина экрана, поэтому дальше
+// он не растягивается: на сверхшироком мониторе картинка остаётся прежней,
+// а слева просто прибавляется фон. Голова спикера не обрезается никогда.
+@media (min-width: 1600px) {
+    .corp-page {
+        .corp-hero--image {
+            min-height: 580px;
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+    .corp-page {
+        .corp-hero--image {
+            min-height: 620px;
+        }
     }
 }
 
