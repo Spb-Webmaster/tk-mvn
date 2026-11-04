@@ -8,6 +8,7 @@ namespace App\Providers;
 use App\MoonShine\Pages\Pages\ConstantsPage;
 use App\MoonShine\Pages\Pages\MasterPage;
 use App\MoonShine\Pages\Pages\ContactPage;
+use App\MoonShine\Pages\Pages\CorporatePage;
 use App\MoonShine\Pages\Pages\HomePage;
 use App\MoonShine\Pages\Pages\NewsPage;
 use App\MoonShine\Pages\Pages\PhotoPage;
@@ -63,6 +64,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 ...$core->getConfig()->getPages(),
                 HomePage::class,
                 ContactPage::class,
+                CorporatePage::class,
                 TrainerPage::class,
                 NewsPage::class,
                 TrainingPage::class,
