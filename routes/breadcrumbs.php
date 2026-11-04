@@ -6,6 +6,11 @@ Breadcrumbs::for('home', function ($trail) {
     $trail->push('Главная', route('home'));
 });
 
+Breadcrumbs::for('corporate', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Компаниям', route('corporate'));
+});
+
 Breadcrumbs::for('contact', function ($trail) {
     $trail->parent('home');
     $trail->push('Контакты', route('contact'));

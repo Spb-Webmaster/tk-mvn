@@ -21,13 +21,15 @@ class TopMenu extends Component
         $training = Setting::getGroup('training')->data ?? [];
         $photo    = Setting::getGroup('photo')->data ?? [];
         $video    = Setting::getGroup('video')->data ?? [];
-        $response = Setting::getGroup('response')->data ?? [];
+        $response  = Setting::getGroup('response')->data ?? [];
+        $corporate = Setting::getGroup('corporate')->data ?? [];
 
         $items = [
             ['label' => 'Главная',                                          'route' => 'home',           'url' => null, 'pattern' => 'home'],
             // Пункт «Расписание» убран из меню
             // ['label' => 'Расписание', 'route' => 'schedule', 'url' => null, 'pattern' => 'schedule'],
             ['label' => $training['menu_title'] ?? 'Программы',             'route' => 'training',       'url' => null, 'pattern' => 'training*', 'hasDropdown' => true],
+            ['label' => $corporate['menu_title'] ?? 'Компаниям',            'route' => 'corporate',      'url' => null, 'pattern' => 'corporate'],
             ['label' => 'О тренере',                                        'route' => 'trainer',        'url' => null, 'pattern' => 'trainer'],
             [
                 'label'         => 'О нас',

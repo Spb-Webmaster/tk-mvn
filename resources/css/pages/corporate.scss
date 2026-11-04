@@ -1,0 +1,290 @@
+@charset "utf-8";
+
+// ── Страница «Компаниям» (корпоративное обучение) ──────────────────────
+
+.corp-page {
+
+    // ── HERO ──────────────────────────────────────────────────────────
+    .corp-hero {
+        background: var(--navy);
+        background-size: cover;
+        background-position: center;
+        padding: 88px 0 72px;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 55% 90% at 88% 50%, rgba(196, 150, 58, 0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+    }
+
+    .corp-hero--image {
+        background-repeat: no-repeat;
+    }
+
+    .corp-hero__inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 46px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .corp-hero__title {
+        font-family: var(--serif);
+        font-size: clamp(30px, 3.4vw, 50px);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.12;
+        max-width: 780px;
+        margin-bottom: 20px;
+    }
+
+    .corp-hero__lead {
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.62);
+        line-height: 1.7;
+        max-width: 620px;
+        margin-bottom: 28px;
+    }
+
+    .corp-hero__points {
+        list-style: none;
+        margin: 0 0 28px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 620px;
+
+        li {
+            position: relative;
+            padding-left: 26px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.82);
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 9px;
+                width: 8px;
+                height: 8px;
+                background: var(--gold);
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    .corp-hero__meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.45);
+        padding-bottom: 32px;
+
+        strong {
+            color: var(--gold-lt);
+            font-weight: 700;
+        }
+    }
+
+    .corp-hero__meta-sep {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .corp-hero__btn {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .corp-hero__note {
+        margin-top: 18px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.6;
+    }
+
+    // ── ФОРМАТЫ ───────────────────────────────────────────────────────
+    .corp-formats {
+        background: var(--bg);
+    }
+
+    .corp-formats__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .corp-format {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .corp-format__media {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    .corp-format__body {
+        padding: 32px 34px 34px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .corp-format__num {
+        font-family: var(--serif);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--gold);
+        margin-bottom: 10px;
+    }
+
+    .corp-format__title {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--navy);
+        line-height: 1.25;
+        margin-bottom: 12px;
+    }
+
+    .corp-format__desc {
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.7;
+    }
+
+    // ── ПРОГРАММЫ ─────────────────────────────────────────────────────
+    .corp-programs {
+        background: var(--bg2);
+    }
+
+    .corp-programs__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .corp-program {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .corp-program__media {
+        aspect-ratio: 3 / 2;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    .corp-program__body {
+        padding: 28px 28px 30px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .corp-program__title {
+        font-family: var(--serif);
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--navy);
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    .corp-program__note {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        margin-bottom: 12px;
+    }
+
+    .corp-program__desc {
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.65;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    .corp-program__link {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .corp-program:hover .corp-program__link {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .corp-page {
+        .corp-hero {
+            padding: 64px 0 56px;
+        }
+        .corp-hero__inner {
+            padding: 0 32px;
+        }
+        .corp-programs__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .corp-page {
+        .corp-hero {
+            padding: 48px 0 44px;
+        }
+        .corp-hero__inner {
+            padding: 0 20px;
+        }
+        .corp-formats__grid,
+        .corp-programs__grid {
+            grid-template-columns: 1fr;
+        }
+        .corp-format__body {
+            padding: 26px 24px 28px;
+        }
+        .corp-program__body {
+            padding: 24px 22px 26px;
+        }
+    }
+}

@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminVideo\AdminVideoController;
 use App\Http\Controllers\New\NewController;
 use App\Http\Controllers\Pages\ContactController;
+use App\Http\Controllers\Pages\CorporateController;
 use App\Http\Controllers\Pages\ContactFormController;
 use App\Http\Controllers\Pages\PrivacyController;
 use App\Http\Controllers\Pages\TrainerController;
@@ -34,6 +35,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 /** О тренере **/
 Route::get('/vasilij-nikolskij', [TrainerController::class, 'index'])->name('trainer');
 /** ///О тренере **/
+
+/** Компаниям (корпоративное обучение) **/
+Route::get('/korporativnoe-obuchenie', [CorporateController::class, 'index'])->name('corporate');
+/** ///Компаниям **/
 
 /** Контакты **/
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact');

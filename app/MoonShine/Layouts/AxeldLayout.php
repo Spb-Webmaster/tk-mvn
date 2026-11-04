@@ -6,6 +6,7 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Pages\Pages\ConstantsPage;
 use App\MoonShine\Pages\Pages\ContactPage;
+use App\MoonShine\Pages\Pages\CorporatePage;
 use App\MoonShine\Pages\Pages\HomePage;
 use App\MoonShine\Pages\Pages\MasterPage;
 use App\MoonShine\Pages\Pages\NewsPage;
@@ -66,6 +67,7 @@ final class AxeldLayout extends AppLayout
             MenuGroup::make(static fn() => __('Категории'), [
                 MenuItem::make(HomePage::class, 'Главная', 'home'),
                 MenuItem::make(ContactPage::class, 'Контакты', 'phone'),
+                MenuItem::make(CorporatePage::class, 'Компаниям', 'building-office'),
                 MenuItem::make(TrainerPage::class, 'О тренере', 'user'),
                 MenuGroup::make('О нас', [
                     MenuItem::make(NewsPage::class, 'Новости', 'newspaper'),
