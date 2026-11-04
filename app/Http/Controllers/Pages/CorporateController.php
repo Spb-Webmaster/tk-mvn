@@ -34,7 +34,16 @@ class CorporateController extends PageController
      */
     private function programs(array $corporate): Collection
     {
-        $items = collect($corporate['programs'] ?? []);
+        // Карточки, заведённые до появления отдельных программ, хранят
+        // category_id вместо target — приводим их к общему виду
+        $items = collect($corporate['programs'] ?? [])
+            ->map(static function (array $item): array {
+                if (empty($item['target']) && !empty($item['category_id'])) {
+                    $item['target'] = 'c:' . $item['category_id'];
+                }
+
+                return $item;
+            });
 
         $targets = $items->pluck('target')->filter();
         $categoryIds = $targets->filter(fn($t) => str_starts_with((string) $t, 'c:'))
