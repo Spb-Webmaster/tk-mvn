@@ -68,6 +68,11 @@ class ConstantsPage extends Page
                                 Text::make('Цифра', 'num')->hint('Например: 500+ или 16'),
                                 Text::make('Подпись', 'label')->hint('Например: мероприятий'),
                             ])->creatable()->removable(),
+                            Divider::make('Блок цифр — выводится в секции «О тренере» на главной'),
+                            Json::make('Статистика (о тренере)', 'stats_about')->fields([
+                                Text::make('Цифра', 'num')->hint('Например: 500+ или 12'),
+                                Text::make('Подпись', 'label')->hint('Например: проведённых тренингов'),
+                            ])->creatable()->removable(),
                         ])->icon('chart-bar'),
                         Tab::make('Стоимость', [
                             Divider::make('Программа «Программа подготовки переговорщиков для бизнеса»'),

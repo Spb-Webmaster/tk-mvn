@@ -1,7 +1,13 @@
 @props([
     'title' => '',
     'body'  => '',
+    'facts' => [],
 ])
+
+@php
+    // Цифры задаются в админке: Константы → Статистика → «Статистика (о тренере)»
+    $facts = collect($facts)->filter(fn($f) => trim($f['num'] ?? '') !== '')->values();
+@endphp
 
 <section class="home-about" id="about">
     <div class="about-inner">
@@ -16,24 +22,18 @@
             @if(!empty($body))
                 <div class="about-body">{!! $body !!}</div>
             @endif
+            @if($facts->isNotEmpty())
             <div class="about-facts">
+                @foreach($facts as $fact)
                 <div class="about-fact">
-                    <div class="about-fact-num">500+</div>
-                    <div class="about-fact-label">проведённых тренингов</div>
+                    <div class="about-fact-num">{{ $fact['num'] }}</div>
+                    @if(!empty($fact['label']))
+                    <div class="about-fact-label">{{ $fact['label'] }}</div>
+                    @endif
                 </div>
-                <div class="about-fact">
-                    <div class="about-fact-num">80+</div>
-                    <div class="about-fact-label">компаний в портфеле</div>
-                </div>
-                <div class="about-fact">
-                    <div class="about-fact-num">16</div>
-                    <div class="about-fact-label">лет на рынке</div>
-                </div>
-                <div class="about-fact">
-                    <div class="about-fact-num">12</div>
-                    <div class="about-fact-label">человек в группе</div>
-                </div>
+                @endforeach
             </div>
+            @endif
             <button class="btn-primary open-fancybox" data-form="zapros">Оставить запрос</button>
         </div>
     </div>

@@ -32,6 +32,7 @@
 <x-modules.about
     :title="$home['about_title'] ?? ''"
     :body="$home['about_body'] ?? ''"
+    :facts="$constants['stats_about'] ?? []"
 />
 
 <!-- GALLERY -->
