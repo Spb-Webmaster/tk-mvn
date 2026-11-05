@@ -75,7 +75,7 @@
             :modal="true"
         />
         <br>
-        <x-modules.stats2 class="white" />
+        <x-modules.stats2 :items="$constants['stats2'] ?? []" class="white" />
         <br>
         <x-modules.master-nav />
 
