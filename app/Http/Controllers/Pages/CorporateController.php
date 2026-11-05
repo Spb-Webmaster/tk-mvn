@@ -15,6 +15,10 @@ class CorporateController extends PageController
     {
         $corporate = Setting::getGroup('corporate')->data ?? [];
 
+        // Блок «О тренере» общий с главной: правится в админке в одном месте
+        // (Главная → О тренере, цифры — Константы → Статистика (о тренере))
+        $home = Setting::getGroup('home')->data ?? [];
+
         // Те же письма, что в блоке на главной — отмеченные галочкой «На главной»
         $letters = Response::published()
             ->lettersOnHome()
@@ -22,6 +26,7 @@ class CorporateController extends PageController
 
         return view('pages.corporate', [
             'corporate' => $corporate,
+            'home'      => $home,
             'letters'   => $letters,
             'programs'  => $this->programs($corporate),
         ]);

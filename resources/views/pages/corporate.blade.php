@@ -159,6 +159,13 @@
         </section>
     @endif
 
+    {{-- О ТРЕНЕРЕ — тот же блок, что на главной, правится там же --}}
+    <x-modules.about
+        :title="$home['about_title'] ?? ''"
+        :body="$home['about_body'] ?? ''"
+        :facts="$constants['stats_about'] ?? []"
+    />
+
     {{-- КЛИЕНТЫ --}}
     <x-modules.clients />
 
