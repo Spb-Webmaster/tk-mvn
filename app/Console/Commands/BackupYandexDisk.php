@@ -68,7 +68,7 @@ class BackupYandexDisk extends Command
 
     public function handle(): int
     {
-        $site = env('BACKUP_YADISK_SITE') ?: (parse_url((string) config('app.url'), PHP_URL_HOST) ?: 'site');
+        $site = config('backup.site') ?: (parse_url((string) config('app.url'), PHP_URL_HOST) ?: 'site');
         $tmp = storage_path('app/backup/tmp');
         $started = microtime(true);
         $report = [];
@@ -106,9 +106,13 @@ class BackupYandexDisk extends Command
         }
     }
 
+    /**
+     * Читаем через config, а не env: на сервере конфиг кешируется при деплое,
+     * и env() вне config-файлов возвращает null.
+     */
     private function skipVideo(): bool
     {
-        return filter_var(env('BACKUP_YADISK_SKIP_VIDEO', false), FILTER_VALIDATE_BOOLEAN);
+        return filter_var(config('backup.skip_video', false), FILTER_VALIDATE_BOOLEAN);
     }
 
     /* ---------- ключ доступа ---------- */
