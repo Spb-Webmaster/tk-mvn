@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Training;
 
 use App\Rules\FormTimestamp;
+use App\Rules\Honeypot;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TrainingRegistrationRequest extends FormRequest
@@ -27,6 +28,7 @@ class TrainingRegistrationRequest extends FormRequest
             'position'    => ['nullable', 'string', 'max:100'],
             'agree'       => ['accepted'],
             '_form_time'  => ['required', new FormTimestamp()],
+            'website'     => [new Honeypot()],
         ];
     }
 

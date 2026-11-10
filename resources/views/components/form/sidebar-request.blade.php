@@ -1,6 +1,8 @@
 {{-- Компактная форма запроса в сайдбаре программы — выводится вместо заглушки расписания --}}
 <div class="sbf">
     <form class="sbf-form" novalidate>
+    <x-form.timestamp />
+    <x-form.honeypot />
         <div class="s-eye">Консультация</div>
         <div class="sbf-title">Для консультации или заказа заполните форму ниже</div>
         <p class="sbf-desc">Мы свяжемся с&nbsp;вами в&nbsp;течение рабочего дня.</p>

@@ -21,6 +21,7 @@
         <form action="{{ route('training.register') }}" method="POST" novalidate>
             @csrf
             <x-form.timestamp />
+                    <x-form.honeypot />
             <input type="hidden" name="type" value="fiz">
             @if($trainingId)<input type="hidden" name="training_id" value="{{ $trainingId }}">@endif
             <div class="fgrid">
@@ -48,6 +49,7 @@
         <form action="{{ route('training.register') }}" method="POST" novalidate>
             @csrf
             <x-form.timestamp />
+                    <x-form.honeypot />
             <input type="hidden" name="type" value="yur">
             @if($trainingId)<input type="hidden" name="training_id" value="{{ $trainingId }}">@endif
             <div class="fgrid">

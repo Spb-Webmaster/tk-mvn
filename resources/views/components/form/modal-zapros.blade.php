@@ -11,6 +11,8 @@
     </div>
 
     <form class="mzr-modal__body" id="mzr-form" novalidate>
+    <x-form.timestamp />
+    <x-form.honeypot />
 
         <div class="mzr-field-row">
             <div class="mzr-field">

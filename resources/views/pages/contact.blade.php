@@ -168,6 +168,7 @@
                 <form action="{{ route('form.zapros') }}" method="POST" class="mz-form" data-form="zapros" id="contact-form" novalidate>
                     @csrf
                     <x-form.timestamp />
+                    <x-form.honeypot />
                     {{-- Источник заявки: по нему контроллер выбирает цель Яндекс.Метрики --}}
                     <input type="hidden" name="form_source" value="contact">
                     <div class="fgrid">

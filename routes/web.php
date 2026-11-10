@@ -136,10 +136,12 @@ Route::controller(FancyBoxController::class)->group(function () {
 /** ///FancyBox AJAX **/
 
 /** Axios async forms **/
+// Формы на этих маршрутах шлют письма, поэтому ограничиваем частоту:
+// без этого бот может слать заявки без остановки с одного адреса.
 Route::controller(AxiosController::class)->group(function () {
     Route::post('/upload-form-async', 'async');
-    Route::post('/call-me-blue', 'callMeBlue');
-    Route::post('/send-request', 'sendRequest');
+    Route::post('/call-me-blue', 'callMeBlue')->middleware('throttle:10,10');
+    Route::post('/send-request', 'sendRequest')->middleware('throttle:10,10');
 });
 /** ///Axios async forms **/
 
