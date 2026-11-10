@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\Form\SendContactFormJob;
 use App\Rules\FormTimestamp;
 use App\Rules\Honeypot;
+use App\Rules\NoLinks;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -103,7 +104,7 @@ class AxiosController extends Controller
             'name'    => ['nullable', 'string', 'max:150'],
             'email'   => ['nullable', 'email', 'max:150'],
             'company' => ['nullable', 'string', 'max:200'],
-            'request' => ['nullable', 'string', 'max:3000'],
+            'request' => ['nullable', 'string', 'max:3000', new NoLinks()],
         ])) {
             return $errors;
         }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Training;
 
 use App\Rules\FormTimestamp;
 use App\Rules\Honeypot;
+use App\Rules\NoLinks;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TrainingRegistrationRequest extends FormRequest
@@ -22,7 +23,7 @@ class TrainingRegistrationRequest extends FormRequest
             'last_name'   => ['nullable', 'string', 'max:100'],
             'phone'       => ['required', 'string', 'max:30'],
             'email'       => ['required', 'email', 'max:150'],
-            'comment'     => ['nullable', 'string', 'max:2000'],
+            'comment'     => ['nullable', 'string', 'max:2000', new NoLinks()],
             'company'     => ['required_if:type,yur', 'nullable', 'string', 'max:255'],
             'inn'         => ['required_if:type,yur', 'nullable', 'digits_between:5,12'],
             'position'    => ['nullable', 'string', 'max:100'],

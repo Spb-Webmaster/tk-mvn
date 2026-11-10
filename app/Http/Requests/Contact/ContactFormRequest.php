@@ -4,6 +4,7 @@ namespace App\Http\Requests\Contact;
 
 use App\Rules\FormTimestamp;
 use App\Rules\Honeypot;
+use App\Rules\NoLinks;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactFormRequest extends FormRequest
@@ -26,7 +27,7 @@ class ContactFormRequest extends FormRequest
             }],
             'email'   => ['nullable', 'email', 'max:150'],
             'represent'  => ['nullable', 'string', 'in:company,personal'],
-            'message'    => ['nullable', 'string', 'max:3000'],
+            'message'    => ['nullable', 'string', 'max:3000', new NoLinks()],
             'agree'      => ['accepted'],
             '_form_time' => ['required', new FormTimestamp()],
             'website' => [new Honeypot()],
