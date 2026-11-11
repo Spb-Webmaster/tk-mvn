@@ -5,6 +5,23 @@
 @section('description', 'Пользователь оставил заявку. Свяжитесь с ним как можно скорее.')
 
 @section('content')
+    @if(!empty($signals))
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:18px; background:#fff8e6; border:1px solid #f0d9a0;">
+            <tr>
+                <td style="padding:14px 16px;">
+                    <div style="font-family:Arial,Helvetica,sans-serif; font-size:13px; color:#8a6400; font-weight:700; margin-bottom:6px;">Заявка похожа на рассылку</div>
+                    <div style="font-family:Arial,Helvetica,sans-serif; font-size:13px; color:#8a6400; line-height:1.6;">
+                        {{ implode(' · ', $signals) }}
+                    </div>
+                    <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; color:#b09050; margin-top:8px;">
+                        Письмо не заблокировано — проверьте сами и решите, отвечать ли.
+                    </div>
+                </td>
+            </tr>
+        </table>
+    @endif
+
+
     @foreach($data as $label => $value)
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:12px;">
             <tr>

@@ -2,6 +2,8 @@
 
 namespace App\Mail\Form;
 
+use App\Support\SpamSignals;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -12,12 +14,18 @@ class TrainingRegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public array $data) {}
+    /** Признаки рассылки; заявку не блокируем, только предупреждаем получателя */
+    public array $signals = [];
+
+    public function __construct(public array $data)
+    {
+        $this->signals = SpamSignals::check($data);
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Новая заявка на обучение',
+            subject: ($this->signals ? '[Возможно спам] ' : '') . 'Новая заявка на обучение',
         );
     }
 
@@ -25,6 +33,7 @@ class TrainingRegistrationMail extends Mailable
     {
         return new Content(
             view: 'html.email.training_registration',
+            with: ['signals' => $this->signals],
         );
     }
 

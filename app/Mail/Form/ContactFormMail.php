@@ -2,6 +2,7 @@
 
 namespace App\Mail\Form;
 
+use App\Support\SpamSignals;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -12,12 +13,18 @@ class ContactFormMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public array $data) {}
+    /** Признаки рассылки; заявку не блокируем, только предупреждаем получателя */
+    public array $signals = [];
+
+    public function __construct(public array $data)
+    {
+        $this->signals = SpamSignals::check($data);
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Новый запрос с сайта',
+            subject: ($this->signals ? '[Возможно спам] ' : '') . 'Новый запрос с сайта',
         );
     }
 
@@ -25,6 +32,7 @@ class ContactFormMail extends Mailable
     {
         return new Content(
             view: 'html.email.contact_form',
+            with: ['signals' => $this->signals],
         );
     }
 
